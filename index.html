@@ -3,33 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DONE COIN ($DONE) – Community, Trust & Quest Airdrop</title>
+  <title>DONE COIN ($DONE) – Community, Quest & Airdrop</title>
   <meta name="description" content="DONE COIN ($DONE) on Base. Meme coin for everyone who’s DONE with rugs, fake promises and trash devs. Community first, hype later – plus DONE Quest airdrop info." />
   <link rel="icon" href="https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-0d78-19e399cfb801/public?exp=1762754400&sig=33fae3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf" />
   <style>
     :root {
-      --bg: #020617;
-      --bg-soft: #020819;
-      --card: #020b1f;
-      --card-soft: #020f2a;
+      --bg: #030712;
+      --bg-alt: #020617;
+      --card: rgba(15, 23, 42, 0.9);
+      --card-soft: rgba(15, 23, 42, 0.78);
       --accent: #38bdf8;
-      --accent-soft: rgba(56, 189, 248, 0.18);
       --accent-strong: #0ea5e9;
-      --text: #e5f2ff;
+      --accent-soft: rgba(56, 189, 248, 0.14);
+      --accent-soft-2: rgba(94, 234, 212, 0.16);
+      --text: #e5f1ff;
       --muted: #94a3b8;
-      --border: rgba(148, 163, 184, 0.25);
-      --danger: #f97373;
+      --danger: #fb7185;
       --radius-xl: 22px;
-      --radius-lg: 16px;
+      --radius-lg: 18px;
       --radius-pill: 999px;
-      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.75);
-      --shadow-glow: 0 0 60px rgba(56, 189, 248, 0.35);
+      --shadow-soft: 0 22px 60px rgba(15, 23, 42, 0.9);
+      --shadow-chip: 0 10px 25px rgba(15, 23, 42, 0.85);
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     html, body {
@@ -40,7 +40,8 @@
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
         "Inter", sans-serif;
-      background: radial-gradient(circle at top, #0b1120 0, #020617 45%, #000 100%);
+      background:
+        radial-gradient(circle at top left, #0b1120 0, #020617 40%, #020617 55%, #000 100%);
       color: var(--text);
       -webkit-font-smoothing: antialiased;
       display: flex;
@@ -50,35 +51,45 @@
       position: relative;
     }
 
-    .bg-orbit {
+    .bg-orbit,
+    .bg-orbit-2 {
       position: fixed;
-      inset: 0;
+      inset: -10%;
       pointer-events: none;
       z-index: -2;
+      opacity: 0.75;
+      mix-blend-mode: screen;
+    }
+
+    .bg-orbit {
       background:
-        radial-gradient(circle at 10% 0%, rgba(56, 189, 248, 0.14), transparent 55%),
-        radial-gradient(circle at 80% 10%, rgba(129, 140, 248, 0.18), transparent 60%),
-        radial-gradient(circle at 0% 60%, rgba(45, 212, 191, 0.14), transparent 55%);
-      opacity: 0.9;
-      filter: blur(0.25px);
+        radial-gradient(circle at 10% 0%, rgba(56, 189, 248, 0.18), transparent 55%),
+        radial-gradient(circle at 80% 10%, rgba(129, 140, 248, 0.2), transparent 60%);
       animation: bgFloat 26s ease-in-out infinite alternate;
     }
 
+    .bg-orbit-2 {
+      background:
+        radial-gradient(circle at 0% 80%, rgba(45, 212, 191, 0.18), transparent 60%),
+        radial-gradient(circle at 110% 90%, rgba(59, 130, 246, 0.18), transparent 60%);
+      animation: bgFloat2 32s ease-in-out infinite alternate;
+    }
+
     @keyframes bgFloat {
-      0% {
-        transform: translate3d(0, 0, 0) scale(1);
-      }
-      50% {
-        transform: translate3d(-12px, 6px, 0) scale(1.03);
-      }
-      100% {
-        transform: translate3d(12px, -10px, 0) scale(1.04);
-      }
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(-20px, 8px, 0) scale(1.04); }
+      100% { transform: translate3d(20px, -10px, 0) scale(1.06); }
+    }
+
+    @keyframes bgFloat2 {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(14px, -16px, 0) scale(1.06); }
+      100% { transform: translate3d(-16px, 18px, 0) scale(1.04); }
     }
 
     .page {
       width: 100%;
-      max-width: 1080px;
+      max-width: 1120px;
       margin: 0 auto;
       padding: 18px 16px 40px;
       flex: 1 0 auto;
@@ -89,7 +100,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      margin-bottom: 22px;
+      margin-bottom: 18px;
     }
 
     .brand {
@@ -98,35 +109,49 @@
       gap: 10px;
     }
 
+    .brand-logo-wrap {
+      position: relative;
+    }
+
+    .brand-logo-glow {
+      position: absolute;
+      inset: -6px;
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 30% 0%, rgba(56, 189, 248, 0.55), transparent 60%);
+      filter: blur(14px);
+      opacity: 0.9;
+      z-index: -1;
+    }
+
     .brand-logo {
-      width: 42px;
-      height: 42px;
-      border-radius: 18px;
-      border: 1px solid rgba(148, 163, 184, 0.55);
+      width: 44px;
+      height: 44px;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: var(--shadow-glow);
-      background: radial-gradient(circle at 30% 0%, #1f2937, #020617);
       display: flex;
       align-items: center;
       justify-content: center;
+      background: radial-gradient(circle at 30% 0%, #1f2937, #020617);
+      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.95);
       animation: pulseLogo 2.4s ease-in-out infinite;
-    }
-
-    @keyframes pulseLogo {
-      0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.5);
-      }
-      50% {
-        transform: scale(1.04);
-        box-shadow: 0 0 0 12px rgba(56, 189, 248, 0);
-      }
     }
 
     .brand-logo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    @keyframes pulseLogo {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.6);
+      }
+      50% {
+        transform: scale(1.04);
+        box-shadow: 0 0 30px 8px rgba(56, 189, 248, 0);
+      }
     }
 
     .brand-meta {
@@ -137,34 +162,38 @@
 
     .brand-name {
       font-weight: 600;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.05em;
       font-size: 13px;
       text-transform: uppercase;
-      color: var(--text);
     }
 
-    .brand-chain {
+    .brand-sub {
+      display: flex;
+      align-items: center;
+      gap: 6px;
       font-size: 11px;
       color: var(--muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      opacity: 0.9;
     }
 
-    .pill {
+    .chip {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 2px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      background: linear-gradient(
-        135deg,
-        rgba(15, 23, 42, 0.95),
-        rgba(15, 23, 42, 0.7)
-      );
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.7));
+      box-shadow: var(--shadow-chip);
       font-size: 10px;
       color: var(--muted);
+    }
+
+    .chip-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #22c55e, #16a34a);
+      box-shadow: 0 0 14px rgba(34, 197, 94, 0.9);
     }
 
     nav {
@@ -174,16 +203,16 @@
     }
 
     .nav-link {
-      border-radius: 999px;
-      border: 1px solid transparent;
-      background: rgba(15, 23, 42, 0.9);
-      padding: 6px 11px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.8);
+      padding: 7px 11px;
       font-size: 11px;
       color: var(--muted);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      text-decoration: none;
       transition: all 0.18s ease-out;
     }
 
@@ -192,30 +221,28 @@
     }
 
     .nav-link:hover {
-      border-color: rgba(148, 163, 184, 0.7);
       color: var(--text);
+      background: rgba(15, 23, 42, 0.98);
       transform: translateY(-1px);
-      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.7);
+      box-shadow: var(--shadow-chip);
     }
 
     .nav-link.primary {
-      background: radial-gradient(circle at 10% 0%, #22d3ee, #0ea5e9 45%, #0369a1);
-      color: #0b1220;
+      background: radial-gradient(circle at 0% 0%, #22d3ee, #0ea5e9 45%, #0369a1);
+      color: #020617;
       font-weight: 600;
-      border-color: rgba(15, 23, 42, 0.5);
+      box-shadow: 0 14px 30px rgba(8, 47, 73, 0.9);
     }
 
     .nav-link.primary:hover {
-      box-shadow: var(--shadow-glow);
       transform: translateY(-1px) scale(1.01);
     }
 
     .lang-toggle {
       display: inline-flex;
       align-items: center;
-      border-radius: 999px;
+      border-radius: var(--radius-pill);
       background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.4);
       padding: 2px;
       gap: 2px;
     }
@@ -226,7 +253,7 @@
       color: var(--muted);
       font-size: 10px;
       padding: 3px 8px;
-      border-radius: 999px;
+      border-radius: var(--radius-pill);
       cursor: pointer;
       transition: all 0.18s ease-out;
     }
@@ -235,7 +262,6 @@
       background: var(--accent);
       color: #020617;
       font-weight: 600;
-      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.5);
     }
 
     main {
@@ -246,30 +272,30 @@
 
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.1fr);
       gap: 16px;
     }
 
     .card {
       border-radius: var(--radius-xl);
       background:
-        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.04), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(79, 70, 229, 0.06), transparent 55%),
-        linear-gradient(145deg, rgba(15, 23, 42, 0.98), #020617);
-      border: 1px solid rgba(148, 163, 184, 0.25);
+        linear-gradient(145deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.75));
       box-shadow: var(--shadow-soft);
       padding: 18px 18px 16px;
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(18px);
     }
 
     .card::before {
       content: "";
       position: absolute;
       inset: -40%;
-      background: radial-gradient(circle at 10% 0%, rgba(56, 189, 248, 0.12), transparent 60%);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.18), transparent 60%),
+        radial-gradient(circle at 120% 120%, rgba(129, 140, 248, 0.18), transparent 60%);
       opacity: 0;
-      transition: opacity 0.25s ease-out;
+      transition: opacity 0.3s ease-out;
       pointer-events: none;
     }
 
@@ -277,41 +303,42 @@
       opacity: 1;
     }
 
-    .hero-title {
-      font-size: clamp(24px, 3vw, 28px);
-      line-height: 1.15;
-      margin-bottom: 8px;
-      letter-spacing: 0.03em;
-    }
-
-    .hero-title span.badge {
+    .hero-title-label {
       font-size: 10px;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
       color: var(--accent);
+      margin-bottom: 6px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
-    .hero-title span.badge::before {
+    .hero-title-label::before {
       content: "";
-      width: 7px;
-      height: 7px;
+      width: 8px;
+      height: 8px;
       border-radius: 999px;
       background: radial-gradient(circle, #22c55e, #16a34a);
       box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
     }
 
-    .hero-title strong {
-      display: block;
-      margin-top: 6px;
+    .hero-title-main {
+      font-size: clamp(24px, 3vw, 30px);
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .hero-title-main span.highlight {
+      background: linear-gradient(120deg, #e2e8f0, #7dd3fc);
+      -webkit-background-clip: text;
+      color: transparent;
     }
 
     .hero-desc {
       font-size: 13px;
       color: var(--muted);
-      max-width: 520px;
+      max-width: 560px;
       margin-bottom: 12px;
     }
 
@@ -331,7 +358,7 @@
       padding: 8px 13px;
       border-radius: var(--radius-pill);
       font-size: 12px;
-      border: 1px solid transparent;
+      border: none;
       cursor: pointer;
       text-decoration: none;
       transition: all 0.16s ease-out;
@@ -342,24 +369,23 @@
       background: radial-gradient(circle at 0% 0%, #22d3ee, #0ea5e9 45%, #0369a1);
       color: #020617;
       font-weight: 600;
-      box-shadow: var(--shadow-glow);
+      box-shadow: 0 18px 36px rgba(8, 47, 73, 0.9);
     }
 
     .btn-primary:hover {
       transform: translateY(-1px) scale(1.01);
-      box-shadow: 0 18px 40px rgba(8, 47, 73, 0.9);
     }
 
     .btn-ghost {
       background: rgba(15, 23, 42, 0.9);
       color: var(--muted);
-      border-color: rgba(148, 163, 184, 0.4);
+      border: 1px solid rgba(148, 163, 184, 0.45);
     }
 
     .btn-ghost:hover {
       color: var(--text);
-      border-color: rgba(148, 163, 184, 0.8);
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.85);
+      border-color: rgba(148, 163, 184, 0.9);
+      box-shadow: var(--shadow-chip);
       transform: translateY(-1px);
     }
 
@@ -370,32 +396,29 @@
     .hero-meta-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 10px;
       align-items: center;
       margin-bottom: 6px;
     }
 
-    .ca-box {
+    .ca-pill {
       border-radius: var(--radius-pill);
       background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.5);
       padding: 5px 6px 5px 9px;
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono",
-        "Courier New", monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
       font-size: 11px;
-      color: var(--muted);
       max-width: 100%;
-      overflow: hidden;
     }
 
     .ca-label {
       font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: rgba(148, 163, 184, 0.9);
+      letter-spacing: 0.14em;
+      color: rgba(148, 163, 184, 0.95);
     }
 
     .ca-value {
@@ -406,24 +429,22 @@
     }
 
     .copy-btn {
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: rgba(15, 23, 42, 0.95);
-      color: var(--muted);
-      font-size: 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.98);
       padding: 3px 7px;
+      font-size: 10px;
+      color: var(--muted);
+      border: 1px solid rgba(148, 163, 184, 0.5);
       display: inline-flex;
       align-items: center;
       gap: 4px;
       cursor: pointer;
       transition: all 0.16s ease-out;
-      flex-shrink: 0;
     }
 
     .copy-btn:hover {
       color: var(--text);
       border-color: rgba(148, 163, 184, 0.9);
-      transform: translateY(-0.5px);
     }
 
     .copy-msg {
@@ -439,32 +460,51 @@
       transform: translateY(0);
     }
 
+    .hero-note {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+      max-width: 520px;
+    }
+
     .hero-side {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
 
-    .subcard {
+    .side-card {
       border-radius: var(--radius-lg);
-      background:
-        linear-gradient(145deg, rgba(15, 23, 42, 0.96), #020617);
-      border: 1px solid rgba(148, 163, 184, 0.25);
+      background: linear-gradient(
+        145deg,
+        rgba(15, 23, 42, 0.95),
+        rgba(15, 23, 42, 0.78)
+      );
       padding: 13px 14px 12px;
+      backdrop-filter: blur(18px);
       position: relative;
       overflow: hidden;
     }
 
-    .subcard-title {
-      font-size: 12px;
-      font-weight: 600;
-      margin-bottom: 6px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: rgba(226, 232, 240, 0.9);
+    .side-card::before {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background: radial-gradient(circle at 100% 0%, var(--accent-soft), transparent 55%);
+      opacity: 0.7;
+      pointer-events: none;
     }
 
-    .subcard p {
+    .side-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      color: rgba(226, 232, 240, 0.94);
+    }
+
+    .side-body {
       font-size: 12px;
       color: var(--muted);
     }
@@ -472,15 +512,14 @@
     .metric-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
       margin-top: 8px;
     }
 
-    .pill-metric {
+    .metric-pill {
       border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.9);
       padding: 4px 9px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      background: rgba(15, 23, 42, 0.96);
       font-size: 11px;
       color: var(--muted);
       display: inline-flex;
@@ -488,38 +527,58 @@
       gap: 6px;
     }
 
-    .pill-dot {
+    .metric-dot {
       width: 7px;
       height: 7px;
       border-radius: 999px;
       background: radial-gradient(circle, #22c55e, #16a34a);
     }
 
-    section {
-      margin-top: 16px;
+    .section {
+      margin-top: 18px;
     }
 
     .section-inner {
       border-radius: var(--radius-xl);
-      border: 1px solid rgba(148, 163, 184, 0.25);
-      background:
-        radial-gradient(circle at 100% 0%, rgba(79, 70, 229, 0.13), transparent 55%),
-        linear-gradient(135deg, rgba(15, 23, 42, 0.98), #020617);
-      padding: 16px 16px 14px;
+      background: linear-gradient(
+        135deg,
+        rgba(15, 23, 42, 0.92),
+        rgba(15, 23, 42, 0.8)
+      );
+      padding: 16px 16px 15px;
+      backdrop-filter: blur(18px);
       box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-inner::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 100% 0%, var(--accent-soft), transparent 55%),
+        radial-gradient(circle at 0% 100%, var(--accent-soft-2), transparent 60%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .section-content {
+      position: relative;
+      z-index: 1;
     }
 
     .section-label {
       font-size: 10px;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
       color: rgba(148, 163, 184, 0.95);
       margin-bottom: 4px;
     }
 
     .section-title {
-      font-size: 17px;
-      margin-bottom: 6px;
+      font-size: 18px;
+      margin-bottom: 4px;
     }
 
     .section-sub {
@@ -550,16 +609,16 @@
     }
 
     .step-circle {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
       background: rgba(15, 23, 42, 0.95);
       font-size: 11px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--muted);
+      box-shadow: var(--shadow-chip);
       flex-shrink: 0;
     }
 
@@ -575,38 +634,13 @@
       margin-bottom: 1px;
     }
 
-    .tokenomics-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
-      margin-top: 10px;
+    .link-inline {
+      color: var(--accent);
+      text-decoration: none;
     }
 
-    .token-box {
-      border-radius: 14px;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      background: rgba(15, 23, 42, 0.95);
-      padding: 8px 9px;
-      font-size: 12px;
-    }
-
-    .token-label {
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      font-size: 10px;
-      color: rgba(148, 163, 184, 0.95);
-      margin-bottom: 3px;
-    }
-
-    .token-value {
-      font-weight: 600;
-      font-size: 13px;
-      margin-bottom: 2px;
-    }
-
-    .token-note {
-      font-size: 11px;
-      color: var(--muted);
+    .link-inline:hover {
+      text-decoration: underline;
     }
 
     .checklist {
@@ -618,13 +652,18 @@
 
     .check-item {
       border-radius: 14px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      background: rgba(15, 23, 42, 0.96);
-      padding: 6px 8px;
+      background: rgba(15, 23, 42, 0.92);
+      padding: 7px 9px;
       display: flex;
       gap: 7px;
       align-items: flex-start;
       cursor: pointer;
+      transition: background 0.15s ease-out, transform 0.15s ease-out;
+    }
+
+    .check-item:hover {
+      background: rgba(15, 23, 42, 0.98);
+      transform: translateY(-1px);
     }
 
     .check-item input {
@@ -644,10 +683,57 @@
       margin-bottom: 1px;
     }
 
+    .quest-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .quest-pill {
+      border-radius: var(--radius-pill);
+      padding: 4px 9px;
+      font-size: 11px;
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .quest-progress {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .quest-dots {
+      display: inline-flex;
+      gap: 4px;
+    }
+
+    .quest-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.5);
+      transition: background 0.2s ease-out, transform 0.2s ease-out;
+    }
+
+    .quest-dot.active {
+      background: var(--accent);
+      transform: scale(1.1);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.9);
+    }
+
     footer {
-      max-width: 1080px;
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 0 16px 20px;
+      padding: 10px 16px 20px;
       font-size: 11px;
       color: var(--muted);
       display: flex;
@@ -655,7 +741,6 @@
       justify-content: space-between;
       gap: 8px;
       border-top: 1px solid rgba(15, 23, 42, 0.9);
-      margin-top: 10px;
     }
 
     footer a {
@@ -682,8 +767,8 @@
 
     .reveal {
       opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+      transform: translateY(16px);
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
     }
 
     .reveal.in-view {
@@ -691,17 +776,24 @@
       transform: translateY(0);
     }
 
-    @media (max-width: 860px) {
+    @media (max-width: 920px) {
       .hero {
-        grid-template-columns: minmax(0, 1fr);
+        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.2fr);
       }
+    }
+
+    @media (max-width: 820px) {
       header {
         flex-direction: column;
         align-items: flex-start;
+        gap: 10px;
       }
       nav {
         align-self: stretch;
         justify-content: space-between;
+      }
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
       }
     }
 
@@ -728,34 +820,40 @@
     }
 
     @media (max-width: 480px) {
-      header {
-        gap: 8px;
-      }
       .brand-name {
         font-size: 12px;
+      }
+      .page {
+        padding-inline: 12px;
       }
     }
   </style>
 </head>
 <body>
   <div class="bg-orbit"></div>
+  <div class="bg-orbit-2"></div>
 
   <div class="page">
     <header class="reveal">
       <div class="brand">
-        <div class="brand-logo">
-          <img src="https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-0d78-19e399cfb801/public?exp=1762754400&sig=33fae3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf" alt="DONE COIN logo" />
+        <div class="brand-logo-wrap">
+          <div class="brand-logo-glow"></div>
+          <div class="brand-logo">
+            <img src="https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-0d78-19e399cfb801/public?exp=1762754400&sig=33fae3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf" alt="DONE COIN logo" />
+          </div>
         </div>
         <div class="brand-meta">
           <div class="brand-name">DONE COIN • $DONE</div>
-          <div class="brand-chain">
-            <span class="pill">
+          <div class="brand-sub">
+            <span class="chip">
+              <span class="chip-dot"></span>
               <span>Base Network</span>
             </span>
             <span>Community-first meme coin.</span>
           </div>
         </div>
       </div>
+
       <nav>
         <div class="lang-toggle">
           <button class="lang-btn active" data-lang="en">EN</button>
@@ -771,7 +869,7 @@
         </a>
         <a class="nav-link primary" href="https://base.meme/coin/base:0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888" target="_blank" rel="noopener noreferrer">
           <span class="emoji">🧠</span>
-          <span>View on Base.meme</span>
+          <span>Open on Base.meme</span>
         </a>
       </nav>
     </header>
@@ -780,12 +878,12 @@
       <!-- HERO -->
       <section class="hero reveal">
         <div class="card">
-          <div class="hero-title">
-            <span class="badge">Transparent • Community First</span>
-            <strong>
-              <span class="lang lang-en">DONE COIN ($DONE) – I’m DONE with rugs.</span>
-              <span class="lang lang-id">DONE COIN ($DONE) – Saya DONE dengan rug, janji palsu & dev sampah.</span>
-            </strong>
+          <div class="hero-title-label">
+            <span>Transparent • Community First</span>
+          </div>
+          <div class="hero-title-main">
+            <span class="highlight">DONE COIN ($DONE)</span>
+            <span>– I’m DONE with rugs.</span>
           </div>
           <p class="hero-desc">
             <span class="lang lang-en">
@@ -800,7 +898,7 @@
           </p>
 
           <div class="hero-meta-row">
-            <div class="ca-box">
+            <div class="ca-pill">
               <div class="ca-label">Contract</div>
               <div class="ca-value" id="ca-value">0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888</div>
               <button class="copy-btn" id="copy-ca-btn" type="button">
@@ -813,7 +911,11 @@
           <div class="hero-actions">
             <a class="btn-primary" href="https://base.meme/coin/base:0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888" target="_blank" rel="noopener noreferrer">
               <span class="btn-icon">🧠</span>
-              <span>Open on Base.meme</span>
+              <span>View on Base.meme</span>
+            </a>
+            <a class="btn-ghost" href="#airdrop">
+              <span class="btn-icon">🎯</span>
+              <span>Open DONE Quest</span>
             </a>
             <a class="btn-ghost" href="https://x.com/i/communities/1986294951999906065" target="_blank" rel="noopener noreferrer">
               <span class="btn-icon">𝕏</span>
@@ -821,11 +923,11 @@
             </a>
             <a class="btn-ghost" href="https://farcaster.xyz/dani12po" target="_blank" rel="noopener noreferrer">
               <span class="btn-icon">🔵</span>
-              <span>Farcaster @dani12po</span>
+              <span>@dani12po on Farcaster</span>
             </a>
           </div>
 
-          <p class="section-sub" style="font-size:11px;margin-top:4px;">
+          <p class="hero-note">
             <span class="lang lang-en">
               DYOR, never invest what you can’t afford to lose. This page is for community information and memes only.
             </span>
@@ -837,9 +939,9 @@
         </div>
 
         <div class="hero-side">
-          <div class="subcard">
-            <div class="subcard-title">Why DONE?</div>
-            <p>
+          <div class="side-card">
+            <div class="side-title">Why DONE?</div>
+            <p class="side-body">
               <span class="lang lang-en">
                 DONE is for people who are tired of rugs, overpromised roadmaps and silent devs. Simple narrative, clean
                 branding, and a community that actually shows up.
@@ -850,305 +952,306 @@
               </span>
             </p>
             <div class="metric-row">
-              <div class="pill-metric">
-                <span class="pill-dot"></span>
+              <div class="metric-pill">
+                <span class="metric-dot"></span>
                 <span>Chain: Base</span>
               </div>
-              <div class="pill-metric">
+              <div class="metric-pill">
                 <span>Ticker: $DONE</span>
               </div>
-              <div class="pill-metric">
+              <div class="metric-pill">
                 <span>Community-first launch</span>
               </div>
             </div>
           </div>
 
-          <div class="subcard">
-            <div class="subcard-title">Token basics</div>
-            <div class="tokenomics-grid">
-              <div class="token-box">
-                <div class="token-label">Supply</div>
-                <div class="token-value">1,000,000,000 DONE</div>
-                <div class="token-note">
-                  Example total supply. Update here if tokenomics are finalized on-chain.
-                </div>
-              </div>
-              <div class="token-box">
-                <div class="token-label">Liquidity</div>
-                <div class="token-value">Locked / TBD</div>
-                <div class="token-note">
-                  Liquidity & lock details should be shared transparently with the community.
-                </div>
-              </div>
-              <div class="token-box">
-                <div class="token-label">Community</div>
-                <div class="token-value">Airdrops & quests</div>
-                <div class="token-note">
-                  Part of supply can be used for quests like DONE Quest to reward real participants.
-                </div>
-              </div>
-              <div class="token-box">
-                <div class="token-label">Disclaimer</div>
-                <div class="token-value">Not financial advice</div>
-                <div class="token-note">
-                  Meme only. No promises, no guarantees. Always research before buying any token.
-                </div>
-              </div>
+          <div class="side-card">
+            <div class="side-title">Token basics</div>
+            <div class="metric-row" style="margin-top:4px;">
+              <div class="metric-pill">Supply: 1,000,000,000 DONE (example)</div>
+              <div class="metric-pill">Liquidity: Locked / TBD</div>
             </div>
+            <p class="side-body" style="margin-top:8px;">
+              <span class="lang lang-en">
+                Share liquidity, lock details and contract ownership transparently with the community. DONE can power quests
+                and airdrops like DONE Quest to reward real participants.
+              </span>
+              <span class="lang lang-id">
+                Bagikan detail likuiditas, lock dan kepemilikan kontrak secara transparan ke komunitas. DONE bisa dipakai
+                untuk quest dan airdrop seperti DONE Quest untuk reward peserta yang real.
+              </span>
+            </p>
           </div>
         </div>
       </section>
 
       <!-- COMMUNITY -->
-      <section id="community" class="reveal">
+      <section id="community" class="section reveal">
         <div class="section-inner">
-          <div class="section-label">Community & Links</div>
-          <h2 class="section-title">DONE COIN ecosystem</h2>
-          <p class="section-sub">
-            <span class="lang lang-en">
-              These are the core links for the DONE community. Always double check contract addresses and official links
-              before interacting with any token.
-            </span>
-            <span class="lang lang-id">
-              Berikut link inti komunitas DONE. Selalu cek ulang alamat kontrak dan link resmi sebelum berinteraksi
-              dengan token apa pun.
-            </span>
-          </p>
+          <div class="section-content">
+            <div class="section-label">Community & Links</div>
+            <h2 class="section-title">DONE COIN ecosystem</h2>
+            <p class="section-sub">
+              <span class="lang lang-en">
+                These are the core links for the DONE community. Always double check contract addresses and official links
+                before interacting with any token.
+              </span>
+              <span class="lang lang-id">
+                Berikut link inti komunitas DONE. Selalu cek ulang alamat kontrak dan link resmi sebelum berinteraksi
+                dengan token apa pun.
+              </span>
+            </p>
 
-          <div class="two-col" style="margin-top:12px;">
-            <div class="subcard">
-              <div class="subcard-title">Official links</div>
-              <ul class="howto-list">
-                <li class="howto-item">
-                  <div class="step-circle">◎</div>
-                  <div class="step-body">
-                    <strong>Base.meme listing</strong>
-                    <span>
-                      <a href="https://base.meme/coin/base:0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;">
-                        https://base.meme/coin/base:0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888
-                      </a>
-                    </span>
-                  </div>
-                </li>
-                <li class="howto-item">
-                  <div class="step-circle">𝕏</div>
-                  <div class="step-body">
-                    <strong>X Community</strong>
-                    <span>
-                      <a href="https://x.com/i/communities/1986294951999906065" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;">
-                        DONE COIN community on X
-                      </a>
-                    </span>
-                  </div>
-                </li>
-                <li class="howto-item">
-                  <div class="step-circle">🔵</div>
-                  <div class="step-body">
-                    <strong>Farcaster</strong>
-                    <span>
-                      <a href="https://farcaster.xyz/dani12po" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;">
-                        @dani12po on Farcaster
-                      </a>
-                    </span>
-                  </div>
-                </li>
-              </ul>
-            </div>
+            <div class="two-col" style="margin-top:12px;">
+              <div class="side-card" style="background: rgba(15,23,42,0.96);">
+                <div class="side-title">Official links</div>
+                <ul class="howto-list">
+                  <li class="howto-item">
+                    <div class="step-circle">◎</div>
+                    <div class="step-body">
+                      <strong>Base.meme listing</strong>
+                      <span>
+                        <a class="link-inline" href="https://base.meme/coin/base:0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888" target="_blank" rel="noopener noreferrer">
+                          View DONE on Base.meme
+                        </a>
+                      </span>
+                    </div>
+                  </li>
+                  <li class="howto-item">
+                    <div class="step-circle">𝕏</div>
+                    <div class="step-body">
+                      <strong>X Community</strong>
+                      <span>
+                        <a class="link-inline" href="https://x.com/i/communities/1986294951999906065" target="_blank" rel="noopener noreferrer">
+                          DONE COIN community on X
+                        </a>
+                      </span>
+                    </div>
+                  </li>
+                  <li class="howto-item">
+                    <div class="step-circle">🔵</div>
+                    <div class="step-body">
+                      <strong>Farcaster</strong>
+                      <span>
+                        <a class="link-inline" href="https://farcaster.xyz/dani12po" target="_blank" rel="noopener noreferrer">
+                          @dani12po on Farcaster
+                        </a>
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
 
-            <div class="subcard">
-              <div class="subcard-title">Community trust notes</div>
-              <p class="section-sub" style="margin-bottom:6px;">
-                <span class="lang lang-en">
-                  DONE is built on transparency: clear contract, visible community, and meme-first narrative. Before
-                  joining, read the contract, check liquidity, and hang out with the community.
-                </span>
-                <span class="lang lang-id">
-                  DONE dibangun dengan transparansi: kontrak jelas, komunitas terlihat, dan narasi meme yang sederhana.
-                  Sebelum ikut, baca kontraknya, cek likuiditas dan nongkrong dulu dengan komunitas.
-                </span>
-              </p>
-              <p class="section-sub" style="font-size:11px;">
-                <span class="lang lang-en">
-                  No team can promise price. The only thing we can promise: memes, quests, and honest communication.
-                </span>
-                <span class="lang lang-id">
-                  Tidak ada tim yang bisa janji harga. Yang bisa dijanjikan hanya: meme, quest, dan komunikasi yang
-                  jujur.
-                </span>
-              </p>
+              <div class="side-card" style="background: rgba(15,23,42,0.96);">
+                <div class="side-title">Community trust notes</div>
+                <p class="section-sub" style="margin-bottom:6px;">
+                  <span class="lang lang-en">
+                    DONE is built on transparency: clear contract, visible community, and meme-first narrative. Before
+                    joining, read the contract, check liquidity, and hang out with the community.
+                  </span>
+                  <span class="lang lang-id">
+                    DONE dibangun dengan transparansi: kontrak jelas, komunitas terlihat, dan narasi meme yang sederhana.
+                    Sebelum ikut, baca kontraknya, cek likuiditas dan nongkrong dulu dengan komunitas.
+                  </span>
+                </p>
+                <p class="section-sub" style="font-size:11px;">
+                  <span class="lang lang-en">
+                    No team can promise price. The only thing we can promise: memes, quests, and honest communication.
+                  </span>
+                  <span class="lang lang-id">
+                    Tidak ada tim yang bisa janji harga. Yang bisa dijanjikan hanya: meme, quest, dan komunikasi yang
+                    jujur.
+                  </span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       <!-- AIRDROP / DONE QUEST -->
-      <section id="airdrop" class="reveal">
+      <section id="airdrop" class="section reveal">
         <div class="section-inner">
-          <div class="section-label">DONE QUEST • AIRDROP</div>
-          <h2 class="section-title">DONE Quest – 1,000 DONE Airdrop</h2>
-          <p class="section-sub">
-            <span class="lang lang-en">
-              Complete the mission on Farcaster to become eligible for a 1,000 DONE airdrop. This page explains the quest
-              and provides a simple progress UI – final eligibility must always be checked from Farcaster data and on-chain
-              logic.
-            </span>
-            <span class="lang lang-id">
-              Selesaikan misi di Farcaster untuk berhak ikut airdrop 1.000 DONE. Halaman ini menjelaskan quest dan
-              menyediakan tampilan progres sederhana – status akhir tetap harus dicek dari data Farcaster dan logika
-              on-chain.
-            </span>
-          </p>
+          <div class="section-content">
+            <div class="section-label">DONE QUEST • AIRDROP</div>
+            <h2 class="section-title">DONE Quest – 1,000 DONE Airdrop</h2>
+            <p class="section-sub">
+              <span class="lang lang-en">
+                Complete the mission on Farcaster to become eligible for a 1,000 DONE airdrop. This page explains the quest
+                and provides a simple progress UI – final eligibility must always be checked from Farcaster data and
+                on-chain logic.
+              </span>
+              <span class="lang lang-id">
+                Selesaikan misi di Farcaster untuk berhak ikut airdrop 1.000 DONE. Halaman ini menjelaskan quest dan
+                menyediakan tampilan progres sederhana – status akhir tetap harus dicek dari data Farcaster dan logika
+                on-chain.
+              </span>
+            </p>
 
-          <div class="two-col" style="margin-top:16px;">
-            <!-- KIRI: STEP MISI -->
-            <div class="subcard">
-              <div class="subcard-title">Langkah misi DONE Quest</div>
-              <ul class="howto-list" style="margin-top:8px;">
-                <li class="howto-item">
-                  <div class="step-circle">1</div>
-                  <div class="step-body">
-                    <strong>Follow akun Farcaster Dani12po</strong>
-                    <span>
-                      Buka profil Farcaster Dani12po dari tombol di kanan, lalu tekan tombol follow.
-                    </span>
+            <div class="two-col" style="margin-top:16px;">
+              <!-- LEFT: steps -->
+              <div class="side-card" style="background: rgba(15,23,42,0.96);">
+                <div class="quest-header-row">
+                  <div class="side-title" style="margin-bottom:0;">Quest steps</div>
+                  <div class="quest-pill">
+                    <span style="width:7px;height:7px;border-radius:999px;background:var(--accent);box-shadow:0 0 10px rgba(56,189,248,0.9);"></span>
+                    <span>Simple 4-step mission</span>
                   </div>
-                </li>
-                <li class="howto-item">
-                  <div class="step-circle">2</div>
-                  <div class="step-body">
-                    <strong>Like cast quest</strong>
-                    <span>
-                      Buka cast quest DONE, lalu tap like (♥).
-                    </span>
-                  </div>
-                </li>
-                <li class="howto-item">
-                  <div class="step-circle">3</div>
-                  <div class="step-body">
-                    <strong>Recast cast quest</strong>
-                    <span>
-                      Recast cast yang sama supaya tersebar ke timeline kamu.
-                    </span>
-                  </div>
-                </li>
-                <li class="howto-item">
-                  <div class="step-circle">4</div>
-                  <div class="step-body">
-                    <strong>Quote + tag Dani12po</strong>
-                    <span>
-                      Buat quote cast dari quest itu, tulis pesanmu sendiri, dan tag <code>@dani12po</code> di dalamnya.
-                    </span>
-                  </div>
-                </li>
-              </ul>
+                </div>
 
-              <p class="section-sub" style="margin-top:10px;font-size:11px;">
-                ⚠️ Semua langkah di atas dilakukan langsung di Farcaster (farcaster.xyz / Warpcast). Halaman ini hanya
-                membantu menjelaskan aturan & progres; verifikasi asli tetap harus berdasarkan data Farcaster dan
-                on-chain, bukan centang manual di sini.
-              </p>
-            </div>
+                <ul class="howto-list" style="margin-top:8px;">
+                  <li class="howto-item">
+                    <div class="step-circle">1</div>
+                    <div class="step-body">
+                      <strong>Follow Farcaster account Dani12po</strong>
+                      <span>
+                        Buka profil Farcaster Dani12po dari tombol di samping, lalu tekan tombol follow.
+                      </span>
+                    </div>
+                  </li>
+                  <li class="howto-item">
+                    <div class="step-circle">2</div>
+                    <div class="step-body">
+                      <strong>Like the quest cast</strong>
+                      <span>Buka cast quest DONE, lalu tap like (♥).</span>
+                    </div>
+                  </li>
+                  <li class="howto-item">
+                    <div class="step-circle">3</div>
+                    <div class="step-body">
+                      <strong>Recast the quest cast</strong>
+                      <span>Recast cast yang sama supaya tersebar ke timeline kamu.</span>
+                    </div>
+                  </li>
+                  <li class="howto-item">
+                    <div class="step-circle">4</div>
+                    <div class="step-body">
+                      <strong>Quote + tag Dani12po</strong>
+                      <span>
+                        Buat quote cast dari quest itu, tulis pesanmu sendiri, dan tag
+                        <code>@dani12po</code> di dalamnya.
+                      </span>
+                    </div>
+                  </li>
+                </ul>
 
-            <!-- KANAN: TOMBOL & PROGRES -->
-            <div class="subcard">
-              <div class="subcard-title">Progres Quest & Klaim (UI)</div>
-
-              <div class="hero-actions" style="margin-top:4px;margin-bottom:10px;">
-                <a
-                  class="btn-primary"
-                  href="https://farcaster.xyz/dani12po"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span class="btn-icon">👤</span>
-                  <span>Follow Dani12po</span>
-                </a>
-
-                <a
-                  class="btn-ghost"
-                  href="https://farcaster.xyz/dani12po/0x302c440b"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span class="btn-icon">🧠</span>
-                  <span>Buka quest cast</span>
-                </a>
+                <p class="section-sub" style="margin-top:10px;font-size:11px;">
+                  ⚠️ Semua langkah di atas dilakukan langsung di Farcaster (farcaster.xyz / Warpcast). Halaman ini hanya
+                  membantu menjelaskan aturan & progres; verifikasi asli tetap harus berdasarkan data Farcaster dan
+                  on-chain, bukan centang manual di sini.
+                </p>
               </div>
 
-              <!-- Checklist lokal (UI saja) -->
-              <div style="margin-top:6px;font-size:12px;">
-                <p style="color:var(--muted);margin-bottom:6px;">
-                  Centang sesuai langkah yang sudah kamu lakukan di Farcaster, lalu klik tombol cek. Ini hanya simulasi UI;
-                  verifikasi asli butuh koneksi ke API Farcaster dan smart contract klaim di Base.
-                </p>
-                <div class="checklist" style="margin-top:4px;">
-                  <label class="check-item quest-check">
-                    <input type="checkbox" />
-                    <div class="check-body">
-                      <strong>Sudah follow Dani12po</strong>
-                      <span style="display:block;font-size:11px;color:var(--muted);">
-                        Saya sudah follow akun Dani12po di Farcaster.
-                      </span>
-                    </div>
-                  </label>
-                  <label class="check-item quest-check">
-                    <input type="checkbox" />
-                    <div class="check-body">
-                      <strong>Sudah like cast quest</strong>
-                      <span style="display:block;font-size:11px;color:var(--muted);">
-                        Saya sudah memberikan like pada cast quest airdrop.
-                      </span>
-                    </div>
-                  </label>
-                  <label class="check-item quest-check">
-                    <input type="checkbox" />
-                    <div class="check-body">
-                      <strong>Sudah recast</strong>
-                      <span style="display:block;font-size:11px;color:var(--muted);">
-                        Saya sudah recast cast quest ke timeline saya.
-                      </span>
-                    </div>
-                  </label>
-                  <label class="check-item quest-check">
-                    <input type="checkbox" />
-                    <div class="check-body">
-                      <strong>Sudah quote + tag</strong>
-                      <span style="display:block;font-size:11px;color:var(--muted);">
-                        Saya sudah membuat quote cast dan tag Dani12po.
-                      </span>
-                    </div>
-                  </label>
-                </div>
+              <!-- RIGHT: buttons & local progress -->
+              <div class="side-card" style="background: rgba(15,23,42,0.96);">
+                <div class="side-title" style="margin-bottom:4px;">Start quest & track progress</div>
 
-                <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;">
-                  <button
-                    id="btn-check-quest"
-                    type="button"
-                    class="btn-ghost"
-                    style="border-style:dashed;"
-                  >
-                    <span class="btn-icon">✅</span>
-                    <span>Cek progres</span>
-                  </button>
-
-                  <button
-                    id="btn-claim-done"
-                    type="button"
+                <div class="hero-actions" style="margin-top:2px;margin-bottom:8px;">
+                  <a
                     class="btn-primary"
-                    style="opacity:0.6;pointer-events:none;"
+                    href="https://farcaster.xyz/dani12po"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <span class="btn-icon">🎁</span>
-                    <span>Claim 1,000 DONE (soon)</span>
-                  </button>
+                    <span class="btn-icon">👤</span>
+                    <span>Follow Dani12po</span>
+                  </a>
+
+                  <a
+                    class="btn-ghost"
+                    href="https://farcaster.xyz/dani12po/0x302c440b"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span class="btn-icon">🧠</span>
+                    <span>Open quest cast</span>
+                  </a>
                 </div>
 
-                <p
-                  id="quest-status"
-                  style="margin-top:8px;font-size:11px;color:var(--muted);"
-                >
-                  Setelah backend & smart contract klaim terhubung, tombol klaim akan aktif otomatis untuk wallet yang
-                  benar-benar memenuhi semua syarat di Farcaster & on-chain.
-                </p>
+                <div class="quest-progress">
+                  <div class="quest-dots">
+                    <div class="quest-dot" data-step="1"></div>
+                    <div class="quest-dot" data-step="2"></div>
+                    <div class="quest-dot" data-step="3"></div>
+                    <div class="quest-dot" data-step="4"></div>
+                  </div>
+                  <span id="quest-progress-label">0 / 4 steps checked</span>
+                </div>
+
+                <div style="margin-top:10px;font-size:12px;">
+                  <p style="color:var(--muted);margin-bottom:6px;">
+                    Centang sesuai langkah yang sudah kamu lakukan di Farcaster, lalu klik tombol cek. Ini hanya simulasi
+                    UI; verifikasi asli butuh koneksi ke API Farcaster dan smart contract klaim di Base.
+                  </p>
+                  <div class="checklist" style="margin-top:4px;">
+                    <label class="check-item quest-check">
+                      <input type="checkbox" />
+                      <div class="check-body">
+                        <strong>Sudah follow Dani12po</strong>
+                        <span style="display:block;font-size:11px;color:var(--muted);">
+                          Saya sudah follow akun Dani12po di Farcaster.
+                        </span>
+                      </div>
+                    </label>
+                    <label class="check-item quest-check">
+                      <input type="checkbox" />
+                      <div class="check-body">
+                        <strong>Sudah like cast quest</strong>
+                        <span style="display:block;font-size:11px;color:var(--muted);">
+                          Saya sudah memberikan like pada cast quest airdrop.
+                        </span>
+                      </div>
+                    </label>
+                    <label class="check-item quest-check">
+                      <input type="checkbox" />
+                      <div class="check-body">
+                        <strong>Sudah recast</strong>
+                        <span style="display:block;font-size:11px;color:var(--muted);">
+                          Saya sudah recast cast quest ke timeline saya.
+                        </span>
+                      </div>
+                    </label>
+                    <label class="check-item quest-check">
+                      <input type="checkbox" />
+                      <div class="check-body">
+                        <strong>Sudah quote + tag</strong>
+                        <span style="display:block;font-size:11px;color:var(--muted);">
+                          Saya sudah membuat quote cast dan tag Dani12po.
+                        </span>
+                      </div>
+                    </label>
+                  </div>
+
+                  <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;">
+                    <button
+                      id="btn-check-quest"
+                      type="button"
+                      class="btn-ghost"
+                      style="border:1px dashed rgba(148,163,184,0.6);"
+                    >
+                      <span class="btn-icon">✅</span>
+                      <span>Cek progres</span>
+                    </button>
+
+                    <button
+                      id="btn-claim-done"
+                      type="button"
+                      class="btn-primary"
+                      style="opacity:0.6;pointer-events:none;"
+                    >
+                      <span class="btn-icon">🎁</span>
+                      <span>Claim 1,000 DONE (soon)</span>
+                    </button>
+                  </div>
+
+                  <p
+                    id="quest-status"
+                    style="margin-top:8px;font-size:11px;color:var(--muted);"
+                  >
+                    Setelah backend & smart contract klaim terhubung, tombol klaim akan aktif otomatis untuk wallet yang
+                    benar-benar memenuhi semua syarat di Farcaster & on-chain.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -1168,6 +1271,15 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Farcaster Mini App: signal ready to parent (Warpcast)
+      try {
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: 'miniapp.ready' }, '*');
+        }
+      } catch (e) {
+        console.warn('miniapp ready postMessage failed', e);
+      }
+
       // language toggle
       const langButtons = document.querySelectorAll('.lang-btn');
       const root = document.documentElement;
@@ -1211,12 +1323,33 @@
       const questStatus = document.getElementById('quest-status');
       const btnCheckQuest = document.getElementById('btn-check-quest');
       const btnClaimDone = document.getElementById('btn-claim-done');
+      const questDots = document.querySelectorAll('.quest-dot');
+      const questProgressLabel = document.getElementById('quest-progress-label');
+
+      function updateQuestProgress() {
+        const total = questChecks.length;
+        const completed = Array.from(questChecks).filter((c) => c.checked).length;
+        if (questProgressLabel) {
+          questProgressLabel.textContent = completed + ' / ' + total + ' steps checked';
+        }
+        if (questDots.length) {
+          questDots.forEach((dot, index) => {
+            dot.classList.toggle('active', index < completed);
+          });
+        }
+        return { completed, total };
+      }
 
       if (btnCheckQuest && questChecks.length && questStatus && btnClaimDone) {
-        btnCheckQuest.addEventListener('click', () => {
-          const allChecked = Array.from(questChecks).every((c) => c.checked);
+        questChecks.forEach((c) => {
+          c.addEventListener('change', updateQuestProgress);
+        });
+        updateQuestProgress();
 
-          if (allChecked) {
+        btnCheckQuest.addEventListener('click', () => {
+          const { completed, total } = updateQuestProgress();
+
+          if (completed === total) {
             questStatus.textContent =
               'Semua langkah sudah kamu centang. Jika backend Farcaster & smart contract klaim sudah aktif, wallet yang memenuhi syarat bisa klaim 1.000 DONE secara otomatis.';
             btnClaimDone.style.opacity = '1';
