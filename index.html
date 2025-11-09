@@ -6,6 +6,24 @@
   <title>DONE COIN ($DONE) – Community, Quest & Airdrop</title>
   <meta name="description" content="DONE COIN ($DONE) on Base. Meme coin for everyone who’s DONE with rugs, fake promises and trash devs. Community first, hype later – plus DONE Quest airdrop info." />
   <link rel="icon" href="https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-0d78-19e399cfb801/public?exp=1762754400&sig=33fae3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf" />
+  <!-- Optional: Mini App embed metadata so the URL can render nicely in casts -->
+  <meta
+    name="fc:miniapp"
+    content='{
+      "version":"1",
+      "imageUrl":"https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-0d78-19e399cfb801/public?exp=1762754400&sig=33fae3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf",
+      "button":{
+        "title":"DONE Quest",
+        "action":{
+          "type":"launch_frame",
+          "name":"DONE Quest ($DONE)",
+          "url":"https://done-coin.vercel.app/#airdrop",
+          "splashImageUrl":"https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-0d78-19e399cfb801/public?exp=1762754400&sig=33fae3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf",
+          "splashBackgroundColor":"#020617"
+        }
+      }
+    }'
+  />
   <style>
     :root {
       --bg: #030712;
@@ -1269,17 +1287,9 @@
     </div>
   </footer>
 
+  <!-- UI logic -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Farcaster Mini App: signal ready to parent (Warpcast)
-      try {
-        if (window.parent && window.parent !== window) {
-          window.parent.postMessage({ type: 'miniapp.ready' }, '*');
-        }
-      } catch (e) {
-        console.warn('miniapp ready postMessage failed', e);
-      }
-
       // language toggle
       const langButtons = document.querySelectorAll('.lang-btn');
       const root = document.documentElement;
@@ -1368,7 +1378,8 @@
 
         btnClaimDone.addEventListener('click', () => {
           alert(
-            'Tombol klaim ini masih UI saja.\nUntuk klaim otomatis, perlu backend yang terhubung ke API Farcaster + smart contract airdrop di Base.'
+            'Tombol klaim ini masih UI saja.
+Untuk klaim otomatis, perlu backend yang terhubung ke API Farcaster + smart contract airdrop di Base.'
           );
         });
       }
@@ -1387,6 +1398,20 @@
         { threshold: 0.1 }
       );
       revealEls.forEach((el) => io.observe(el));
+    });
+  </script>
+
+  <!-- Farcaster Mini App SDK: hide splash screen when ready -->
+  <script type="module">
+    import { sdk } from 'https://esm.sh/@farcaster/miniapp-sdk';
+
+    // Setelah konten siap ditampilkan, beri tahu Farcaster untuk menyembunyikan splash
+    window.addEventListener('load', async () => {
+      try {
+        await sdk.actions.ready();
+      } catch (err) {
+        console.error('Error calling sdk.actions.ready()', err);
+      }
     });
   </script>
 </body>
