@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-lang="en">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -8,39 +8,315 @@
   <link rel="icon" href="https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-0d78-19e399cfb801/public?exp=1762754400&sig=33fae3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf" />
 
   <style>
-    :root { --bg:#030712; --card:rgba(15,23,42,.9); --accent:#38bdf8; --text:#e5f1ff; --muted:#94a3b8; --radius-xl:22px; --radius-pill:999px; --shadow-soft:0 22px 60px rgba(15,23,42,.9); }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%} body{font-family:system-ui,-apple-system,Inter,sans-serif;background:radial-gradient(circle at top left,#0b1120 0,#020617 40%,#020617 55%,#000 100%);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-    .page{max-width:1120px;margin:0 auto;padding:18px 16px 40px}
-    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
-    .brand{display:flex;align-items:center;gap:10px}
-    .brand-logo{width:44px;height:44px;border-radius:20px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#0b1b2c;box-shadow:0 14px 35px rgba(15,23,42,.95)}
-    .brand-logo img{width:100%;height:100%;object-fit:cover}
-    .brand-name{font-weight:600;letter-spacing:.05em;font-size:13px;text-transform:uppercase}
-    .brand-sub{font-size:11px;color:var(--muted)}
-    nav{display:flex;gap:8px;flex-wrap:wrap}
-    .nav-link{background:rgba(15,23,42,.8);color:var(--muted);text-decoration:none;padding:7px 11px;border-radius:var(--radius-pill);font-size:11px}
-    .nav-link.primary{background:radial-gradient(circle at 0 0,#22d3ee,#0ea5e9 45%,#0369a1);color:#020617;font-weight:600}
-    .hero{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1.1fr);gap:16px}
-    .card{background:var(--card);border-radius:var(--radius-xl);box-shadow:var(--shadow-soft);padding:18px}
-    .hero-title{font-size:clamp(24px,3vw,30px);margin:6px 0 12px}
-    .hero-desc{font-size:13px;color:var(--muted);max-width:560px}
-    .actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
-    .btn{border:none;border-radius:var(--radius-pill);padding:9px 14px;font-size:12px;cursor:pointer;text-decoration:none;display:inline-flex;gap:6px;align-items:center}
-    .btn.primary{background:radial-gradient(circle at 0 0,#22d3ee,#0ea5e9 45%,#0369a1);color:#020617;font-weight:600}
-    .btn.ghost{background:rgba(15,23,42,.92);color:var(--muted);border:1px solid rgba(148,163,184,.45)}
-    .section{margin-top:18px}
-    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .side{background:var(--card);border-radius:18px;padding:14px}
-    .title-sm{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
-    .muted{color:var(--muted)}
-    footer{max-width:1120px;margin:0 auto;padding:10px 16px 20px;font-size:11px;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
-    @media (max-width:820px){.hero{grid-template-columns:1fr}.two-col{grid-template-columns:1fr}}
+    :root {
+      --bg: #030712;
+      --card: rgba(15, 23, 42, 0.94);
+      --card-soft: rgba(15, 23, 42, 0.86);
+      --accent: #38bdf8;
+      --accent-strong: #0ea5e9;
+      --text: #e5f1ff;
+      --muted: #94a3b8;
+      --radius-xl: 22px;
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 22px 60px rgba(15, 23, 42, 0.9);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body {
+      font-family: system-ui, -apple-system, Inter, sans-serif;
+      background:
+        radial-gradient(circle at top left, #0b1120 0, #020617 40%, #020617 55%, #000 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 18px 16px 40px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .brand { display: flex; align-items: center; gap: 10px; }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 30% 0, #1f2937, #020617);
+      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.95);
+      animation: pulseLogo 2.4s ease-in-out infinite;
+    }
+
+    .brand-logo img { width: 100%; height: 100%; object-fit: cover; }
+
+    .brand-name {
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    .brand-sub { font-size: 11px; color: var(--muted); }
+
+    nav { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .nav-link {
+      background: rgba(15, 23, 42, 0.86);
+      color: var(--muted);
+      text-decoration: none;
+      padding: 7px 11px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.18s ease-out, transform 0.18s ease-out, color 0.18s ease-out;
+    }
+
+    .nav-link.primary {
+      background: radial-gradient(circle at 0 0, #22d3ee, #0ea5e9 45%, #0369a1);
+      color: #020617;
+      font-weight: 600;
+      box-shadow: 0 14px 30px rgba(8, 47, 73, 0.9);
+    }
+
+    .nav-link:hover {
+      background: rgba(15, 23, 42, 0.96);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .nav-link.primary:hover { transform: translateY(-1px) scale(1.01); }
+
+    main { display: flex; flex-direction: column; gap: 18px; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius-xl);
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-soft {
+      background: var(--card-soft);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+    }
+
+    .hero-label {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .hero-title {
+      font-size: clamp(24px, 3vw, 30px);
+      margin-bottom: 8px;
+    }
+
+    .hero-title span.highlight {
+      background: linear-gradient(120deg, #e2e8f0, #7dd3fc);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 560px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 12px 0;
+    }
+
+    .btn {
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 9px 14px;
+      font-size: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.16s ease-out, box-shadow 0.16s ease-out, background 0.16s ease-out;
+      white-space: nowrap;
+    }
+
+    .btn.primary {
+      background: radial-gradient(circle at 0 0, #22d3ee, #0ea5e9 45%, #0369a1);
+      color: #020617;
+      font-weight: 600;
+      box-shadow: 0 16px 34px rgba(8, 47, 73, 0.9);
+    }
+
+    .btn.ghost {
+      background: rgba(15, 23, 42, 0.92);
+      color: var(--muted);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.8);
+    }
+
+    .btn.primary:hover {
+      transform: translateY(-1px) scale(1.01);
+    }
+
+    .muted { color: var(--muted); }
+
+    .section { margin-top: 18px; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 12px;
+    }
+
+    .title-sm {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    footer {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 10px 16px 20px;
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    @keyframes pulseLogo {
+      0%,100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.5); }
+      50% { transform: scale(1.05); box-shadow: 0 0 30px 10px rgba(56, 189, 248, 0); }
+    }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+    }
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile layout */
+    @media (max-width: 840px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      nav {
+        align-self: stretch;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .page {
+        padding-inline: 12px;
+        padding-bottom: 28px;
+      }
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-inline: 12px;
+      }
+    }
+
+    /* Ultra small */
+    @media (max-width: 480px) {
+      .btn { width: 100%; }
+      .nav-link.primary { flex: 1 0 100%; justify-content: center; }
+    }
+
+    /* Special tweaks when running inside Farcaster Mini App */
+    html.miniapp body {
+      background: #020617;
+    }
+    html.miniapp .page {
+      max-width: 640px;
+      padding: 10px 10px 20px;
+    }
+    html.miniapp header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    html.miniapp nav {
+      width: 100%;
+      justify-content: space-between;
+    }
+    html.miniapp .hero {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+    }
+    html.miniapp .card,
+    html.miniapp .card-soft {
+      border-radius: 18px;
+      padding: 14px 14px 12px;
+    }
+    html.miniapp .btn {
+      width: 100%;
+      justify-content: center;
+    }
+    html.miniapp footer {
+      max-width: 640px;
+      padding: 8px 10px 16px;
+      font-size: 10px;
+    }
   </style>
 </head>
 <body>
   <div class="page">
-    <header>
+    <header class="reveal">
       <div class="brand">
         <div class="brand-logo">
           <img alt="DONE" src="https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-0d78-19e399cfb801/public?exp=1762754400&sig=33fae3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf"/>
@@ -58,97 +334,159 @@
     </header>
 
     <main>
-      <section class="hero">
+      <section class="hero reveal">
         <div class="card">
-          <div class="title-sm" style="color:#38bdf8;">Transparent • Community First</div>
-          <h1 class="hero-title">DONE COIN ($DONE) – I’m DONE with rugs</h1>
+          <div class="hero-label">Transparent • Community First</div>
+          <h1 class="hero-title">
+            <span class="highlight">DONE COIN ($DONE)</span> – I’m DONE with rugs
+          </h1>
           <p class="hero-desc">
-            Meme coin for everyone who’s DONE with rugs, fake promises and trash devs. Community first, hype later – simple, transparent and easy to meme. Not financial advice, always DYOR. 🧠
+            Meme coin for everyone who’s DONE with rugs, fake promises and trash devs. Community first, hype later – simple,
+            transparent and easy to meme. Not financial advice, always DYOR. 🧠
           </p>
           <div class="actions">
-            <a class="btn primary" target="_blank" rel="noopener noreferrer" href="https://base.meme/coin/base:0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888">🧠 View on Base.meme</a>
-            <a class="btn ghost" href="#airdrop">🎯 Open DONE Quest</a>
-            <a class="btn ghost" target="_blank" rel="noopener noreferrer" href="https://x.com/i/communities/1986294951999906065">𝕏 Join X Community</a>
-            <a class="btn ghost" target="_blank" rel="noopener noreferrer" href="https://farcaster.xyz/dani12po">🔵 @dani12po on Farcaster</a>
+            <a class="btn primary" target="_blank" rel="noopener noreferrer" href="https://base.meme/coin/base:0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888">
+              🧠 View on Base.meme
+            </a>
+            <a class="btn ghost" href="#airdrop">
+              🎯 Open DONE Quest
+            </a>
+            <a class="btn ghost" target="_blank" rel="noopener noreferrer" href="https://x.com/i/communities/1986294951999906065">
+              𝕏 Join X Community
+            </a>
+            <a class="btn ghost" target="_blank" rel="noopener noreferrer" href="https://farcaster.xyz/dani12po">
+              🔵 @dani12po on Farcaster
+            </a>
           </div>
-          <div class="muted" style="font-size:11px;">CA: <code>0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888</code></div>
+          <div class="muted" style="font-size:11px;">
+            CA: <code>0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888</code>
+          </div>
         </div>
 
-        <div class="card">
+        <div class="card-soft reveal">
           <div class="title-sm">Token basics</div>
-          <div class="muted">Share liquidity & ownership details transparently with the community. DONE can power quests and airdrops to reward real participants.</div>
+          <div class="muted">
+            Share liquidity & ownership details transparently with the community. DONE can power quests and airdrops to reward
+            real participants.
+          </div>
         </div>
       </section>
 
-      <section id="community" class="section">
+      <section id="community" class="section reveal">
         <div class="two-col">
-          <div class="side">
+          <div class="card-soft">
             <div class="title-sm">Official links</div>
             <ul class="muted" style="line-height:1.7;">
-              <li>◎ <a target="_blank" rel="noopener noreferrer" href="https://base.meme/coin/base:0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888" style="color:#38bdf8;">View DONE on Base.meme</a></li>
-              <li>𝕏 <a target="_blank" rel="noopener noreferrer" href="https://x.com/i/communities/1986294951999906065" style="color:#38bdf8;">DONE Community on X</a></li>
-              <li>🔵 <a target="_blank" rel="noopener noreferrer" href="https://farcaster.xyz/dani12po" style="color:#38bdf8;">@dani12po on Farcaster</a></li>
+              <li>◎ <a target="_blank" rel="noopener noreferrer" href="https://base.meme/coin/base:0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888" style="color:var(--accent);">View DONE on Base.meme</a></li>
+              <li>𝕏 <a target="_blank" rel="noopener noreferrer" href="https://x.com/i/communities/1986294951999906065" style="color:var(--accent);">DONE Community on X</a></li>
+              <li>🔵 <a target="_blank" rel="noopener noreferrer" href="https://farcaster.xyz/dani12po" style="color:var(--accent);">@dani12po on Farcaster</a></li>
             </ul>
           </div>
-          <div class="side">
+          <div class="card-soft">
             <div class="title-sm">Community notes</div>
-            <div class="muted">Built on transparency: clear contract, visible community, meme-first narrative. Always double check links before interacting with any token.</div>
+            <div class="muted">
+              Built on transparency: clear contract, visible community, meme-first narrative. Always double check links before
+              interacting with any token.
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="airdrop" class="section">
+      <section id="airdrop" class="section reveal">
         <div class="two-col">
-          <div class="side">
+          <div class="card-soft">
             <div class="title-sm">Quest steps</div>
             <ol class="muted" style="line-height:1.8; padding-left:16px;">
-              <li>Follow <a target="_blank" rel="noopener noreferrer" href="https://farcaster.xyz/dani12po" style="color:#38bdf8;">@dani12po</a></li>
+              <li>Follow <a target="_blank" rel="noopener noreferrer" href="https://farcaster.xyz/dani12po" style="color:var(--accent);">@dani12po</a></li>
               <li>Like the quest cast</li>
               <li>Recast the quest cast</li>
-              <li>Quote & tag @dani12po</li>
+              <li>Quote &amp; tag @dani12po</li>
             </ol>
-            <div class="muted" style="font-size:11px;margin-top:6px;">⚠️ Verification must be done with Farcaster data & on-chain logic.</div>
+            <div class="muted" style="font-size:11px;margin-top:6px;">
+              ⚠️ Verification must be done with Farcaster data &amp; on-chain logic.
+            </div>
           </div>
-          <div class="side">
+          <div class="card-soft">
             <div class="title-sm">Quick actions</div>
             <div class="actions">
-              <a class="btn primary" target="_blank" rel="noopener noreferrer" href="https://farcaster.xyz/dani12po">👤 Follow Dani12po</a>
-              <a class="btn ghost" target="_blank" rel="noopener noreferrer" href="https://farcaster.xyz/dani12po/0x302c440b">🧠 Open quest cast</a>
+              <a class="btn primary" target="_blank" rel="noopener noreferrer" href="https://farcaster.xyz/dani12po">
+                👤 Follow Dani12po
+              </a>
+              <a class="btn ghost" target="_blank" rel="noopener noreferrer" href="https://farcaster.xyz/dani12po/0x302c440b">
+                🧠 Open quest cast
+              </a>
             </div>
-            <button id="tapToStart" class="btn primary" style="width:100%; margin-top:6px;">✅ Tap to start Mini App</button>
-            <div class="muted" style="font-size:11px; margin-top:6px;">If the Mini App is stuck on the splash, press the button above to signal readiness.</div>
+            <button id="tapToStart" class="btn primary" style="width:100%; margin-top:6px;">
+              ✅ Tap to start Mini App
+            </button>
+            <div class="muted" style="font-size:11px; margin-top:6px;">
+              If the Mini App is stuck on the splash, press the button above to signal readiness.
+            </div>
           </div>
         </div>
       </section>
     </main>
   </div>
 
-  <footer>
-    <div>DONE COIN ($DONE) on Base. Community, memes & transparent quests.</div>
+  <footer class="reveal">
+    <div>DONE COIN ($DONE) on Base. Community, memes &amp; transparent quests.</div>
     <div><span style="opacity:0.7;">Always DYOR • Not financial advice.</span></div>
   </footer>
 
   <script>
+    // Detect if running inside Farcaster Mini App / iframe
+    (function detectMiniApp() {
+      let isMini = false;
+      try {
+        if (window.parent && window.parent !== window) isMini = true;
+        const ref = document.referrer || "";
+        if (ref.includes("warpcast.com") || ref.includes("farcaster.xyz")) isMini = true;
+        const qs = new URLSearchParams(window.location.search);
+        if (qs.get("miniapp") === "1") isMini = true;
+      } catch (e) {}
+      if (isMini) document.documentElement.classList.add("miniapp");
+    })();
+
+    // Simple scroll reveal
+    const revealEls = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    revealEls.forEach((el) => io.observe(el));
+
+    // Mini App ready signals
     function signalMiniAppReady() {
-      try { if (window.sdk?.actions?.ready) window.sdk.actions.ready(); } catch(e) {}
-      try { window.parent?.postMessage({ type: 'miniapp.ready' }, '*'); } catch(e) {}
-      try { window.parent?.postMessage({ type: 'frame_ready' }, '*'); } catch(e) {}
-      try { window.ReactNativeWebView?.postMessage(JSON.stringify({ type: 'miniapp.ready' })); } catch(e) {}
+      try { if (window.sdk && window.sdk.actions && window.sdk.actions.ready) window.sdk.actions.ready(); } catch (e) {}
+      try { window.parent && window.parent.postMessage({ type: "miniapp.ready" }, "*"); } catch (e) {}
+      try { window.parent && window.parent.postMessage({ type: "frame_ready" }, "*"); } catch (e) {}
+      try { window.ReactNativeWebView && window.ReactNativeWebView.postMessage(JSON.stringify({ type: "miniapp.ready" })); } catch (e) {}
     }
-    window.addEventListener('load', signalMiniAppReady);
-    document.addEventListener('DOMContentLoaded', () => {
-      const btn = document.getElementById('tapToStart');
-      if (btn) btn.addEventListener('click', signalMiniAppReady);
+
+    window.addEventListener("load", signalMiniAppReady);
+    document.addEventListener("DOMContentLoaded", () => {
+      const btn = document.getElementById("tapToStart");
+      if (btn) btn.addEventListener("click", signalMiniAppReady);
     });
   </script>
 
+  <!-- Try SDK (if allowed) -->
   <script type="module">
     (async () => {
       try {
-        const { sdk } = await import('https://esm.sh/@farcaster/miniapp-sdk');
+        const { sdk } = await import("https://esm.sh/@farcaster/miniapp-sdk");
         window.sdk = sdk;
         try { await sdk.actions.ready(); } catch (_) {}
-      } catch (err) { /* ignore */ }
+      } catch (err) {
+        // ignore if blocked
+      }
     })();
   </script>
 </body>
