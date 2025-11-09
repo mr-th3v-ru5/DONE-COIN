@@ -1,257 +1,139 @@
 <!DOCTYPE html>
-<html lang="en" data-lang="en">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>DONE COIN ($DONE) – Quest, Airdrop & Community</title>
-  <meta name="description" content="DONE COIN ($DONE) on Base. Meme coin for everyone who’s DONE with rugs, fake promises and trash devs. Community first, hype later. Includes DONE Quest & claim (demo) with wallet connect." />
+  <title>DONE COIN ($DONE) – Community-first meme coin on Base</title>
+  <meta name="description" content="DONE COIN ($DONE) on Base. I’m DONE with rugs. Transparent tokenomics, community quests, and clean airdrop flows." />
   <link rel="icon" href="https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-0d78-19e399cfb801/public?exp=1762754400&sig=33fae3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf" />
-  <style>
-    :root{
-      --bg:#070a13;
-      --bg-2:#030813;
-      --card:rgba(15,23,42,.9);
-      --card-soft:rgba(17,24,39,.86);
-      --muted:#98a6bd;
-      --text:#e7f0ff;
-      --accent:#60a5fa;
-      --accent-2:#22d3ee;
-      --accent-3:#34d399;
-      --pill:#0b1220;
-      --danger:#fb7185;
-      --radius-xl:22px;
-      --radius-lg:16px;
-      --radius-pill:999px;
-      --shadow:0 22px 60px rgba(3,8,20,.65);
-      --shadow-soft:0 14px 34px rgba(3,8,20,.55);
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "SF Pro Text", Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      background:
-        radial-gradient(1200px 1200px at -10% -10%, rgba(96,165,250,.12), transparent 40%),
-        radial-gradient(1000px 1000px at 110% -20%, rgba(34,211,238,.12), transparent 40%),
-        linear-gradient(180deg, #0b1220, #020617);
-      color:var(--text);
-      -webkit-font-smoothing: antialiased;
-      overflow-x:hidden;
-    }
-    .page{max-width:1160px;margin:0 auto;padding:22px 18px 40px;}
-    /* Header */
-    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{
-      width:46px;height:46px;border-radius:20px;overflow:hidden;display:grid;place-items:center;
-      background: radial-gradient(circle at 35% 0%, #0b1b2c, #020617);
-      box-shadow: 0 18px 36px rgba(2,6,23,.9);
-      animation: pulse 2.8s ease-in-out infinite;
-    }
-    .logo img{width:100%;height:100%;object-fit:cover}
-    .b-meta{display:flex;flex-direction:column;gap:2px}
-    .b-title{font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:13px}
-    .b-sub{font-size:11px;color:var(--muted)}
-    nav{display:flex;gap:10px;flex-wrap:wrap}
-    .pill{
-      background:linear-gradient(180deg, #0d1628, #0a1322);
-      color:var(--muted);border:1px solid rgba(148,163,184,.35);
-      padding:8px 12px;border-radius:var(--radius-pill);font-size:12px;text-decoration:none;display:flex;align-items:center;gap:8px;
-      transition:all .18s ease-out
-    }
-    .pill:hover{color:var(--text);border-color:rgba(148,163,184,.7);transform:translateY(-1px);box-shadow:var(--shadow-soft)}
-    .cta{background: radial-gradient(120% 120% at 0% 0%, var(--accent-2), var(--accent) 55%, #0861b2);
-      color:#031225;border:none;font-weight:700}
-    .cta:hover{transform:translateY(-1px) scale(1.01)}
-    /* Layout */
-    main{display:grid;grid-template-columns: 1.25fr .95fr; gap:16px}
-    .card{background:linear-gradient(180deg, rgba(15,23,42,.98), rgba(15,23,42,.84)); border:1px solid rgba(148,163,184,.18);
-      border-radius:var(--radius-xl); padding:18px; box-shadow:var(--shadow); position:relative; overflow:hidden;}
-    .card.soft{background:linear-gradient(180deg, rgba(17,24,39,.95), rgba(17,24,39,.84));}
-    .chipbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
-    .chip{display:flex;align-items:center;gap:8px;background:var(--pill);border:1px solid rgba(148,163,184,.25);color:var(--muted);
-      padding:6px 10px;border-radius:var(--radius-pill);font-size:11px}
-    .dot{width:8px;height:8px;border-radius:999px;background: radial-gradient(circle, #34d399, #059669);box-shadow:0 0 12px rgba(52,211,153,.9)}
-    .title-xl{font-size:clamp(26px,3.1vw,36px);line-height:1.12;margin-bottom:10px}
-    .title-xl .grad{background:linear-gradient(120deg, #e2e8f0, #7dd3fc);-webkit-background-clip:text;color:transparent}
-    .lead{color:var(--muted);font-size:14px;max-width:680px}
-    .actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 10px}
-    .btn{border-radius:var(--radius-pill);padding:10px 14px;font-size:13px;text-decoration:none;border:1px solid rgba(148,163,184,.35);
-      color:var(--text);background:var(--pill);display:inline-flex;align-items:center;gap:8px;transition:all .16s ease-out}
-    .btn:hover{transform:translateY(-1px);box-shadow:var(--shadow-soft)}
-    .btn.primary{border:none;background: radial-gradient(120% 120% at 0% 0%, var(--accent-2), var(--accent) 55%, #0861b2);
-      color:#031225;font-weight:700}
-    .meta{font-size:11px;color:var(--muted);margin-top:4px}
-    .meta code{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .list{list-style:none;display:flex;flex-direction:column;gap:10px}
-    .li{display:flex;gap:10px}
-    .li .bullet{width:10px;height:10px;border-radius:999px;background: radial-gradient(circle, #60a5fa, #2563eb)}
-    .muted{color:var(--muted)}
-    /* Quest block */
-    .progress{display:flex;align-items:center;gap:10px;margin:8px 0}
-    .dots{display:flex;gap:6px}
-    .dot-s{width:8px;height:8px;border-radius:999px;background:rgba(148,163,184,.45);transition:all .18s}
-    .dot-s.active{background:var(--accent);box-shadow:0 0 10px rgba(96,165,250,.9);transform:scale(1.08)}
-    .checklist{display:flex;flex-direction:column;gap:8px;margin-top:6px}
-    .check{background:var(--pill);border:1px solid rgba(148,163,184,.28);padding:10px;border-radius:14px;display:flex;gap:10px;align-items:flex-start}
-    .check input{margin-top:3px;accent-color:#38bdf8}
-    .claim-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-    .alert{font-size:11px;color:var(--muted);margin-top:6px}
-    /* Wallet section */
-    .tabs{display:flex;gap:8px;margin-top:8px;margin-bottom:8px}
-    .tab{padding:8px 12px;border-radius:var(--radius-pill);border:1px solid rgba(148,163,184,.35);background:var(--pill);color:var(--muted);cursor:pointer;font-size:12px}
-    .tab.active{background: radial-gradient(120% 120% at 0% 0%, var(--accent-2), var(--accent) 55%, #0861b2); color:#031225; font-weight:700; border:none}
-    .wallet-panel{display:none}
-    .wallet-panel.active{display:block}
-    .addr{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:12px; color:var(--text); background:#0c1322; border:1px solid rgba(148,163,184,.28); padding:6px 10px; border-radius:12px; }
-    /* Reveal */
-    .reveal{opacity:0;transform:translateY(18px);transition:opacity .45s ease-out, transform .45s ease-out}
-    .reveal.in{opacity:1;transform:translateY(0)}
-    /* Mini app compact mode */
-    html.miniapp .page{max-width:640px;padding:12px 10px 18px}
-    html.miniapp main{display:flex;flex-direction:column;gap:12px}
-    html.miniapp .btn, html.miniapp .pill, html.miniapp .cta{width:100%;justify-content:center}
-    html.miniapp .grid-2{grid-template-columns:1fr}
-    html.miniapp .card{padding:14px;border-radius:18px}
-    html.miniapp .title-xl{font-size:24px}
-    footer{max-width:1160px;margin:14px auto 22px;padding:0 18px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:10px}
-    @media (max-width:980px){main{grid-template-columns:1fr} .page{padding-inline:14px} footer{padding-inline:14px}}
-    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-  </style>
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
   <div class="page">
     <header class="reveal">
       <div class="brand">
-        <div class="logo"><img alt="DONE" src="https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-0d78-19e399cfb801/public?exp=1762754400&sig=33fae3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf"/></div>
+        <div class="logo">
+          <img alt="DONE" src="https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-0d78-19e399cfb801/public?exp=1762754400&sig=33fae3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf" />
+        </div>
         <div class="b-meta">
           <div class="b-title">DONE COIN • $DONE</div>
           <div class="b-sub">Community-first meme coin on Base</div>
         </div>
       </div>
       <nav>
-        <a class="pill" href="#community">🌐 Community</a>
-        <a class="pill" href="#airdrop">🎁 DONE Quest</a>
-        <a class="pill cta" target="_blank" rel="noopener noreferrer" href="https://base.meme/coin/base:0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888">🧠 Open on Base.meme</a>
+        <a class="pill" href="airdrop.html">🎯 DONE Quest</a>
+        <a class="pill" href="community.html">🌐 Community</a>
+        <a class="pill primary" target="_blank" rel="noopener noreferrer" href="https://base.meme/coin/base:0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888">🧠 Open on Base.meme</a>
       </nav>
     </header>
 
     <main>
-      <!-- HERO LEFT -->
-      <section class="card reveal">
-        <div class="chipbar">
-          <span class="chip"><span class="dot"></span>Transparent</span>
-          <span class="chip">Community First</span>
-        </div>
-        <h1 class="title-xl"><span class="grad">DONE COIN ($DONE)</span> – I’m DONE with rugs</h1>
-        <p class="lead">
-          Meme coin for everyone who’s DONE with rugs, fake promises and trash devs.
-          Community first, hype later – simple, transparent and easy to meme.
-          Not financial advice, always DYOR. 🧠
-        </p>
-
-        <div class="actions">
-          <a class="btn primary" target="_blank" rel="noopener noreferrer" href="https://base.meme/coin/base:0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888">🧠 View on Base.meme</a>
-          <a class="btn" href="#airdrop">🎯 Open DONE Quest</a>
-          <a class="btn" target="_blank" rel="noopener noreferrer" href="https://farcaster.xyz/dani12po">🔵 @dani12po on Farcaster</a>
-        </div>
-
-        <div class="meta">CA: <code>0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888</code></div>
-      </section>
-
-      <!-- HERO RIGHT -->
-      <aside class="card soft reveal">
-        <div class="chipbar"><span class="chip">Token basics</span></div>
-        <div class="lead">
-          Share liquidity & ownership details transparently with the community.
-          DONE can power quests and airdrops to reward real participants.
-        </div>
-      </aside>
-
-      <!-- COMMUNITY -->
-      <section id="community" class="card soft reveal" style="grid-column: 1 / -1;">
-        <div class="grid-2">
-          <div>
-            <div class="chipbar"><span class="chip">Official links</span></div>
-            <ul class="list">
-              <li class="li"><span class="bullet"></span><a class="btn" target="_blank" rel="noopener noreferrer" href="https://base.meme/coin/base:0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888">View DONE on Base.meme</a></li>
-              <li class="li"><span class="bullet"></span><a class="btn" target="_blank" rel="noopener noreferrer" href="https://x.com/i/communities/1986294951999906065">DONE Community on X</a></li>
-              <li class="li"><span class="bullet"></span><a class="btn" target="_blank" rel="noopener noreferrer" href="https://farcaster.xyz/dani12po">@dani12po on Farcaster</a></li>
-            </ul>
-          </div>
-          <div>
-            <div class="chipbar"><span class="chip">Community notes</span></div>
-            <p class="muted">
-              Built on transparency: clear contract, visible community, meme-first narrative.
-              Always double check links before interacting with any token.
+      <!-- HERO -->
+      <section class="hero-row">
+        <div class="card reveal">
+          <div class="card-inner">
+            <div class="eyebrow"><span class="badge-dot"></span> TRANSPARENT • COMMUNITY FIRST</div>
+            <h1 class="hero-title"><span>DONE COIN ($DONE)</span> – I’m DONE with rugs</h1>
+            <p class="hero-copy">
+              Meme coin for everyone who’s DONE with rugs, fake promises and trash devs.
+              Community first, hype later – simple, transparent and easy to meme. Not financial advice, always DYOR. 🧠
             </p>
+            <div class="hero-actions">
+              <a class="btn primary full" href="airdrop.html">🎯 Start DONE Quest</a>
+              <a class="btn" target="_blank" rel="noopener noreferrer" href="https://farcaster.xyz/dani12po">🔵 @dani12po</a>
+              <a class="btn" target="_blank" rel="noopener noreferrer" href="https://x.com/i/communities/1986294951999906065">𝕏 Community</a>
+            </div>
+            <div class="hero-meta">CA: <code>0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888</code></div>
           </div>
         </div>
-      </section>
 
-      <!-- QUEST + CLAIM -->
-      <section id="airdrop" class="card reveal" style="grid-column: 1 / -1;">
-        <div class="grid-2">
-          <!-- Left: steps -->
-          <div>
-            <div class="chipbar"><span class="chip">DONE Quest • 1,000 $DONE</span></div>
-            <ol class="list">
-              <li class="li"><span class="bullet"></span>Follow <a class="btn" style="padding:6px 10px" target="_blank" rel="noopener noreferrer" href="https://farcaster.xyz/dani12po">@dani12po</a></li>
-              <li class="li"><span class="bullet"></span>Like the quest cast</li>
-              <li class="li"><span class="bullet"></span>Recast the quest cast</li>
-              <li class="li"><span class="bullet"></span>Quote & tag <code>@dani12po</code></li>
-            </ol>
-            <div class="progress">
-              <div class="dots">
-                <span class="dot-s" data-step="1"></span>
-                <span class="dot-s" data-step="2"></span>
-                <span class="dot-s" data-step="3"></span>
-                <span class="dot-s" data-step="4"></span>
-              </div>
-              <div class="muted" id="pLabel">0 / 4 checked</div>
+        <aside class="card-side reveal">
+          <div class="stat-grid">
+            <div class="stat-card">
+              <div class="stat-label">Network</div>
+              <div class="stat-value">Base</div>
+              <div class="stat-tag">Gas-efficient, built on Ethereum.</div>
             </div>
-            <div class="checklist">
-              <label class="check"><input type="checkbox" class="qcheck"/><div><strong>Followed Dani12po</strong><div class="muted">I have followed @dani12po.</div></div></label>
-              <label class="check"><input type="checkbox" class="qcheck"/><div><strong>Liked the cast</strong><div class="muted">I have liked the quest cast.</div></div></label>
-              <label class="check"><input type="checkbox" class="qcheck"/><div><strong>Recast done</strong><div class="muted">I have recasted the quest cast.</div></div></label>
-              <label class="check"><input type="checkbox" class="qcheck"/><div><strong>Quoted & tagged</strong><div class="muted">I have quoted and tagged @dani12po.</div></div></label>
+            <div class="stat-card">
+              <div class="stat-label">Narrative</div>
+              <div class="stat-value">I’M DONE</div>
+              <div class="stat-tag">No rugs. No trash devs.</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Use case</div>
+              <div class="stat-value">Quests & memes</div>
+              <div class="stat-tag">Reward real community actions.</div>
             </div>
           </div>
+        </aside>
+      </section>
 
-          <!-- Right: wallet + claim -->
-          <div>
-            <div class="chipbar"><span class="chip">Connect wallet</span></div>
-            <div class="tabs">
-              <button class="tab active" data-tab="evm">Base (EVM)</button>
-              <button class="tab" data-tab="sol">Solana</button>
-            </div>
+      <!-- Features -->
+      <section class="feature-row reveal section-gap">
+        <article class="feature">
+          <h3>Clean & simple</h3>
+          <p>No complex DeFi maze. Easy to understand, easy to meme, easy to verify.</p>
+        </article>
+        <article class="feature">
+          <h3>Community-first</h3>
+          <p>Value flows to the people who actually show up, share, and build.</p>
+        </article>
+        <article class="feature">
+          <h3>Built for quests</h3>
+          <p>DONE Quest routes airdrops to real participants, not bots.</p>
+        </article>
+      </section>
 
-            <div id="panel-evm" class="wallet-panel active">
-              <div class="muted">Connect MetaMask or WalletConnect (Base supported).</div>
-              <div class="claim-row">
-                <button id="btn-evm-connect" class="btn primary">🔗 Connect EVM Wallet</button>
-                <span id="evm-addr" class="addr" style="display:none;"></span>
-              </div>
-              <div class="alert" id="evm-note">You will be prompted to switch to Base (chain id 8453) if needed.</div>
+      <!-- Tokenomics -->
+      <section class="tokenomics section-gap reveal">
+        <div class="token-card">
+          <h2>Token overview</h2>
+          <p class="text-muted">
+            High-level view of DONE COIN ($DONE) supply and alignment. Numbers below are examples – adjust to your final tokenomics.
+          </p>
+          <div class="token-grid">
+            <div class="token-item">
+              <strong>100% Total supply</strong>
+              <span>Fixed supply minted at launch.</span>
             </div>
+            <div class="token-item">
+              <strong>40% Community & quests</strong>
+              <span>Airdrops, quests, social rewards.</span>
+            </div>
+            <div class="token-item">
+              <strong>25% Liquidity</strong>
+              <span>DEX liquidity & stability.</span>
+            </div>
+            <div class="token-item">
+              <strong>15% Ecosystem growth</strong>
+              <span>Partnerships, integrations, future tools.</span>
+            </div>
+            <div class="token-item">
+              <strong>10% Core contributors</strong>
+              <span>Vested over time; no instant dumps.</span>
+            </div>
+            <div class="token-item">
+              <strong>10% Reserve</strong>
+              <span>Future experiments & surprises.</span>
+            </div>
+          </div>
+        </div>
 
-            <div id="panel-sol" class="wallet-panel">
-              <div class="muted">Connect Phantom (Solana).</div>
-              <div class="claim-row">
-                <button id="btn-sol-connect" class="btn primary">🔗 Connect Phantom</button>
-                <span id="sol-addr" class="addr" style="display:none;"></span>
-              </div>
-              <div class="alert">If Phantom is not installed, <a class="btn" target="_blank" rel="noopener noreferrer" href="https://phantom.app/download">install Phantom</a>.</div>
-            </div>
-
-            <div class="claim-row">
-              <button id="btn-claim" class="btn cta" style="opacity:.55;pointer-events:none;">🎁 Claim 1,000 DONE (demo)</button>
-              <button id="btn-ready" class="btn" title="If Mini App splash ever hangs">✅ Tap to start Mini App</button>
-            </div>
-            <div class="alert" id="claim-msg">
-              To enable claim: connect wallet + complete all quest checks above. This is a demo UI.
-              Real claim requires Farcaster verification & on-chain airdrop contract on Base.
-            </div>
+        <div class="token-card">
+          <h2>Airdrop & quest philosophy</h2>
+          <p class="text-muted">
+            DONE airdrops are designed to be earned, not farmed. The main rule: <strong>prove you showed up</strong> –
+            follow, like, recast, create memes, and join the community conversation.
+          </p>
+          <ul class="text-muted" style="margin-top:8px;font-size:12px;line-height:1.5;">
+            <li>• Farcaster-native quests with on-chain claims on Base.</li>
+            <li>• No “blind” airdrops to inactive wallets.</li>
+            <li>• Clear rules per quest; transparent claim contracts.</li>
+            <li>• Extra boosts for early community members who stick around.</li>
+          </ul>
+          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+            <a class="btn secondary" href="airdrop.html">🎯 View current DONE Quest</a>
+            <a class="btn" href="community.html">🌐 Explore community layer</a>
           </div>
         </div>
       </section>
@@ -259,176 +141,10 @@
   </div>
 
   <footer class="reveal">
-    <span>DONE COIN ($DONE) on Base — community, memes & transparent quests.</span>
-    <span class="muted">Always DYOR • Not financial advice.</span>
+    <span>DONE COIN ($DONE) • Built on Base.</span>
+    <span>Always DYOR • Not financial advice.</span>
   </footer>
 
-  <!-- Libs for EVM connect (Web3Modal v1 + WalletConnect v1 + Ethers v5) -->
-  <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-  <script src="https://unpkg.com/@walletconnect/web3-provider@1.7.8/dist/umd/index.min.js"></script>
-  <script src="https://unpkg.com/web3modal@1.9.12/dist/index.js"></script>
-
-  <script>
-    // Mini App detection: set compact layout
-    (function detectMiniApp(){
-      let mini = false;
-      try{
-        if(window.parent && window.parent !== window) mini = true;
-        const ref = document.referrer || "";
-        if(ref.includes("warpcast.com") || ref.includes("farcaster.xyz")) mini = true;
-        const qs = new URLSearchParams(location.search);
-        if(qs.get("miniapp") === "1") mini = true;
-      }catch(e){}
-      if(mini) document.documentElement.classList.add("miniapp");
-    })();
-
-    // Reveal animation
-    const obs = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); obs.unobserve(e.target);} });
-    }, {threshold:0.1});
-    document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
-
-    // Farcaster Mini App ready signals
-    function signalMiniAppReady(){
-      try{ if(window.sdk?.actions?.ready) window.sdk.actions.ready(); }catch(e){}
-      try{ window.parent?.postMessage({type:"miniapp.ready"}, "*"); }catch(e){}
-      try{ window.parent?.postMessage({type:"frame_ready"}, "*"); }catch(e){}
-      try{ window.ReactNativeWebView?.postMessage(JSON.stringify({type:"miniapp.ready"})); }catch(e){}
-    }
-    window.addEventListener("load", signalMiniAppReady);
-    document.getElementById("btn-ready").addEventListener("click", signalMiniAppReady);
-
-    // Tabs
-    document.querySelectorAll(".tab").forEach(btn=>{
-      btn.addEventListener("click",()=>{
-        document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));
-        btn.classList.add("active");
-        const t = btn.dataset.tab;
-        document.querySelectorAll(".wallet-panel").forEach(p=>p.classList.remove("active"));
-        document.getElementById("panel-"+t).classList.add("active");
-      });
-    });
-
-    // Quest checks (local UI only)
-    const qChecks = document.querySelectorAll(".qcheck");
-    const dots = document.querySelectorAll(".dot-s");
-    const pLabel = document.getElementById("pLabel");
-    function updateProgress(){
-      const c = Array.from(qChecks).filter(i=>i.checked).length;
-      dots.forEach((d,i)=>d.classList.toggle("active", i < c));
-      pLabel.textContent = `${c} / 4 checked`;
-      updateClaimState();
-    }
-    qChecks.forEach(i=>i.addEventListener("change", updateProgress));
-    updateProgress();
-
-    // EVM connect via Web3Modal v1
-    const providerOptions = {
-      walletconnect: {
-        package: window.WalletConnectProvider.default,
-        options: { rpc: { 8453: "https://mainnet.base.org" } } // Base mainnet
-      }
-    };
-    const web3Modal = new window.Web3Modal.default({
-      cacheProvider: false,
-      providerOptions,
-      theme: "dark"
-    });
-
-    let evmProvider = null;
-    let evmSigner = null;
-    let evmAddress = null;
-
-    async function ensureBaseNetwork(provider){
-      const baseChainId = "0x2105"; // 8453
-      try{
-        await provider.request({ method:"wallet_switchEthereumChain", params:[{ chainId: baseChainId }] });
-      }catch(switchErr){
-        // add network then switch
-        try{
-          await provider.request({
-            method: "wallet_addEthereumChain",
-            params: [{
-              chainId: baseChainId,
-              chainName: "Base",
-              nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
-              rpcUrls: ["https://mainnet.base.org"],
-              blockExplorerUrls: ["https://basescan.org"]
-            }]
-          });
-        }catch(addErr){
-          console.warn("Cannot add/switch to Base:", addErr);
-        }
-      }
-    }
-
-    async function connectEVM(){
-      try{
-        const instance = await web3Modal.connect();
-        evmProvider = new ethers.providers.Web3Provider(instance);
-        await ensureBaseNetwork(evmProvider.provider);
-        evmSigner = evmProvider.getSigner();
-        evmAddress = await evmSigner.getAddress();
-        document.getElementById("evm-addr").style.display = "inline-block";
-        document.getElementById("evm-addr").textContent = evmAddress.slice(0,6)+"…"+evmAddress.slice(-4);
-        document.getElementById("evm-note").textContent = "Connected to EVM wallet (Base).";
-        updateClaimState();
-      }catch(err){
-        console.error(err);
-        document.getElementById("evm-note").textContent = "Failed to connect. Please try again.";
-      }
-    }
-    document.getElementById("btn-evm-connect").addEventListener("click", connectEVM);
-
-    // Solana (Phantom) minimal connect
-    let solAddress = null;
-    async function connectSol(){
-      try{
-        if(!window.solana || !window.solana.isPhantom){
-          alert("Phantom not found. Please install Phantom first.");
-          return;
-        }
-        const resp = await window.solana.connect({ onlyIfTrusted:false });
-        solAddress = resp.publicKey.toString();
-        document.getElementById("sol-addr").style.display = "inline-block";
-        document.getElementById("sol-addr").textContent = solAddress.slice(0,6)+"…"+solAddress.slice(-4);
-        updateClaimState();
-      }catch(err){
-        console.error(err);
-        alert("Failed to connect Phantom.");
-      }
-    }
-    document.getElementById("btn-sol-connect").addEventListener("click", connectSol);
-
-    // Claim button state & demo
-    function isQuestComplete(){ return Array.from(qChecks).every(i=>i.checked); }
-    function isAnyWalletConnected(){ return !!(evmAddress || solAddress); }
-    function updateClaimState(){
-      const btn = document.getElementById("btn-claim");
-      if(isQuestComplete() && isAnyWalletConnected()){
-        btn.style.opacity = "1";
-        btn.style.pointerEvents = "auto";
-      }else{
-        btn.style.opacity = ".55";
-        btn.style.pointerEvents = "none";
-      }
-    }
-    document.getElementById("btn-claim").addEventListener("click", ()=>{
-      if(!(isQuestComplete() && isAnyWalletConnected())) return;
-      const addr = evmAddress ? `EVM: ${evmAddress}` : `Solana: ${solAddress}`;
-      alert(`Demo claim triggered for ${addr}.\n\nFor real claims, you’ll need a backend that verifies Farcaster actions (follow/like/recast/quote) and airdrop smart contract on Base.`);
-    });
-  </script>
-
-  <!-- (Optional) Farcaster Mini App SDK, ignore failure if CDN blocked -->
-  <script type="module">
-    (async () => {
-      try {
-        const { sdk } = await import("https://esm.sh/@farcaster/miniapp-sdk");
-        window.sdk = sdk;
-        try { await sdk.actions.ready(); } catch (_) {}
-      } catch {}
-    })();
-  </script>
+  <script src="assets/app.js" type="module"></script>
 </body>
 </html>
