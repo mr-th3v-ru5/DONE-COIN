@@ -1,25 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>DONE COIN ($DONE) – Meme Coin on Base</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta
-    name="description"
-    content="DONE COIN ($DONE) on Base – a meme coin for everyone who’s done with rugs, fake promises and trash devs. Community first, hype later – simple, transparent and easy to meme. Not financial advice, always DYOR. 🧠"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DONE COIN ($DONE) – Community, Trust & Quest Airdrop</title>
+  <meta name="description" content="DONE COIN ($DONE) on Base. Meme coin for everyone who’s DONE with rugs, fake promises and trash devs. Community first, hype later – plus DONE Quest airdrop info." />
+  <link rel="icon" href="https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-0d78-19e399cfb801/public?exp=1762754400&sig=33fae3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf" />
   <style>
     :root {
       --bg: #020617;
-      --bg-alt: #060b1a;
-      --accent: #32d4ff;
-      --accent-soft: rgba(50, 212, 255, 0.15);
-      --accent-strong: #60a5fa;
-      --text: #f9fafb;
-      --muted: #9ca3af;
-      --border-subtle: 1px solid rgba(148, 163, 184, 0.25);
-      --radius-lg: 18px;
-      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.6);
+      --bg-soft: #020819;
+      --card: #020b1f;
+      --card-soft: #020f2a;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.18);
+      --accent-strong: #0ea5e9;
+      --text: #e5f2ff;
+      --muted: #94a3b8;
+      --border: rgba(148, 163, 184, 0.25);
+      --danger: #f97373;
+      --radius-xl: 22px;
+      --radius-lg: 16px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.75);
+      --shadow-glow: 0 0 60px rgba(56, 189, 248, 0.35);
     }
 
     * {
@@ -28,76 +32,64 @@
       padding: 0;
     }
 
-    html {
+    html, body {
+      height: 100%;
       scroll-behavior: smooth;
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-      background:
-        radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Inter", sans-serif;
+      background: radial-gradient(circle at top, #0b1120 0, #020617 45%, #000 100%);
       color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
       min-height: 100vh;
-      background-size: 140% 140%;
-      animation: bg-pan 18s ease-in-out infinite alternate;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      overflow-x: hidden;
+      position: relative;
     }
 
-    body.page-loaded {
-      opacity: 1;
-      transform: translateY(0);
+    .bg-orbit {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -2;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(56, 189, 248, 0.14), transparent 55%),
+        radial-gradient(circle at 80% 10%, rgba(129, 140, 248, 0.18), transparent 60%),
+        radial-gradient(circle at 0% 60%, rgba(45, 212, 191, 0.14), transparent 55%);
+      opacity: 0.9;
+      filter: blur(0.25px);
+      animation: bgFloat 26s ease-in-out infinite alternate;
     }
 
-    @keyframes bg-pan {
+    @keyframes bgFloat {
       0% {
-        background-position: 0% 0%;
+        transform: translate3d(0, 0, 0) scale(1);
       }
       50% {
-        background-position: 50% 100%;
+        transform: translate3d(-12px, 6px, 0) scale(1.03);
       }
       100% {
-        background-position: 100% 50%;
+        transform: translate3d(12px, -10px, 0) scale(1.04);
       }
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
     }
 
     .page {
-      max-width: 1120px;
+      width: 100%;
+      max-width: 1080px;
       margin: 0 auto;
-      padding: 20px 16px 40px;
+      padding: 18px 16px 40px;
+      flex: 1 0 auto;
     }
 
-    /* NAVBAR */
     header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(18px);
-      background: linear-gradient(
-        to bottom,
-        rgba(15, 23, 42, 0.96),
-        rgba(15, 23, 42, 0.8),
-        transparent
-      );
-      margin: -20px -16px 16px;
-      padding: 10px 16px;
-      border-bottom: 1px solid rgba(15, 23, 42, 0.9);
-    }
-
-    .nav {
-      max-width: 1120px;
-      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
+      margin-bottom: 22px;
     }
 
     .brand {
@@ -106,241 +98,227 @@
       gap: 10px;
     }
 
-    .logo {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 0%, #ffffff 0, #dbeafe 25%, #0f172a 70%);
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      overflow: hidden;
+      box-shadow: var(--shadow-glow);
+      background: radial-gradient(circle at 30% 0%, #1f2937, #020617);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.55);
-      flex-shrink: 0;
-      overflow: hidden;
-      position: relative;
+      animation: pulseLogo 2.4s ease-in-out infinite;
     }
 
-    .logo::after {
-      content: "";
-      position: absolute;
-      inset: -4px;
-      border-radius: inherit;
-      border: 1px solid rgba(94, 234, 212, 0.65);
-      opacity: 0.0;
-      animation: logo-pulse 3.2s ease-out infinite;
-      pointer-events: none;
-    }
-
-    @keyframes logo-pulse {
-      0% {
-        opacity: 0.7;
-        transform: scale(0.98);
+    @keyframes pulseLogo {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.5);
       }
-      60% {
-        opacity: 0;
-        transform: scale(1.12);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(1.12);
+      50% {
+        transform: scale(1.04);
+        box-shadow: 0 0 0 12px rgba(56, 189, 248, 0);
       }
     }
 
-    .logo img {
+    .brand-logo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
     }
 
-    .brand-text h1 {
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+    .brand-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-name {
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      font-size: 13px;
       text-transform: uppercase;
+      color: var(--text);
     }
 
-    .brand-text p {
+    .brand-chain {
       font-size: 11px;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: linear-gradient(
+        135deg,
+        rgba(15, 23, 42, 0.95),
+        rgba(15, 23, 42, 0.7)
+      );
+      font-size: 10px;
       color: var(--muted);
     }
 
-    .nav-right {
+    nav {
       display: flex;
       align-items: center;
-      gap: 12px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 12px;
+      gap: 8px;
     }
 
     .nav-link {
-      padding: 6px 10px;
       border-radius: 999px;
+      border: 1px solid transparent;
+      background: rgba(15, 23, 42, 0.9);
+      padding: 6px 11px;
+      font-size: 11px;
       color: var(--muted);
       cursor: pointer;
-      border: 1px solid transparent;
-      transition: color 0.15s ease, background 0.15s ease, border 0.15s ease,
-        transform 0.15s ease;
-      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.18s ease-out;
+    }
+
+    .nav-link span.emoji {
+      font-size: 13px;
     }
 
     .nav-link:hover {
+      border-color: rgba(148, 163, 184, 0.7);
       color: var(--text);
-      border-color: rgba(148, 163, 184, 0.4);
-      background: rgba(15, 23, 42, 0.9);
       transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.7);
     }
 
     .nav-link.primary {
-      border-color: rgba(56, 189, 248, 0.7);
-      background: rgba(37, 99, 235, 0.18);
-      color: var(--accent);
+      background: radial-gradient(circle at 10% 0%, #22d3ee, #0ea5e9 45%, #0369a1);
+      color: #0b1220;
+      font-weight: 600;
+      border-color: rgba(15, 23, 42, 0.5);
     }
 
-    .nav-link.active {
-      color: var(--accent);
-      border-color: rgba(56, 189, 248, 0.9);
-      background: rgba(37, 99, 235, 0.25);
+    .nav-link.primary:hover {
+      box-shadow: var(--shadow-glow);
+      transform: translateY(-1px) scale(1.01);
     }
 
     .lang-toggle {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 4px;
-      padding: 3px;
       border-radius: 999px;
       background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.5);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 2px;
+      gap: 2px;
     }
 
     .lang-btn {
       border: none;
       background: transparent;
       color: var(--muted);
-      font-size: 11px;
+      font-size: 10px;
       padding: 3px 8px;
       border-radius: 999px;
       cursor: pointer;
-      transition: background 0.12s ease, color 0.12s ease;
+      transition: all 0.18s ease-out;
     }
 
     .lang-btn.active {
       background: var(--accent);
       color: #020617;
-    }
-
-    @media (max-width: 768px) {
-      .nav {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-      }
-      .nav-right {
-        width: 100%;
-        justify-content: space-between;
-      }
-      .nav-links {
-        gap: 6px;
-        flex-wrap: wrap;
-      }
-    }
-
-    /* SECTIONS */
-    section {
-      margin: 32px 0;
-    }
-
-    .section-inner {
-      border-radius: var(--radius-lg);
-      background: rgba(15, 23, 42, 0.94);
-      border: var(--border-subtle);
-      padding: 20px 18px 18px;
-      box-shadow: var(--shadow-soft);
-      opacity: 0;
-      transform: translateY(18px);
-      transition:
-        opacity 0.6s ease,
-        transform 0.6s ease,
-        box-shadow 0.25s ease,
-        border-color 0.25s ease;
-    }
-
-    .section-inner.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .section-inner.visible:hover {
-      box-shadow: 0 22px 55px rgba(15, 23, 42, 0.85);
-      border-color: rgba(148, 163, 184, 0.45);
-    }
-
-    .section-label {
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 6px;
-    }
-
-    .section-title {
-      font-size: 22px;
       font-weight: 600;
-      margin-bottom: 6px;
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.5);
     }
 
-    .section-sub {
-      font-size: 13px;
-      color: var(--muted);
-      max-width: 640px;
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
 
-    /* HERO */
-    #hero .section-inner {
-      background:
-        radial-gradient(circle at top left, #1f2937 0, #020617 55%);
-    }
-
-    .hero-layout {
+    .hero {
       display: grid;
-      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.3fr);
-      gap: 22px;
-      margin-top: 10px;
-      align-items: flex-start;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 16px;
     }
 
-    @media (max-width: 860px) {
-      .hero-layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
+    .card {
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.04), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(79, 70, 229, 0.06), transparent 55%),
+        linear-gradient(145deg, rgba(15, 23, 42, 0.98), #020617);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at 10% 0%, rgba(56, 189, 248, 0.12), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.25s ease-out;
+      pointer-events: none;
+    }
+
+    .card:hover::before {
+      opacity: 1;
     }
 
     .hero-title {
-      font-size: clamp(26px, 3vw, 32px);
-      line-height: 1.1;
+      font-size: clamp(24px, 3vw, 28px);
+      line-height: 1.15;
       margin-bottom: 8px;
+      letter-spacing: 0.03em;
     }
 
-    .hero-description {
-      font-size: 14px;
+    .hero-title span.badge {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-title span.badge::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #22c55e, #16a34a);
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
+    }
+
+    .hero-title strong {
+      display: block;
+      margin-top: 6px;
+    }
+
+    .hero-desc {
+      font-size: 13px;
       color: var(--muted);
-      margin-bottom: 16px;
       max-width: 520px;
-    }
-
-    .hero-description strong {
-      color: var(--text);
+      margin-bottom: 12px;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
       margin-bottom: 12px;
     }
 
@@ -349,45 +327,40 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      padding: 9px 16px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 500;
-      border: none;
+      gap: 6px;
+      padding: 8px 13px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      border: 1px solid transparent;
       cursor: pointer;
       text-decoration: none;
-      outline: none;
-      transition:
-        transform 0.12s ease,
-        box-shadow 0.12s ease,
-        background 0.12s ease,
-        color 0.12s ease;
+      transition: all 0.16s ease-out;
       white-space: nowrap;
     }
 
     .btn-primary {
-      background: linear-gradient(120deg, var(--accent), var(--accent-strong));
+      background: radial-gradient(circle at 0% 0%, #22d3ee, #0ea5e9 45%, #0369a1);
       color: #020617;
-      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.55);
+      font-weight: 600;
+      box-shadow: var(--shadow-glow);
     }
 
     .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 16px 35px rgba(37, 99, 235, 0.75);
+      transform: translateY(-1px) scale(1.01);
+      box-shadow: 0 18px 40px rgba(8, 47, 73, 0.9);
     }
 
     .btn-ghost {
       background: rgba(15, 23, 42, 0.9);
       color: var(--muted);
-      border: 1px solid rgba(148, 163, 184, 0.5);
+      border-color: rgba(148, 163, 184, 0.4);
     }
 
     .btn-ghost:hover {
-      background: rgba(15, 23, 42, 1);
       color: var(--text);
+      border-color: rgba(148, 163, 184, 0.8);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.85);
       transform: translateY(-1px);
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.9);
     }
 
     .btn-icon {
@@ -397,1414 +370,890 @@
     .hero-meta-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      font-size: 11px;
-      color: var(--muted);
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 6px;
     }
 
-    .hero-tag {
-      padding: 6px 10px;
-      border-radius: 999px;
+    .ca-box {
+      border-radius: var(--radius-pill);
       background: rgba(15, 23, 42, 0.9);
       border: 1px solid rgba(148, 163, 184, 0.5);
+      padding: 5px 6px 5px 9px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono",
+        "Courier New", monospace;
+      font-size: 11px;
+      color: var(--muted);
+      max-width: 100%;
+      overflow: hidden;
     }
 
-    .hero-right-card {
-      border-radius: 16px;
-      background: rgba(15, 23, 42, 0.98);
-      border: 1px solid rgba(148, 163, 184, 0.55);
-      padding: 14px;
+    .ca-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(148, 163, 184, 0.9);
+    }
+
+    .ca-value {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--text);
+    }
+
+    .copy-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--muted);
+      font-size: 10px;
+      padding: 3px 7px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: all 0.16s ease-out;
+      flex-shrink: 0;
+    }
+
+    .copy-btn:hover {
+      color: var(--text);
+      border-color: rgba(148, 163, 184, 0.9);
+      transform: translateY(-0.5px);
+    }
+
+    .copy-msg {
+      font-size: 10px;
+      color: var(--accent);
+      opacity: 0;
+      transform: translateY(4px);
+      transition: all 0.18s ease-out;
+    }
+
+    .copy-msg.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero-side {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.8);
     }
 
-    .hero-right-heading {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      font-weight: 500;
+    .subcard {
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(145deg, rgba(15, 23, 42, 0.96), #020617);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      padding: 13px 14px 12px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .badge {
-      font-size: 10px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      border: 1px solid rgba(56, 189, 248, 0.6);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .quote {
+    .subcard-title {
       font-size: 12px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .nfad {
-      margin-top: 4px;
-      font-size: 11px;
-      color: #f97373;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .nfad-icon {
-      width: 14px;
-      height: 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(248, 113, 113, 0.8);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 9px;
-    }
-
-    .checklist {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-top: 6px;
-      font-size: 11px;
-    }
-
-    .check-item {
-      display: flex;
-      gap: 8px;
-      align-items: flex-start;
-      color: var(--muted);
-    }
-
-    .check-icon {
-      width: 16px;
-      height: 16px;
-      border-radius: 999px;
-      background: rgba(22, 163, 74, 0.12);
-      border: 1px solid rgba(34, 197, 94, 0.7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      color: #4ade80;
-      flex-shrink: 0;
-    }
-
-    .check-body strong {
-      color: var(--text);
       font-weight: 600;
-    }
-
-    /* CONTRACT BOX */
-    .contract-box {
-      border-radius: 12px;
-      background: rgba(15, 23, 42, 0.98);
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      padding: 10px 10px 8px;
-      font-size: 12px;
-    }
-
-    .contract-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 6px;
-      margin-bottom: 4px;
-    }
-
-    .contract-label {
-      font-size: 11px;
+      margin-bottom: 6px;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      letter-spacing: 0.15em;
+      color: rgba(226, 232, 240, 0.9);
+    }
+
+    .subcard p {
+      font-size: 12px;
       color: var(--muted);
     }
 
-    .network-pill {
-      font-size: 10px;
-      padding: 2px 7px;
-      border-radius: 999px;
-      border: 1px solid rgba(56, 189, 248, 0.7);
-      background: rgba(15, 23, 42, 0.96);
-      color: var(--accent);
-    }
-
-    .contract-row {
+    .metric-row {
       display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 4px;
-      margin-top: 2px;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
     }
 
-    .contract-value {
-      font-family: "SF Mono", "Consolas", ui-monospace, Menlo, Monaco,
-        "Courier New", monospace;
+    .pill-metric {
+      border-radius: var(--radius-pill);
+      padding: 4px 9px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.96);
       font-size: 11px;
-      padding: 5px 8px;
-      border-radius: 8px;
-      background: rgba(15, 23, 42, 0.98);
-      border: 1px dashed rgba(148, 163, 184, 0.6);
-      word-break: break-all;
-      flex: 1;
-    }
-
-    .btn-copy {
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.8);
-      background: rgba(15, 23, 42, 0.98);
       color: var(--muted);
-      font-size: 11px;
-      padding: 5px 10px;
-      cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: background 0.12s ease, color 0.12s ease, transform 0.12s ease;
-      flex-shrink: 0;
     }
 
-    .btn-copy:hover {
-      background: rgba(15, 23, 42, 1);
-      color: var(--accent);
-      transform: translateY(-1px);
-    }
-
-    .btn-copy .dot {
+    .pill-dot {
       width: 7px;
       height: 7px;
       border-radius: 999px;
-      background: rgba(56, 189, 248, 0.4);
+      background: radial-gradient(circle, #22c55e, #16a34a);
     }
 
-    .contract-note {
-      font-size: 11px;
-      color: var(--muted);
-      margin-top: 2px;
+    section {
+      margin-top: 16px;
     }
 
-    .toast {
-      position: fixed;
-      left: 50%;
-      bottom: 22px;
-      transform: translateX(-50%) translateY(20px);
-      background: rgba(15, 23, 42, 0.95);
-      border-radius: 999px;
-      padding: 8px 14px;
-      font-size: 11px;
-      color: var(--text);
-      border: 1px solid rgba(56, 189, 248, 0.8);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.18s ease, transform 0.18s ease;
-      z-index: 50;
+    .section-inner {
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      background:
+        radial-gradient(circle at 100% 0%, rgba(79, 70, 229, 0.13), transparent 55%),
+        linear-gradient(135deg, rgba(15, 23, 42, 0.98), #020617);
+      padding: 16px 16px 14px;
+      box-shadow: var(--shadow-soft);
     }
 
-    .toast.visible {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-      pointer-events: auto;
+    .section-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: rgba(148, 163, 184, 0.95);
+      margin-bottom: 4px;
     }
 
-    /* ABOUT */
-    .about-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-      gap: 18px;
-      margin-top: 12px;
+    .section-title {
+      font-size: 17px;
+      margin-bottom: 6px;
     }
 
-    @media (max-width: 860px) {
-      .about-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .about-text {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .about-highlights {
-      border-radius: 14px;
-      background: rgba(10, 16, 32, 0.96);
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      padding: 12px;
+    .section-sub {
       font-size: 12px;
-    }
-
-    .about-bullets {
-      list-style: none;
-      margin-top: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .about-bullets li::before {
-      content: "•";
-      margin-right: 6px;
-      color: var(--accent);
-    }
-
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
-    }
-
-    .tag {
-      font-size: 11px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.96);
-      border: 1px solid rgba(148, 163, 184, 0.55);
       color: var(--muted);
+      max-width: 720px;
     }
 
-    /* HOW TO BUY */
-    .howto-layout {
-      margin-top: 12px;
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 12px;
+      margin-top: 10px;
     }
 
     .howto-list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      font-size: 13px;
+      gap: 8px;
       margin-top: 6px;
     }
 
     .howto-item {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       align-items: flex-start;
     }
 
     .step-circle {
-      margin-top: 3px;
       width: 20px;
       height: 20px;
       border-radius: 999px;
-      background: rgba(37, 99, 235, 0.2);
-      border: 1px solid rgba(56, 189, 248, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.95);
+      font-size: 11px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
-      color: var(--accent);
+      color: var(--muted);
       flex-shrink: 0;
+    }
+
+    .step-body {
+      font-size: 12px;
+      color: var(--muted);
     }
 
     .step-body strong {
-      display: block;
-      font-size: 13px;
-      margin-bottom: 2px;
-    }
-
-    .step-body span {
-      color: var(--muted);
       font-size: 12px;
-    }
-
-    /* TOKENOMICS & ROADMAP */
-    .two-col {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-      gap: 18px;
-      margin-top: 12px;
-    }
-
-    @media (max-width: 860px) {
-      .two-col {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .subcard {
-      border-radius: 14px;
-      background: rgba(10, 16, 32, 0.96);
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      padding: 12px 12px 10px;
-      font-size: 12px;
-    }
-
-    .subcard-title {
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .token-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 8px;
-    }
-
-    @media (max-width: 480px) {
-      .token-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .token-box {
-      border-radius: 10px;
-      padding: 8px;
-      background: rgba(15, 23, 42, 0.96);
-      border: 1px solid rgba(148, 163, 184, 0.6);
-    }
-
-    .token-label {
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .token-value {
-      font-size: 13px;
-      font-weight: 600;
-      margin-top: 2px;
-    }
-
-    .roadmap-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-      margin-top: 8px;
-    }
-
-    .roadmap-item {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-    }
-
-    .roadmap-step {
-      margin-top: 2px;
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      color: var(--accent);
-      flex-shrink: 0;
-    }
-
-    .roadmap-body strong {
+      color: var(--text);
       display: block;
       margin-bottom: 1px;
     }
 
-    .roadmap-body span {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    /* COMMUNITY */
-    .community-layout {
+    .tokenomics-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-      gap: 18px;
-      margin-top: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 10px;
     }
 
-    @media (max-width: 860px) {
-      .community-layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .link-card {
+    .token-box {
       border-radius: 14px;
-      background: rgba(10, 16, 32, 0.96);
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      padding: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(15, 23, 42, 0.95);
+      padding: 8px 9px;
       font-size: 12px;
     }
 
-    .link-title {
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .link-pill {
+    .token-label {
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
       font-size: 10px;
-      padding: 2px 7px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: rgba(148, 163, 184, 0.95);
+      margin-bottom: 3px;
+    }
+
+    .token-value {
+      font-weight: 600;
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+
+    .token-note {
+      font-size: 11px;
       color: var(--muted);
     }
 
-    .link-body {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-
-    .link-body a {
-      color: var(--accent);
-      text-decoration: underline;
-      text-decoration-style: dotted;
-      text-underline-offset: 3px;
-      font-weight: 500;
-    }
-
-    .community-list {
-      list-style: none;
-      margin-top: 6px;
+    .checklist {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 6px;
+      margin-top: 4px;
     }
 
-    .community-list li::before {
-      content: "•";
-      margin-right: 6px;
-      color: var(--accent);
+    .check-item {
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.96);
+      padding: 6px 8px;
+      display: flex;
+      gap: 7px;
+      align-items: flex-start;
+      cursor: pointer;
+    }
+
+    .check-item input {
+      margin-top: 4px;
+      accent-color: var(--accent);
+    }
+
+    .check-body {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .check-body strong {
+      font-size: 12px;
+      color: var(--text);
+      display: block;
+      margin-bottom: 1px;
     }
 
     footer {
-      margin-top: 26px;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 16px 20px;
       font-size: 11px;
       color: var(--muted);
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
       gap: 8px;
       border-top: 1px solid rgba(15, 23, 42, 0.9);
-      padding-top: 12px;
+      margin-top: 10px;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 11px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .lang {
+      display: none;
+    }
+
+    html[data-lang="en"] .lang-en {
+      display: inline;
+    }
+
+    html[data-lang="id"] .lang-id {
+      display: inline;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    }
+
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        align-self: stretch;
+        justify-content: space-between;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .card,
+      .section-inner {
+        padding: 14px 12px 12px;
+      }
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn-primary,
+      .btn-ghost {
+        justify-content: flex-start;
+      }
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        gap: 8px;
+      }
+      .brand-name {
+        font-size: 12px;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="nav">
-      <div class="brand">
-        <div class="logo">
-          <!-- GANTI LOGO_URL_HERE dengan URL logo DONE COIN dari Base.meme (klik kanan logo → Copy image address) -->
-          <img src="https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-0d78-19e399cfb801/public?exp=1762754400&sig=33fae3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf" alt="DONE COIN logo" />
-        </div>
-        <div class="brand-text">
-          <h1>DONE COIN ($DONE)</h1>
-          <p data-i18n="brand-subtitle">Community-first meme coin on Base</p>
-        </div>
-      </div>
-      <div class="nav-right">
-        <nav class="nav-links">
-          <a href="#about" class="nav-link" data-i18n="nav-about">About</a>
-          <a href="#how-to-buy" class="nav-link" data-i18n="nav-howto">How to buy</a>
-          <a href="#tokenomics" class="nav-link" data-i18n="nav-tokenomics">Tokenomics</a>
-          <a href="#community" class="nav-link primary active" data-i18n="nav-community">Community</a>
-        </nav>
-        <div class="lang-toggle">
-          <button class="lang-btn active" data-lang="en" type="button">EN</button>
-          <button class="lang-btn" data-lang="id" type="button">ID</button>
-        </div>
-      </div>
-    </div>
-  </header>
+  <div class="bg-orbit"></div>
 
   <div class="page">
-    <!-- HERO -->
-    <section id="hero">
-      <div class="section-inner">
-        <div class="section-label" data-i18n="section-hero-label">
-          COMMUNITY TRUST PAGE
+    <header class="reveal">
+      <div class="brand">
+        <div class="brand-logo">
+          <img src="https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-0d78-19e399cfb801/public?exp=1762754400&sig=33fae3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf" alt="DONE COIN logo" />
         </div>
-        <h2 class="hero-title" data-i18n="hero-title">
-          I’M DONE with rugs, fake promises &amp; trash devs.
-        </h2>
-        <p class="hero-description" data-i18n="hero-subtitle">
-          <strong>DONE COIN ($DONE) on Base</strong> is a meme coin for everyone
-          who’s done with rugs, fake promises and trash devs.
-          Community first, hype later – simple, transparent and easy to meme.
-          Not financial advice, always DYOR. 🧠
-        </p>
-
-        <div class="hero-layout">
-          <div>
-            <div class="hero-actions">
-              <a
-                class="btn-primary"
-                href="https://base.meme/coin/base:0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span class="btn-icon">⚡</span>
-                <span data-i18n="btn-check-done">View $DONE on Base.meme</span>
-              </a>
-
-              <a
-                class="btn-ghost"
-                href="#how-to-buy"
-              >
-                <span class="btn-icon">🧠</span>
-                <span data-i18n="btn-howto">How to buy &amp; DYOR</span>
-              </a>
-
-              <a
-                class="btn-ghost"
-                href="https://x.com/i/communities/1986294951999906065"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span class="btn-icon">🐦</span>
-                <span data-i18n="btn-twitter-community">Join Twitter community</span>
-              </a>
-            </div>
-
-            <div class="hero-meta-row">
-              <div class="hero-tag" data-i18n="hero-meta-1">
-                🧠 Meme-first, community-led
-              </div>
-              <div class="hero-tag" data-i18n="hero-meta-2">
-                👀 Transparent &amp; simple
-              </div>
-              <div class="hero-tag" data-i18n="hero-meta-3">
-                🔵 Built on Base
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-right-card">
-            <div class="hero-right-heading">
-              <span data-i18n="hero-right-title">Key details</span>
-              <span class="badge" data-i18n="hero-right-badge">
-                Verify &amp; DYOR
-              </span>
-            </div>
-            <p class="quote" data-i18n="hero-quote">
-              $DONE is a meme coin on Base for everyone who’s done with rugs,
-              fake promises and trash devs. No over-promising, no fake utility –
-              just a clean meme and transparent communication.
-            </p>
-
-            <div class="contract-box">
-              <div class="contract-header">
-                <span class="contract-label" data-i18n="contract-label">CONTRACT</span>
-                <span class="network-pill" data-i18n="contract-network">Base • ERC-20</span>
-              </div>
-              <div class="contract-row">
-                <div class="contract-value" id="ca-text">
-                  0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888
-                </div>
-                <button class="btn-copy" id="copy-ca" type="button">
-                  <span class="dot"></span>
-                  <span data-i18n="copy-btn">Copy</span>
-                </button>
-              </div>
-              <div class="contract-note" data-i18n="contract-note">
-                Always verify this address on Base and only use links from official channels.
-              </div>
-            </div>
-
-            <div class="nfad">
-              <span class="nfad-icon">!</span>
-              <span data-i18n="nfad-text">
-                Not financial advice. Always do your own research.
-              </span>
-            </div>
-
-            <div class="checklist">
-              <div class="check-item">
-                <div class="check-icon">✓</div>
-                <div class="check-body">
-                  <strong data-i18n="check1-title">
-                    Clear story, no nonsense.
-                  </strong>
-                  <span data-i18n="check1-text">
-                    We’re honest about what $DONE is: a meme coin, not a guaranteed ticket to riches.
-                  </span>
-                </div>
-              </div>
-              <div class="check-item">
-                <div class="check-icon">✓</div>
-                <div class="check-body">
-                  <strong data-i18n="check2-title">
-                    Public links &amp; on-chain data.
-                  </strong>
-                  <span data-i18n="check2-text">
-                    We share where $DONE is listed and encourage you to verify everything on-chain yourself.
-                  </span>
-                </div>
-              </div>
-              <div class="check-item">
-                <div class="check-icon">✓</div>
-                <div class="check-body">
-                  <strong data-i18n="check3-title">
-                    Community over hype.
-                  </strong>
-                  <span data-i18n="check3-text">
-                    Hype will come and go – we focus on building a fun, active community that understands the risks.
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>  
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about">
-      <div class="section-inner">
-        <div class="section-label" data-i18n="section-about-label">
-          ABOUT $DONE
-        </div>
-        <h2 class="section-title" data-i18n="section-about-title">
-          What is DONE COIN ($DONE)?
-        </h2>
-        <p class="section-sub" data-i18n="section-about-sub">
-          A simple meme coin on Base for everyone who’s done with rugs, fake promises and trash devs.
-          Built to be transparent, easy to meme and led by the community instead of fake hype.
-        </p>
-
-        <div class="about-grid">
-          <div class="about-text" data-i18n="side-what-body">
-            DONE COIN ($DONE) is a meme coin on the
-            <strong>Base</strong> network for people who are tired of rugs,
-            fake promises and low-effort devs.
-            <br /><br />
-            It’s built around one simple idea: be transparent, keep it meme-able,
-            and let the community decide how far it goes.
-          </div>
-          <div class="about-highlights">
-            <div data-i18n="side-transparency-body-intro">
-              This page exists so new people can quickly understand the spirit of
-              $DONE. Before you decide anything:
-            </div>
-            <ul class="about-bullets">
-              <li data-i18n="side-transparency-li1">
-                Read the contract and check the holder distribution.
-              </li>
-              <li data-i18n="side-transparency-li2">
-                Verify the listing and links from official channels only.
-              </li>
-              <li data-i18n="side-transparency-li3">
-                Join the community, ask questions, and don’t rush entries.
-              </li>
-            </ul>
-            <div class="tag-row">
-              <span class="tag" data-i18n="tag1">No fake promises</span>
-              <span class="tag" data-i18n="tag2">Meme culture</span>
-              <span class="tag" data-i18n="tag3">Base chain</span>
-              <span class="tag" data-i18n="tag4">DYOR mindset</span>
-            </div>
+        <div class="brand-meta">
+          <div class="brand-name">DONE COIN • $DONE</div>
+          <div class="brand-chain">
+            <span class="pill">
+              <span>Base Network</span>
+            </span>
+            <span>Community-first meme coin.</span>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- HOW TO BUY -->
-    <section id="how-to-buy">
-      <div class="section-inner">
-        <div class="section-label" data-i18n="section-howto-label">
-          HOW TO BUY
+      <nav>
+        <div class="lang-toggle">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="id">ID</button>
         </div>
-        <h2 class="section-title" data-i18n="howto-title">
-          How to buy $DONE (safe flow)
-        </h2>
-        <p class="section-sub" data-i18n="howto-sub">
-          Always double-check links, contract address and network. Don’t rush entries,
-          and never spend more than you’re prepared to lose.
-        </p>
+        <a class="nav-link" href="#community">
+          <span class="emoji">🌐</span>
+          <span>Community</span>
+        </a>
+        <a class="nav-link" href="#airdrop">
+          <span class="emoji">🎁</span>
+          <span>DONE Quest</span>
+        </a>
+        <a class="nav-link primary" href="https://base.meme/coin/base:0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888" target="_blank" rel="noopener noreferrer">
+          <span class="emoji">🧠</span>
+          <span>View on Base.meme</span>
+        </a>
+      </nav>
+    </header>
 
-        <div class="howto-layout">
-          <ul class="howto-list">
-            <li class="howto-item">
-              <div class="step-circle">1</div>
-              <div class="step-body">
-                <strong data-i18n="howto-li1-title">Get a wallet on Base</strong>
-                <span data-i18n="howto-li1-text">
-                  Use a wallet like MetaMask or Rabby, and make sure the
-                  <strong>Base</strong> network is added and selected.
-                </span>
-              </div>
-            </li>
-            <li class="howto-item">
-              <div class="step-circle">2</div>
-              <div class="step-body">
-                <strong data-i18n="howto-li2-title">Fund with ETH on Base</strong>
-                <span data-i18n="howto-li2-text">
-                  Bridge ETH to Base or withdraw ETH directly to Base from a
-                  centralized exchange that supports it.
-                </span>
-              </div>
-            </li>
-            <li class="howto-item">
-              <div class="step-circle">3</div>
-              <div class="step-body">
-                <strong data-i18n="howto-li3-title">
-                  Open the official $DONE page
-                </strong>
-                <span data-i18n="howto-li3-text">
-                  Use the link shared from official channels to open the
-                  $DONE page on <strong>Base.meme</strong> or the DEX where it’s listed.
-                  Always verify the contract address.
-                </span>
-              </div>
-            </li>
-            <li class="howto-item">
-              <div class="step-circle">4</div>
-              <div class="step-body">
-                <strong data-i18n="howto-li4-title">
-                  Swap carefully &amp; stay in control
-                </strong>
-                <span data-i18n="howto-li4-text">
-                  Connect your wallet, set a reasonable slippage, double-check
-                  the token name &amp; contract, then confirm the swap. Avoid
-                  FOMO, and always DYOR.
-                </span>
-              </div>
-            </li>
-          </ul>
+    <main>
+      <!-- HERO -->
+      <section class="hero reveal">
+        <div class="card">
+          <div class="hero-title">
+            <span class="badge">Transparent • Community First</span>
+            <strong>
+              <span class="lang lang-en">DONE COIN ($DONE) – I’m DONE with rugs.</span>
+              <span class="lang lang-id">DONE COIN ($DONE) – Saya DONE dengan rug, janji palsu & dev sampah.</span>
+            </strong>
+          </div>
+          <p class="hero-desc">
+            <span class="lang lang-en">
+              DONE COIN ($DONE) on Base – a meme coin for everyone who’s DONE with rugs, fake promises and trash devs.
+              Community first, hype later – simple, transparent and easy to meme. Not financial advice, always DYOR. 🧠
+            </span>
+            <span class="lang lang-id">
+              DONE COIN ($DONE) di jaringan Base – meme coin untuk semua orang yang DONE dengan rug, janji palsu dan dev
+              sampah. Komunitas dulu, hype belakangan – simple, transparan dan gampang di-meme. Bukan saran finansial,
+              selalu DYOR. 🧠
+            </span>
+          </p>
+
+          <div class="hero-meta-row">
+            <div class="ca-box">
+              <div class="ca-label">Contract</div>
+              <div class="ca-value" id="ca-value">0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888</div>
+              <button class="copy-btn" id="copy-ca-btn" type="button">
+                <span>Copy</span>
+              </button>
+            </div>
+            <span class="copy-msg" id="copy-msg">CA copied ✓</span>
+          </div>
+
+          <div class="hero-actions">
+            <a class="btn-primary" href="https://base.meme/coin/base:0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888" target="_blank" rel="noopener noreferrer">
+              <span class="btn-icon">🧠</span>
+              <span>Open on Base.meme</span>
+            </a>
+            <a class="btn-ghost" href="https://x.com/i/communities/1986294951999906065" target="_blank" rel="noopener noreferrer">
+              <span class="btn-icon">𝕏</span>
+              <span>Join X Community</span>
+            </a>
+            <a class="btn-ghost" href="https://farcaster.xyz/dani12po" target="_blank" rel="noopener noreferrer">
+              <span class="btn-icon">🔵</span>
+              <span>Farcaster @dani12po</span>
+            </a>
+          </div>
+
+          <p class="section-sub" style="font-size:11px;margin-top:4px;">
+            <span class="lang lang-en">
+              DYOR, never invest what you can’t afford to lose. This page is for community information and memes only.
+            </span>
+            <span class="lang lang-id">
+              Selalu DYOR, jangan pernah invest lebih dari yang siap kamu relakan. Halaman ini hanyalah informasi komunitas
+              dan meme.
+            </span>
+          </p>
         </div>
-      </div>
-    </section>
 
-    <!-- TOKENOMICS & ROADMAP -->
-    <section id="tokenomics">
-      <div class="section-inner">
-        <div class="section-label" data-i18n="section-tokenomics-label">
-          TOKENOMICS &amp; ROADMAP
-        </div>
-        <h2 class="section-title" data-i18n="section-tokenomics-title">
-          Tokenomics & honest roadmap
-        </h2>
-        <p class="section-sub" data-i18n="tokenomics-sub">
-          Numbers below are examples. Adjust them to your real supply &amp;
-          distribution once final, and let everyone verify it on-chain.
-        </p>
-
-        <div class="two-col">
+        <div class="hero-side">
           <div class="subcard">
-            <div class="subcard-title" data-i18n="tokenomics-title">
-              Tokenomics (example, edit as needed)
-            </div>
-            <div class="token-grid">
-              <div class="token-box">
-                <div class="token-label" data-i18n="token-total-supply-label">
-                  Total Supply
-                </div>
-                <div class="token-value" data-i18n="token-total-supply-value">
-                  1,000,000,000 $DONE
-                </div>
-              </div>
-              <div class="token-box">
-                <div class="token-label" data-i18n="token-liq-label">
-                  Liquidity Pool
-                </div>
-                <div class="token-value" data-i18n="token-liq-value">
-                  xx% (locked / planned)
-                </div>
-              </div>
-              <div class="token-box">
-                <div class="token-label" data-i18n="token-community-label">
-                  Community / Airdrop
-                </div>
-                <div class="token-value" data-i18n="token-community-value">
-                  xx%
-                </div>
-              </div>
-              <div class="token-box">
-                <div class="token-label" data-i18n="token-team-label">
-                  Team / Dev
-                </div>
-                <div class="token-value" data-i18n="token-team-value">
-                  xx% (transparent + vesting)
-                </div>
-              </div>
-            </div>
-            <p class="section-sub" style="margin-top:8px;font-size:11px;" data-i18n="token-note">
-              🧠 All details will be announced openly. No hidden taxes
-              or random numbers that suddenly change without telling the community.
+            <div class="subcard-title">Why DONE?</div>
+            <p>
+              <span class="lang lang-en">
+                DONE is for people who are tired of rugs, overpromised roadmaps and silent devs. Simple narrative, clean
+                branding, and a community that actually shows up.
+              </span>
+              <span class="lang lang-id">
+                DONE dibuat untuk orang-orang yang capek dengan rug, roadmap PHP dan dev yang hilang. Narasi simple,
+                branding bersih, dan komunitas yang benar-benar hadir.
+              </span>
             </p>
+            <div class="metric-row">
+              <div class="pill-metric">
+                <span class="pill-dot"></span>
+                <span>Chain: Base</span>
+              </div>
+              <div class="pill-metric">
+                <span>Ticker: $DONE</span>
+              </div>
+              <div class="pill-metric">
+                <span>Community-first launch</span>
+              </div>
+            </div>
           </div>
 
           <div class="subcard">
-            <div class="subcard-title" data-i18n="roadmap-title">
-              Honest Roadmap
+            <div class="subcard-title">Token basics</div>
+            <div class="tokenomics-grid">
+              <div class="token-box">
+                <div class="token-label">Supply</div>
+                <div class="token-value">1,000,000,000 DONE</div>
+                <div class="token-note">
+                  Example total supply. Update here if tokenomics are finalized on-chain.
+                </div>
+              </div>
+              <div class="token-box">
+                <div class="token-label">Liquidity</div>
+                <div class="token-value">Locked / TBD</div>
+                <div class="token-note">
+                  Liquidity & lock details should be shared transparently with the community.
+                </div>
+              </div>
+              <div class="token-box">
+                <div class="token-label">Community</div>
+                <div class="token-value">Airdrops & quests</div>
+                <div class="token-note">
+                  Part of supply can be used for quests like DONE Quest to reward real participants.
+                </div>
+              </div>
+              <div class="token-box">
+                <div class="token-label">Disclaimer</div>
+                <div class="token-value">Not financial advice</div>
+                <div class="token-note">
+                  Meme only. No promises, no guarantees. Always research before buying any token.
+                </div>
+              </div>
             </div>
-            <p class="section-sub" style="font-size:12px;" data-i18n="roadmap-sub">
-              Not a fantasy wishlist. Only realistic steps that the community
-              can actually check.
-            </p>
-            <ul class="roadmap-list">
-              <li class="roadmap-item">
-                <div class="roadmap-step">1</div>
-                <div class="roadmap-body">
-                  <strong data-i18n="rm1-title">
-                    Launch &amp; Base.meme listing
-                  </strong>
-                  <span data-i18n="rm1-text">
-                    Deploy the contract on Base, list on Base.meme, and share
-                    this page so everyone understands what $DONE is.
-                  </span>
-                </div>
-              </li>
-              <li class="roadmap-item">
-                <div class="roadmap-step">2</div>
-                <div class="roadmap-body">
-                  <strong data-i18n="rm2-title">
-                    Community build-up
-                  </strong>
-                  <span data-i18n="rm2-text">
-                    Open community channels (Telegram / Twitter / etc.), and invite
-                    people who are already ‘done’ with rugs to hang out together.
-                  </span>
-                </div>
-              </li>
-              <li class="roadmap-item">
-                <div class="roadmap-step">3</div>
-                <div class="roadmap-body">
-                  <strong data-i18n="rm3-title">
-                    Memes, threads &amp; education
-                  </strong>
-                  <span data-i18n="rm3-text">
-                    Meme campaigns, educational threads about DYOR &amp; transparency,
-                    and highlight why $DONE is different from trash dev projects.
-                  </span>
-                </div>
-              </li>
-              <li class="roadmap-item">
-                <div class="roadmap-step">4</div>
-                <div class="roadmap-body">
-                  <strong data-i18n="rm4-title">
-                    Let the community decide
-                  </strong>
-                  <span data-i18n="rm4-text">
-                    Community proposals: light utility, collabs, or simply being a
-                    symbol for people who are ‘done’ with fake promises. No random CEX promises.
-                  </span>
-                </div>
-              </li>
-            </ul>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- COMMUNITY -->
-    <section id="community">
-      <div class="section-inner">
-        <div class="section-label" data-i18n="section-community-label">
-          COMMUNITY &amp; LINKS
-        </div>
-        <h2 class="section-title" data-i18n="section-community-title">
-          Join the DONE COIN community
-        </h2>
-        <p class="section-sub" data-i18n="section-community-sub">
-          Share what $DONE stands for, onboard people who are done with rugs,
-          and keep reminding everyone: this is a meme coin, not a guaranteed ticket to riches. Always DYOR.
-        </p>
+      <!-- COMMUNITY -->
+      <section id="community" class="reveal">
+        <div class="section-inner">
+          <div class="section-label">Community & Links</div>
+          <h2 class="section-title">DONE COIN ecosystem</h2>
+          <p class="section-sub">
+            <span class="lang lang-en">
+              These are the core links for the DONE community. Always double check contract addresses and official links
+              before interacting with any token.
+            </span>
+            <span class="lang lang-id">
+              Berikut link inti komunitas DONE. Selalu cek ulang alamat kontrak dan link resmi sebelum berinteraksi
+              dengan token apa pun.
+            </span>
+          </p>
 
-        <div class="community-layout">
-          <div class="link-card">
-            <div class="link-title">
-              <span>🐦 Twitter Community</span>
-              <span class="link-pill" data-i18n="community-twitter-pill">
-                Official community
-              </span>
+          <div class="two-col" style="margin-top:12px;">
+            <div class="subcard">
+              <div class="subcard-title">Official links</div>
+              <ul class="howto-list">
+                <li class="howto-item">
+                  <div class="step-circle">◎</div>
+                  <div class="step-body">
+                    <strong>Base.meme listing</strong>
+                    <span>
+                      <a href="https://base.meme/coin/base:0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;">
+                        https://base.meme/coin/base:0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888
+                      </a>
+                    </span>
+                  </div>
+                </li>
+                <li class="howto-item">
+                  <div class="step-circle">𝕏</div>
+                  <div class="step-body">
+                    <strong>X Community</strong>
+                    <span>
+                      <a href="https://x.com/i/communities/1986294951999906065" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;">
+                        DONE COIN community on X
+                      </a>
+                    </span>
+                  </div>
+                </li>
+                <li class="howto-item">
+                  <div class="step-circle">🔵</div>
+                  <div class="step-body">
+                    <strong>Farcaster</strong>
+                    <span>
+                      <a href="https://farcaster.xyz/dani12po" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;">
+                        @dani12po on Farcaster
+                      </a>
+                    </span>
+                  </div>
+                </li>
+              </ul>
             </div>
-            <p class="link-body" data-i18n="community-twitter-body">
-              Join the $DONE community space on X (Twitter) to hang out with people
-              who are done with rugs and trash devs:
-              <br />
-              <a
-                href="https://x.com/i/communities/1986294951999906065"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                DONE COIN Community on X
-              </a>
-            </p>
-            <ul class="community-list">
-              <li data-i18n="community-twitter-li1">
-                Get updates from the core community.
-              </li>
-              <li data-i18n="community-twitter-li2">
-                Share memes, ideas and feedback.
-              </li>
-              <li data-i18n="community-twitter-li3">
-                Help new people understand what $DONE stands for.
-              </li>
-            </ul>
-          </div>
 
-          <div class="link-card">
-            <div class="link-title">
-              <span>🔵 Base.meme listing</span>
-              <span class="link-pill" data-i18n="community-basememe-pill">
-                First listing
-              </span>
+            <div class="subcard">
+              <div class="subcard-title">Community trust notes</div>
+              <p class="section-sub" style="margin-bottom:6px;">
+                <span class="lang lang-en">
+                  DONE is built on transparency: clear contract, visible community, and meme-first narrative. Before
+                  joining, read the contract, check liquidity, and hang out with the community.
+                </span>
+                <span class="lang lang-id">
+                  DONE dibangun dengan transparansi: kontrak jelas, komunitas terlihat, dan narasi meme yang sederhana.
+                  Sebelum ikut, baca kontraknya, cek likuiditas dan nongkrong dulu dengan komunitas.
+                </span>
+              </p>
+              <p class="section-sub" style="font-size:11px;">
+                <span class="lang lang-en">
+                  No team can promise price. The only thing we can promise: memes, quests, and honest communication.
+                </span>
+                <span class="lang lang-id">
+                  Tidak ada tim yang bisa janji harga. Yang bisa dijanjikan hanya: meme, quest, dan komunikasi yang
+                  jujur.
+                </span>
+              </p>
             </div>
-            <p class="link-body" data-i18n="side-basememe-body">
-              The first listing for $DONE is live on:
-              <br />
-              <a
-                href="https://base.meme/coin/base:0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888"
-                class="link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Base.meme – DONE COIN page
-              </a>
-            </p>
-            <p class="section-sub" style="margin-top:6px;font-size:11px;" data-i18n="side-basememe-tiny">
-              Always double-check this link and the contract address before swapping.
-              If someone sends a different link, treat it as suspicious until you verify.
-            </p>
-            <ul class="community-list" style="margin-top:8px;">
-              <li data-i18n="side-community-li1">
-                Share what $DONE stands for in one link.
-              </li>
-              <li data-i18n="side-community-li2">
-                Onboard friends who are tired of rugs.
-              </li>
-              <li data-i18n="side-community-li3">
-                Remind everyone: meme first, always DYOR.
-              </li>
-            </ul>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <footer>
-      <div>
-        © <span id="year"></span> DONE COIN ($DONE) •
-        <span data-i18n="footer-built">Built on Base</span>
-      </div>
-      <div data-i18n="footer-disclaimer">
-        Not financial advice. Always do your own research. 🧠
-      </div>
-    </footer>
+      <!-- AIRDROP / DONE QUEST -->
+      <section id="airdrop" class="reveal">
+        <div class="section-inner">
+          <div class="section-label">DONE QUEST • AIRDROP</div>
+          <h2 class="section-title">DONE Quest – 1,000 DONE Airdrop</h2>
+          <p class="section-sub">
+            <span class="lang lang-en">
+              Complete the mission on Farcaster to become eligible for a 1,000 DONE airdrop. This page explains the quest
+              and provides a simple progress UI – final eligibility must always be checked from Farcaster data and on-chain
+              logic.
+            </span>
+            <span class="lang lang-id">
+              Selesaikan misi di Farcaster untuk berhak ikut airdrop 1.000 DONE. Halaman ini menjelaskan quest dan
+              menyediakan tampilan progres sederhana – status akhir tetap harus dicek dari data Farcaster dan logika
+              on-chain.
+            </span>
+          </p>
+
+          <div class="two-col" style="margin-top:16px;">
+            <!-- KIRI: STEP MISI -->
+            <div class="subcard">
+              <div class="subcard-title">Langkah misi DONE Quest</div>
+              <ul class="howto-list" style="margin-top:8px;">
+                <li class="howto-item">
+                  <div class="step-circle">1</div>
+                  <div class="step-body">
+                    <strong>Follow akun Farcaster Dani12po</strong>
+                    <span>
+                      Buka profil Farcaster Dani12po dari tombol di kanan, lalu tekan tombol follow.
+                    </span>
+                  </div>
+                </li>
+                <li class="howto-item">
+                  <div class="step-circle">2</div>
+                  <div class="step-body">
+                    <strong>Like cast quest</strong>
+                    <span>
+                      Buka cast quest DONE, lalu tap like (♥).
+                    </span>
+                  </div>
+                </li>
+                <li class="howto-item">
+                  <div class="step-circle">3</div>
+                  <div class="step-body">
+                    <strong>Recast cast quest</strong>
+                    <span>
+                      Recast cast yang sama supaya tersebar ke timeline kamu.
+                    </span>
+                  </div>
+                </li>
+                <li class="howto-item">
+                  <div class="step-circle">4</div>
+                  <div class="step-body">
+                    <strong>Quote + tag Dani12po</strong>
+                    <span>
+                      Buat quote cast dari quest itu, tulis pesanmu sendiri, dan tag <code>@dani12po</code> di dalamnya.
+                    </span>
+                  </div>
+                </li>
+              </ul>
+
+              <p class="section-sub" style="margin-top:10px;font-size:11px;">
+                ⚠️ Semua langkah di atas dilakukan langsung di Farcaster (farcaster.xyz / Warpcast). Halaman ini hanya
+                membantu menjelaskan aturan & progres; verifikasi asli tetap harus berdasarkan data Farcaster dan
+                on-chain, bukan centang manual di sini.
+              </p>
+            </div>
+
+            <!-- KANAN: TOMBOL & PROGRES -->
+            <div class="subcard">
+              <div class="subcard-title">Progres Quest & Klaim (UI)</div>
+
+              <div class="hero-actions" style="margin-top:4px;margin-bottom:10px;">
+                <a
+                  class="btn-primary"
+                  href="https://farcaster.xyz/dani12po"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span class="btn-icon">👤</span>
+                  <span>Follow Dani12po</span>
+                </a>
+
+                <a
+                  class="btn-ghost"
+                  href="https://farcaster.xyz/dani12po/0x302c440b"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span class="btn-icon">🧠</span>
+                  <span>Buka quest cast</span>
+                </a>
+              </div>
+
+              <!-- Checklist lokal (UI saja) -->
+              <div style="margin-top:6px;font-size:12px;">
+                <p style="color:var(--muted);margin-bottom:6px;">
+                  Centang sesuai langkah yang sudah kamu lakukan di Farcaster, lalu klik tombol cek. Ini hanya simulasi UI;
+                  verifikasi asli butuh koneksi ke API Farcaster dan smart contract klaim di Base.
+                </p>
+                <div class="checklist" style="margin-top:4px;">
+                  <label class="check-item quest-check">
+                    <input type="checkbox" />
+                    <div class="check-body">
+                      <strong>Sudah follow Dani12po</strong>
+                      <span style="display:block;font-size:11px;color:var(--muted);">
+                        Saya sudah follow akun Dani12po di Farcaster.
+                      </span>
+                    </div>
+                  </label>
+                  <label class="check-item quest-check">
+                    <input type="checkbox" />
+                    <div class="check-body">
+                      <strong>Sudah like cast quest</strong>
+                      <span style="display:block;font-size:11px;color:var(--muted);">
+                        Saya sudah memberikan like pada cast quest airdrop.
+                      </span>
+                    </div>
+                  </label>
+                  <label class="check-item quest-check">
+                    <input type="checkbox" />
+                    <div class="check-body">
+                      <strong>Sudah recast</strong>
+                      <span style="display:block;font-size:11px;color:var(--muted);">
+                        Saya sudah recast cast quest ke timeline saya.
+                      </span>
+                    </div>
+                  </label>
+                  <label class="check-item quest-check">
+                    <input type="checkbox" />
+                    <div class="check-body">
+                      <strong>Sudah quote + tag</strong>
+                      <span style="display:block;font-size:11px;color:var(--muted);">
+                        Saya sudah membuat quote cast dan tag Dani12po.
+                      </span>
+                    </div>
+                  </label>
+                </div>
+
+                <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;">
+                  <button
+                    id="btn-check-quest"
+                    type="button"
+                    class="btn-ghost"
+                    style="border-style:dashed;"
+                  >
+                    <span class="btn-icon">✅</span>
+                    <span>Cek progres</span>
+                  </button>
+
+                  <button
+                    id="btn-claim-done"
+                    type="button"
+                    class="btn-primary"
+                    style="opacity:0.6;pointer-events:none;"
+                  >
+                    <span class="btn-icon">🎁</span>
+                    <span>Claim 1,000 DONE (soon)</span>
+                  </button>
+                </div>
+
+                <p
+                  id="quest-status"
+                  style="margin-top:8px;font-size:11px;color:var(--muted);"
+                >
+                  Setelah backend & smart contract klaim terhubung, tombol klaim akan aktif otomatis untuk wallet yang
+                  benar-benar memenuhi semua syarat di Farcaster & on-chain.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
 
-  <div class="toast" id="toast">
-    <span>✅</span>
-    <span data-i18n="toast-text">Contract copied to clipboard.</span>
-  </div>
+  <footer>
+    <div>
+      DONE COIN ($DONE) on Base. Community, memes & transparent quests.
+    </div>
+    <div>
+      <span style="opacity:0.7;">Always DYOR • Not financial advice.</span>
+    </div>
+  </footer>
 
   <script>
-    const translations = {
-      en: {
-        'page-title': 'DONE COIN ($DONE) – Meme Coin on Base',
-        'meta-description':
-          'DONE COIN ($DONE) on Base – a meme coin for everyone who’s done with rugs, fake promises and trash devs. Community first, hype later – simple, transparent and easy to meme. Not financial advice, always DYOR. 🧠',
-
-        'brand-subtitle': 'Community-first meme coin on Base',
-
-        'nav-about': 'About',
-        'nav-howto': 'How to buy',
-        'nav-tokenomics': 'Tokenomics',
-        'nav-community': 'Community',
-
-        'section-hero-label': 'COMMUNITY TRUST PAGE',
-        'hero-title': 'I’M DONE with rugs, fake promises &amp; trash devs.',
-        'hero-subtitle':
-          '<strong>DONE COIN ($DONE) on Base</strong> is a meme coin for everyone who’s done with rugs, fake promises and trash devs.<br />Community first, hype later – simple, transparent and easy to meme. Not financial advice, always DYOR. 🧠',
-
-        'btn-check-done': 'View $DONE on Base.meme',
-        'btn-howto': 'How to buy &amp; DYOR',
-        'btn-twitter-community': 'Join Twitter community',
-
-        'hero-meta-1': '🧠 Meme-first, community-led',
-        'hero-meta-2': '👀 Transparent &amp; simple',
-        'hero-meta-3': '🔵 Built on Base',
-
-        'hero-right-title': 'Key details',
-        'hero-right-badge': 'Verify &amp; DYOR',
-        'hero-quote':
-          '$DONE is a meme coin on Base for everyone who’s done with rugs, fake promises and trash devs. No over-promising, no fake utility – just a clean meme and transparent communication.',
-        'nfad-text': 'Not financial advice. Always do your own research.',
-
-        'contract-label': 'CONTRACT',
-        'contract-network': 'Base • ERC-20',
-        'contract-note':
-          'Always verify this address on Base and only use links from official channels.',
-        'copy-btn': 'Copy',
-        'toast-text': 'Contract copied to clipboard.',
-
-        'check1-title': 'Clear story, no nonsense.',
-        'check1-text':
-          'We’re honest about what $DONE is: a meme coin, not a guaranteed ticket to riches.',
-        'check2-title': 'Public links &amp; on-chain data.',
-        'check2-text':
-          'We share where $DONE is listed and encourage you to verify everything on-chain yourself.',
-        'check3-title': 'Community over hype.',
-        'check3-text':
-          'Hype will come and go – we focus on building a fun, active community that understands the risks.',
-
-        'section-about-label': 'ABOUT $DONE',
-        'section-about-title': 'What is DONE COIN ($DONE)?',
-        'section-about-sub':
-          'A simple meme coin on Base for everyone who’s done with rugs, fake promises and trash devs. Built to be transparent, easy to meme and led by the community instead of fake hype.',
-
-        'side-what-body':
-          'DONE COIN ($DONE) is a meme coin on the <strong>Base</strong> network for people who are tired of rugs, fake promises and low-effort devs.<br /><br />It’s built around one simple idea: be transparent, keep it meme-able, and let the community decide how far it goes.',
-
-        'side-transparency-body-intro':
-          'This page exists so new people can quickly understand the spirit of $DONE. Before you decide anything:',
-        'side-transparency-li1':
-          'Read the contract and check the holder distribution.',
-        'side-transparency-li2':
-          'Verify the listing and links from official channels only.',
-        'side-transparency-li3':
-          'Join the community, ask questions, and don’t rush entries.',
-
-        'tag1': 'No fake promises',
-        'tag2': 'Meme culture',
-        'tag3': 'Base chain',
-        'tag4': 'DYOR mindset',
-
-        'section-howto-label': 'HOW TO BUY',
-        'howto-title': 'How to buy $DONE (safe flow)',
-        'howto-sub':
-          'Always double-check links, contract address and network. Don’t rush entries, and never spend more than you’re prepared to lose.',
-        'howto-li1-title': 'Get a wallet on Base',
-        'howto-li1-text':
-          'Use a wallet like MetaMask or Rabby, and make sure the <strong>Base</strong> network is added and selected.',
-        'howto-li2-title': 'Fund with ETH on Base',
-        'howto-li2-text':
-          'Bridge ETH to Base or withdraw ETH directly to Base from a centralized exchange that supports it.',
-        'howto-li3-title': 'Open the official $DONE page',
-        'howto-li3-text':
-          'Use the link shared from official channels to open the $DONE page on <strong>Base.meme</strong> or the DEX where it’s listed. Always verify the contract address.',
-        'howto-li4-title': 'Swap carefully &amp; stay in control',
-        'howto-li4-text':
-          'Connect your wallet, set a reasonable slippage, double-check the token name &amp; contract, then confirm the swap. Avoid FOMO, and always DYOR.',
-
-        'section-tokenomics-label': 'TOKENOMICS &amp; ROADMAP',
-        'section-tokenomics-title': 'Tokenomics & honest roadmap',
-        'tokenomics-title': 'Tokenomics (example, edit as needed)',
-        'tokenomics-sub':
-          'Numbers below are examples. Adjust them to your real supply &amp; distribution once final, and let everyone verify it on-chain.',
-        'token-total-supply-label': 'Total Supply',
-        'token-total-supply-value': '1,000,000,000 $DONE',
-        'token-liq-label': 'Liquidity Pool',
-        'token-liq-value': 'xx% (locked / planned)',
-        'token-community-label': 'Community / Airdrop',
-        'token-community-value': 'xx%',
-        'token-team-label': 'Team / Dev',
-        'token-team-value': 'xx% (transparent + vesting)',
-        'token-note':
-          '🧠 All details will be announced openly. No hidden taxes or random numbers that suddenly change without telling the community.',
-
-        'roadmap-title': 'Honest Roadmap',
-        'roadmap-sub':
-          'Not a fantasy wishlist. Only realistic steps that the community can actually check.',
-        'rm1-title': 'Launch &amp; Base.meme listing',
-        'rm1-text':
-          'Deploy the contract on Base, list on Base.meme, and share this page so everyone understands what $DONE is.',
-        'rm2-title': 'Community build-up',
-        'rm2-text':
-          'Open community channels (Telegram / Twitter / etc.), and invite people who are already ‘done’ with rugs to hang out together.',
-        'rm3-title': 'Memes, threads &amp; education',
-        'rm3-text':
-          'Meme campaigns, educational threads about DYOR &amp; transparency, and highlight why $DONE is different from trash dev projects.',
-        'rm4-title': 'Let the community decide',
-        'rm4-text':
-          'Community proposals: light utility, collabs, or simply being a symbol for people who are ‘done’ with fake promises. No random CEX promises.',
-
-        'section-community-label': 'COMMUNITY &amp; LINKS',
-        'section-community-title': 'Join the DONE COIN community',
-        'section-community-sub':
-          'Share what $DONE stands for, onboard people who are done with rugs, and keep reminding everyone: this is a meme coin, not a guaranteed ticket to riches. Always DYOR.',
-
-        'community-twitter-pill': 'Official community',
-        'community-twitter-body':
-          'Join the $DONE community space on X (Twitter) to hang out with people who are done with rugs and trash devs:<br /><a href="https://x.com/i/communities/1986294951999906065" target="_blank" rel="noopener noreferrer">DONE COIN Community on X</a>',
-        'community-twitter-li1': 'Get updates from the core community.',
-        'community-twitter-li2': 'Share memes, ideas and feedback.',
-        'community-twitter-li3':
-          'Help new people understand what $DONE stands for.',
-
-        'community-basememe-pill': 'First listing',
-        'side-basememe-body':
-          'The first listing for $DONE is live on:<br /><a href="https://base.meme/coin/base:0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888" class="link" target="_blank" rel="noopener noreferrer">Base.meme – DONE COIN page</a>',
-        'side-basememe-tiny':
-          'Always double-check this link and the contract address before swapping. If someone sends a different link, treat it as suspicious until you verify.',
-
-        'side-community-li1':
-          'Share what $DONE stands for in one link.',
-        'side-community-li2':
-          'Onboard friends who are tired of rugs.',
-        'side-community-li3':
-          'Remind everyone: meme first, always DYOR.',
-
-        'footer-built': 'Built on Base',
-        'footer-disclaimer':
-          'Not financial advice. Always do your own research. 🧠'
-      },
-
-      id: {
-        'page-title': 'DONE COIN ($DONE) – Koin Meme di Base',
-        'meta-description':
-          'DONE COIN ($DONE) di Base – koin meme untuk semua orang yang sudah capek dengan rug, janji palsu, dan dev abal-abal. Komunitas dulu, hype belakangan – simpel, transparan, dan gampang di-meme-in. Bukan saran finansial, selalu DYOR. 🧠',
-
-        'brand-subtitle': 'Koin meme berfokus komunitas di Base',
-
-        'nav-about': 'Tentang',
-        'nav-howto': 'Cara beli',
-        'nav-tokenomics': 'Tokenomics',
-        'nav-community': 'Komunitas',
-
-        'section-hero-label': 'HALAMAN KEPERCAYAAN KOMUNITAS',
-        'hero-title':
-          'I’M DONE dengan rug, janji palsu &amp; dev abal-abal.',
-        'hero-subtitle':
-          '<strong>DONE COIN ($DONE) di Base</strong> adalah koin meme untuk semua orang yang sudah capek dengan rug, janji palsu, dan dev abal-abal.<br />Komunitas dulu, hype belakangan – simpel, transparan, dan gampang di-meme-in. Bukan saran finansial, selalu DYOR. 🧠',
-
-        'btn-check-done': 'Lihat $DONE di Base.meme',
-        'btn-howto': 'Cara beli &amp; DYOR',
-        'btn-twitter-community': 'Gabung komunitas Twitter',
-
-        'hero-meta-1': '🧠 Meme dulu, komunitas pimpin',
-        'hero-meta-2': '👀 Transparan &amp; simpel',
-        'hero-meta-3': '🔵 Dibangun di Base',
-
-        'hero-right-title': 'Detail utama',
-        'hero-right-badge': 'Verifikasi &amp; DYOR',
-        'hero-quote':
-          '$DONE adalah koin meme di jaringan Base untuk semua yang sudah capek dengan rug, janji palsu, dan dev abal-abal. Tidak ada over-promise, tidak ada utilitas palsu – hanya meme yang jelas dan komunikasi transparan.',
-        'nfad-text': 'Bukan saran finansial. Selalu lakukan riset sendiri.',
-
-        'contract-label': 'KONTRAK',
-        'contract-network': 'Base • ERC-20',
-        'contract-note':
-          'Selalu verifikasi alamat ini di jaringan Base dan gunakan hanya link dari kanal resmi.',
-        'copy-btn': 'Copy',
-        'toast-text': 'Alamat kontrak sudah disalin.',
-
-        'check1-title': 'Cerita jelas, tanpa basa-basi.',
-        'check1-text':
-          'Kami jujur bahwa $DONE adalah koin meme, bukan tiket pasti untuk kaya mendadak.',
-        'check2-title': 'Link publik &amp; data on-chain.',
-        'check2-text':
-          'Kami bagikan di mana $DONE listing dan dorong semua orang untuk verifikasi sendiri langsung di chain.',
-        'check3-title': 'Komunitas di atas hype.',
-        'check3-text':
-          'Hype bisa datang dan pergi – fokus kami adalah komunitas yang seru, aktif, dan paham risiko.',
-
-        'section-about-label': 'TENTANG $DONE',
-        'section-about-title': 'Apa itu DONE COIN ($DONE)?',
-        'section-about-sub':
-          'Koin meme simpel di jaringan Base untuk semua yang sudah capek dengan rug, janji palsu, dan dev abal-abal. Dibuat transparan, gampang di-meme-in, dan dipimpin komunitas, bukan hype palsu.',
-
-        'side-what-body':
-          'DONE COIN ($DONE) adalah koin meme di jaringan <strong>Base</strong> untuk orang-orang yang sudah lelah dengan rug, janji palsu, dan dev asal-asalan.<br /><br />Semua berangkat dari satu ide simpel: transparan, gampang di-meme-in, dan biarkan komunitas yang menentukan mau dibawa sejauh apa.',
-
-        'side-transparency-body-intro':
-          'Halaman ini dibuat supaya orang baru cepat paham spirit dari $DONE. Sebelum ambil keputusan apa pun:',
-        'side-transparency-li1':
-          'Baca kontrak dan cek distribusi holder.',
-        'side-transparency-li2':
-          'Verifikasi listing dan link hanya dari kanal resmi.',
-        'side-transparency-li3':
-          'Gabung komunitas, tanya-tanya dulu, jangan FOMO masuk.',
-
-        'tag1': 'Tanpa janji palsu',
-        'tag2': 'Budaya meme',
-        'tag3': 'Jaringan Base',
-        'tag4': 'Mindset DYOR',
-
-        'section-howto-label': 'CARA BELI',
-        'howto-title': 'Cara beli $DONE (alur aman)',
-        'howto-sub':
-          'Selalu cek ulang link, alamat kontrak dan jaringan. Jangan FOMO, dan jangan pakai uang lebih dari yang siap kamu relakan.',
-        'howto-li1-title': 'Siapkan wallet di jaringan Base',
-        'howto-li1-text':
-          'Pakai wallet seperti MetaMask atau Rabby, dan pastikan jaringan <strong>Base</strong> sudah ditambahkan dan dipilih.',
-        'howto-li2-title': 'Isi saldo ETH di Base',
-        'howto-li2-text':
-          'Bridge ETH ke Base atau tarik ETH langsung ke jaringan Base dari exchange terpusat yang sudah mendukungnya.',
-        'howto-li3-title': 'Buka halaman resmi $DONE',
-        'howto-li3-text':
-          'Gunakan link resmi dari kanal komunitas untuk membuka halaman $DONE di <strong>Base.meme</strong> atau DEX tempat listing. Selalu cocokkan alamat kontraknya.',
-        'howto-li4-title': 'Swap dengan tenang &amp; tetap kontrol',
-        'howto-li4-text':
-          'Hubungkan wallet, atur slippage yang wajar, cek ulang nama token &amp; alamat kontrak, lalu baru konfirmasi swap. Hindari FOMO, dan selalu DYOR.',
-
-        'section-tokenomics-label': 'TOKENOMICS &amp; ROADMAP',
-        'section-tokenomics-title': 'Tokenomics & roadmap jujur',
-        'tokenomics-title': 'Tokenomics (contoh, bisa kamu ubah)',
-        'tokenomics-sub':
-          'Angka di bawah ini hanya contoh. Nanti sesuaikan dengan supply &amp; distribusi asli, dan biarkan semua orang verifikasi sendiri di chain.',
-        'token-total-supply-label': 'Total Supply',
-        'token-total-supply-value': '1.000.000.000 $DONE',
-        'token-liq-label': 'Liquidity Pool',
-        'token-liq-value': 'xx% (terkunci / rencana)',
-        'token-community-label': 'Komunitas / Airdrop',
-        'token-community-value': 'xx%',
-        'token-team-label': 'Tim / Dev',
-        'token-team-value': 'xx% (transparan + vesting)',
-        'token-note':
-          '🧠 Semua detail akan diumumkan secara terbuka. Tidak ada “hidden tax” atau angka random yang tiba-tiba berubah tanpa info ke komunitas.',
-
-        'roadmap-title': 'Roadmap Jujur',
-        'roadmap-sub':
-          'Bukan daftar harapan kosong. Hanya langkah realistis yang bisa dicek sendiri oleh komunitas.',
-        'rm1-title': 'Launch &amp; listing di Base.meme',
-        'rm1-text':
-          'Deploy kontrak di Base, listing di Base.meme, dan sebar halaman ini supaya semua orang paham apa itu $DONE.',
-        'rm2-title': 'Bangun komunitas',
-        'rm2-text':
-          'Buka kanal komunitas (Telegram / Twitter / dll.), dan ajak orang-orang yang sudah ‘done’ sama rug buat nongkrong bareng.',
-        'rm3-title': 'Meme, thread &amp; edukasi',
-        'rm3-text':
-          'Kampanye meme, thread edukasi soal DYOR &amp; transparansi, dan highlight kenapa $DONE beda dari proyek dev abal-abal.',
-        'rm4-title': 'Biarkan komunitas yang memutuskan',
-        'rm4-text':
-          'Proposal dari komunitas: utilitas ringan, kolaborasi, atau cukup jadi simbol orang-orang yang sudah ‘done’ dengan janji palsu. Tidak janji listing CEX sembarangan.',
-
-        'section-community-label': 'KOMUNITAS &amp; LINK',
-        'section-community-title': 'Gabung komunitas DONE COIN',
-        'section-community-sub':
-          'Share apa yang $DONE perjuangkan, ajak orang-orang yang sudah capek dengan rug, dan terus ingatkan: ini koin meme, bukan tiket pasti kaya. Selalu DYOR.',
-
-        'community-twitter-pill': 'Komunitas resmi',
-        'community-twitter-body':
-          'Gabung ruang komunitas $DONE di X (Twitter) bareng orang-orang yang sudah “done” dengan rug dan dev abal-abal:<br /><a href="https://x.com/i/communities/1986294951999906065" target="_blank" rel="noopener noreferrer">DONE COIN Community di X</a>',
-        'community-twitter-li1':
-          'Dapatkan update dari inti komunitas.',
-        'community-twitter-li2':
-          'Share meme, ide, dan feedback.',
-        'community-twitter-li3':
-          'Bantu orang baru paham apa yang diperjuangkan $DONE.',
-
-        'community-basememe-pill': 'Listing pertama',
-        'side-basememe-body':
-          'Listing pertama untuk $DONE sudah live di:<br /><a href="https://base.meme/coin/base:0x004976ca7bE8Ed236e0AE76cfA48841DB26c8888" class="link" target="_blank" rel="noopener noreferrer">Base.meme – halaman DONE COIN</a>',
-        'side-basememe-tiny':
-          'Selalu cek ulang link ini dan alamat kontrak sebelum swap. Kalau ada yang kirim link berbeda, anggap saja mencurigakan sampai kamu verifikasi sendiri.',
-
-        'side-community-li1':
-          'Share apa yang $DONE perjuangkan pakai satu link ini.',
-        'side-community-li2':
-          'Ajak teman-teman yang sudah capek kena rug.',
-        'side-community-li3':
-          'Ingatkan semua orang: ini meme dulu, dan selalu DYOR.',
-
-        'footer-built': 'Dibangun di Base',
-        'footer-disclaimer':
-          'Bukan saran finansial. Selalu lakukan riset sendiri. 🧠'
-      }
-    };
-
-    function setLanguage(lang) {
-      const elements = document.querySelectorAll('[data-i18n]');
-      elements.forEach((el) => {
-        const key = el.getAttribute('data-i18n');
-        const translation = translations[lang][key];
-        if (translation !== undefined) {
-          el.innerHTML = translation;
-        }
-      });
-
-      document.querySelectorAll('.lang-btn').forEach((btn) => {
-        btn.classList.toggle('active', btn.dataset.lang === lang);
-      });
-
-      if (translations[lang]['page-title']) {
-        document.title = translations[lang]['page-title'];
-      }
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc && translations[lang]['meta-description']) {
-        metaDesc.setAttribute('content', translations[lang]['meta-description']);
-      }
-
-      localStorage.setItem('done_lang', lang);
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
-      const savedLang = localStorage.getItem('done_lang') || 'en';
-      setLanguage(savedLang);
-
-      // animate body in
-      requestAnimationFrame(() => {
-        document.body.classList.add('page-loaded');
-      });
-
-      // nav link active state on click
-      const navLinks = document.querySelectorAll('.nav-link');
-      navLinks.forEach((link) => {
-        link.addEventListener('click', () => {
-          navLinks.forEach((l) => l.classList.remove('active'));
-          link.classList.add('active');
+      // language toggle
+      const langButtons = document.querySelectorAll('.lang-btn');
+      const root = document.documentElement;
+      let currentLang = localStorage.getItem('done_lang') || 'en';
+      function applyLang(lang) {
+        currentLang = lang;
+        root.setAttribute('data-lang', lang);
+        langButtons.forEach((btn) => {
+          btn.classList.toggle('active', btn.dataset.lang === lang);
         });
-      });
-
-      // scroll reveal for sections
-      const sections = document.querySelectorAll('.section-inner');
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.15 }
-      );
-
-      sections.forEach((section, index) => {
-        if (index === 0) {
-          section.classList.add('visible');
-        } else {
-          observer.observe(section);
-        }
-      });
-
-      // language switch buttons
-      document.querySelectorAll('.lang-btn').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const lang = btn.dataset.lang;
-          setLanguage(lang);
-        });
-      });
-
-      const yearEl = document.getElementById('year');
-      if (yearEl) {
-        yearEl.textContent = new Date().getFullYear();
+        localStorage.setItem('done_lang', lang);
       }
+      applyLang(currentLang);
+      langButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          applyLang(btn.dataset.lang || 'en');
+        });
+      });
 
-      // copy contract button
-      const caText = document.getElementById('ca-text');
-      const copyBtn = document.getElementById('copy-ca');
-      const toast = document.getElementById('toast');
+      // copy CA
+      const caValue = document.getElementById('ca-value');
+      const copyBtn = document.getElementById('copy-ca-btn');
+      const copyMsg = document.getElementById('copy-msg');
 
-      if (copyBtn && caText && navigator.clipboard) {
+      if (copyBtn && caValue && copyMsg && navigator.clipboard) {
         copyBtn.addEventListener('click', async () => {
           try {
-            await navigator.clipboard.writeText(caText.textContent.trim());
-            toast.classList.add('visible');
-            setTimeout(() => {
-              toast.classList.remove('visible');
-            }, 1800);
-          } catch (e) {
-            console.error('Copy failed', e);
+            await navigator.clipboard.writeText(caValue.textContent.trim());
+            copyMsg.classList.add('visible');
+            setTimeout(() => copyMsg.classList.remove('visible'), 1800);
+          } catch (err) {
+            copyMsg.textContent = 'Copy failed – please copy manually.';
+            copyMsg.classList.add('visible');
+            setTimeout(() => copyMsg.classList.remove('visible'), 2200);
           }
         });
       }
+
+      // quest progress UI (placeholder, belum terhubung backend)
+      const questChecks = document.querySelectorAll('.quest-check input');
+      const questStatus = document.getElementById('quest-status');
+      const btnCheckQuest = document.getElementById('btn-check-quest');
+      const btnClaimDone = document.getElementById('btn-claim-done');
+
+      if (btnCheckQuest && questChecks.length && questStatus && btnClaimDone) {
+        btnCheckQuest.addEventListener('click', () => {
+          const allChecked = Array.from(questChecks).every((c) => c.checked);
+
+          if (allChecked) {
+            questStatus.textContent =
+              'Semua langkah sudah kamu centang. Jika backend Farcaster & smart contract klaim sudah aktif, wallet yang memenuhi syarat bisa klaim 1.000 DONE secara otomatis.';
+            btnClaimDone.style.opacity = '1';
+            btnClaimDone.style.pointerEvents = 'auto';
+            btnClaimDone.innerHTML =
+              '<span class="btn-icon">🎁</span><span>Claim 1,000 DONE (nanti)</span>';
+          } else {
+            questStatus.textContent =
+              'Belum semua langkah dicentang. Pastikan kamu sudah follow, like, recast, dan quote cast di Farcaster sebelum klaim.';
+            btnClaimDone.style.opacity = '0.6';
+            btnClaimDone.style.pointerEvents = 'none';
+            btnClaimDone.innerHTML =
+              '<span class="btn-icon">🎁</span><span>Claim 1,000 DONE (soon)</span>';
+          }
+        });
+
+        btnClaimDone.addEventListener('click', () => {
+          alert(
+            'Tombol klaim ini masih UI saja.\nUntuk klaim otomatis, perlu backend yang terhubung ke API Farcaster + smart contract airdrop di Base.'
+          );
+        });
+      }
+
+      // scroll reveal
+      const revealEls = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      revealEls.forEach((el) => io.observe(el));
     });
   </script>
 </body>
