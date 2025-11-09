@@ -1,14 +1,14 @@
 {
   "accountAssociation": {
     "header": "eyJmaWQiOjQ0MTYyNiwidHlwZSI6ImF1dGgiLCJrZXkiOiIweGZhN0E2MTEzRGFCNjQ0Njk2OTRiNjdiRTU4RjIwN2FCODgwZjdkRDMifQ",
-    "payload": "eyJkb21haW4iOiJkb25lLWNvaW4tbnA0aHpjdXdjLWRhbml4eXpzLXByb2plY3RzLnZlcmNlbC5hcHAifQ",
-    "signature": "jPGfT+fT7+k+Xly7ozIkVamoSGbW4Z7SJ6DdWMTZSXh3Mwjw6FWncaj0Z+ydZgOvHW1+NJtv/R5JRXesyz2L9hw="
+    "payload": "eyJkb21haW4iOiJkb25lLWNvaW4udmVyY2VsLmFwcCJ9",
+    "signature": "QkAb3hSn+syb8O63mQ+F+sLjVBCbrN0ZzRWuLh/1WEApk7QZhsWoF3aTttCroXoOp4fdvkAEpLSP6H0m0Sw5Ixs="
   },
   "miniapp": {
     "version": "1",
     "name": "DONE Quest ($DONE)",
     "description": "Quest and airdrop helper for DONE COIN on Base. Follow Dani12po, like, recast and quote the airdrop cast to unlock claim. Always DYOR.",
-    "homeUrl": "https://done-coin-np4hzcuwc-danixyzs-projects.vercel.app/#airdrop",
+    "homeUrl": "https://done-coin.vercel.app/#airdrop",
     "iconUrl": "https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-0d78-19e399cfb801/public?exp=1762754400&sig=33fae3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf",
     "splashImageUrl": "https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-0d78-19e399cfb801/public?exp=1762754400&sig=33fae3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf",
     "splashBackgroundColor": "#020617",
