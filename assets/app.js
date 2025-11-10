@@ -1,21 +1,17 @@
-// assets/app.js – Script untuk versi WEB (index.html, airdrop.html, community.html)
-//
-// TIDAK pakai miniapp-sdk. Mini app cuma di /mini/.
+// assets/app.js – JS kecil untuk versi WEB (index, airdrop, community)
 
 window.DONE = window.DONE || {};
 
-// Ganti dengan URL mini app Farcaster kamu
+// URL mini app Farcaster kamu
 window.DONE.MINIAPP_URL =
   "https://farcaster.xyz/miniapps/3YcfUSEaBQQM/done-quest-done";
 
 (function () {
-  // ---------- Scroll reveal ----------
   function setupScrollReveal() {
     const els = document.querySelectorAll(".reveal");
     if (!els.length) return;
 
     if (!("IntersectionObserver" in window)) {
-      // Browser lama: tampilkan saja
       els.forEach((el) => el.classList.add("reveal-visible"));
       return;
     }
@@ -35,7 +31,6 @@ window.DONE.MINIAPP_URL =
     els.forEach((el) => obs.observe(el));
   }
 
-  // ---------- Tombol buka mini app ----------
   function setupMiniAppButtons() {
     const buttons = document.querySelectorAll(".js-miniapp-start");
     if (!buttons.length) return;
