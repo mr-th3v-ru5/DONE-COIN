@@ -1,11 +1,11 @@
-// app.js – Shared JS untuk versi WEB (index.html, airdrop.html, community.html)
+// app.js – Script untuk versi WEB (index.html, airdrop.html, community.html)
 //
-// TIDAK ada import miniapp-sdk di sini. Mini app cuma di /mini/.
+// TIDAK memakai miniapp-sdk di sini. Mini app /sdk cuma dipakai di /mini/.
 
-// namespace simpel
+// Namespace sederhana
 window.DONE = window.DONE || {};
 
-// Ganti dengan URL mini app kamu di Farcaster
+// GANTI dengan URL mini app kamu di Farcaster (kalau ID berubah)
 window.DONE.MINIAPP_URL =
   "https://farcaster.xyz/miniapps/3YcfUSEaBQQM/done-quest-done";
 
@@ -13,28 +13,28 @@ window.DONE.MINIAPP_URL =
   // ---------- Scroll reveal ----------
   function setupScrollReveal() {
     const els = document.querySelectorAll(".reveal");
-    if (!("IntersectionObserver" in window) || !els.length) return;
+    if (!("IntersectionObserver" in window) || !els.length) {
+      // fallback: kalau browser lama, tampilkan saja semuanya
+      els.forEach((el) => el.classList.add("in"));
+      return;
+    }
 
-    const observer = new IntersectionObserver(
+    const obs = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("reveal-visible");
-            observer.unobserve(entry.target);
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in"); // CSS: .reveal.in { opacity:1; ... }
+            obs.unobserve(e.target);
           }
         });
       },
-      {
-        root: null,
-        rootMargin: "0px 0px -10% 0px",
-        threshold: 0.15,
-      }
+      { threshold: 0.1 }
     );
 
-    els.forEach((el) => observer.observe(el));
+    els.forEach((el) => obs.observe(el));
   }
 
-  // ---------- Open mini app from web ----------
+  // ---------- Tombol buka mini app Farcaster ----------
   function setupMiniAppButtons() {
     const buttons = document.querySelectorAll(".js-miniapp-start");
     if (!buttons.length) return;
