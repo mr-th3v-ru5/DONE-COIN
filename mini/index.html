@@ -98,9 +98,9 @@
     <!-- ethers untuk kirim tx -->
     <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 
-    <!-- Mini App SDK: penting untuk hilangkan splash & dapat context -->
+    <!-- Mini App SDK: WAJIB untuk hilangkan splash & dapat context -->
     <script type="module">
-      import { sdk } from "https://esm.sh/@farcaster/miniapp-sdk";
+      import { sdk } from "https://esm.run/@farcaster/miniapp-sdk";
 
       // simpan di window supaya bisa dipakai non-module mini-app.js
       window.DONE_MINIAPP_SDK = sdk;
@@ -113,9 +113,10 @@
         console.warn("Cannot read sdk.context yet", e);
       }
 
+      // PENTING: kalau tidak dipanggil, mini app akan stuck di logo
       window.addEventListener("load", async () => {
         try {
-          await sdk.actions.ready(); // WAJIB supaya gak stuck di logo
+          await sdk.actions.ready();
         } catch (e) {
           console.warn("sdk.actions.ready() failed", e);
         }
