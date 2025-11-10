@@ -1,11 +1,10 @@
-// app.js – Script untuk versi WEB (index.html, airdrop.html, community.html)
+// assets/app.js – Script untuk versi WEB (index.html, airdrop.html, community.html)
 //
-// TIDAK memakai miniapp-sdk di sini. Mini app /sdk cuma dipakai di /mini/.
+// TIDAK pakai miniapp-sdk. Mini app cuma di /mini/.
 
-// Namespace sederhana
 window.DONE = window.DONE || {};
 
-// GANTI dengan URL mini app kamu di Farcaster (kalau ID berubah)
+// Ganti dengan URL mini app Farcaster kamu
 window.DONE.MINIAPP_URL =
   "https://farcaster.xyz/miniapps/3YcfUSEaBQQM/done-quest-done";
 
@@ -13,9 +12,11 @@ window.DONE.MINIAPP_URL =
   // ---------- Scroll reveal ----------
   function setupScrollReveal() {
     const els = document.querySelectorAll(".reveal");
-    if (!("IntersectionObserver" in window) || !els.length) {
-      // fallback: kalau browser lama, tampilkan saja semuanya
-      els.forEach((el) => el.classList.add("in"));
+    if (!els.length) return;
+
+    if (!("IntersectionObserver" in window)) {
+      // Browser lama: tampilkan saja
+      els.forEach((el) => el.classList.add("reveal-visible"));
       return;
     }
 
@@ -23,18 +24,18 @@ window.DONE.MINIAPP_URL =
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
-            e.target.classList.add("in"); // CSS: .reveal.in { opacity:1; ... }
+            e.target.classList.add("reveal-visible");
             obs.unobserve(e.target);
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.15 }
     );
 
     els.forEach((el) => obs.observe(el));
   }
 
-  // ---------- Tombol buka mini app Farcaster ----------
+  // ---------- Tombol buka mini app ----------
   function setupMiniAppButtons() {
     const buttons = document.querySelectorAll(".js-miniapp-start");
     if (!buttons.length) return;
