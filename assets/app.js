@@ -1,12 +1,16 @@
 // app.js – Shared JS untuk versi WEB (index.html, airdrop.html, community.html)
+//
+// TIDAK ada import miniapp-sdk di sini. Mini app cuma di /mini/.
 
+// namespace simpel
 window.DONE = window.DONE || {};
 
 // Ganti dengan URL mini app kamu di Farcaster
-window.DONE.MINIAPP_URL = "https://farcaster.xyz/miniapps/3YcfUSEaBQQM/done-quest-done";
+window.DONE.MINIAPP_URL =
+  "https://farcaster.xyz/miniapps/3YcfUSEaBQQM/done-quest-done";
 
 (function () {
-  // Scroll reveal sederhana
+  // ---------- Scroll reveal ----------
   function setupScrollReveal() {
     const els = document.querySelectorAll(".reveal");
     if (!("IntersectionObserver" in window) || !els.length) return;
@@ -30,7 +34,7 @@ window.DONE.MINIAPP_URL = "https://farcaster.xyz/miniapps/3YcfUSEaBQQM/done-ques
     els.forEach((el) => observer.observe(el));
   }
 
-  // Button pembuka mini app Farcaster (class: js-miniapp-start)
+  // ---------- Open mini app from web ----------
   function setupMiniAppButtons() {
     const buttons = document.querySelectorAll(".js-miniapp-start");
     if (!buttons.length) return;
