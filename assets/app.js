@@ -11,11 +11,29 @@ const DONE = window.DONE;
 // URL mini app kamu di Farcaster (optional, untuk tombol "Open mini app")
 DONE.MINIAPP_URL = "https://farcaster.xyz/miniapps/3YcfUSEaBQQM/done-quest-done";
 
-// --------- DETECT MINI APP ----------
+// --------- GLOBAL STATE: WALLET + FARCASTER ----------
+DONE.wallet = {
+  provider: null,
+  address: null,
+  chainId: null,
+  connected: false,
+  source: null, // 'miniapp' | 'browser'
+};
+
+DONE.farcaster = {
+  fid: null,
+  username: null,
+  displayName: null,
+  neynarScore: null,
+  eligible: false,
+  checked: false,
+};
+
+const MIN_NEYNAR_SCORE = 0.35;
+
 (function detectMiniApp() {
   let mini = false;
   try {
-    // kalau dibuka dalam iframe native Farcaster
     if (window.parent && window.parent !== window) mini = true;
 
     const ref = document.referrer || "";
@@ -30,6 +48,14 @@ DONE.MINIAPP_URL = "https://farcaster.xyz/miniapps/3YcfUSEaBQQM/done-quest-done"
       qs.get("miniapp") === "true"
     ) {
       mini = true;
+    }
+
+    // coba ambil FID dari query (beberapa mini app kirim ?fid= / ?viewerFid=)
+    const fidParam =
+      qs.get("fid") || qs.get("viewerFid") || qs.get("viewer_fid") || qs.get("f");
+    if (fidParam && !DONE.farcaster.fid) {
+      const fidNum = parseInt(fidParam, 10);
+      if (Number.isFinite(fidNum)) DONE.farcaster.fid = fidNum;
     }
   } catch (e) {}
 
@@ -56,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
 });
 
-// --------- MINI APP READY HELPER (opsional) ----------
+// --------- MINI APP READY HELPER ----------
 function signalMiniAppReady() {
   try {
     window.parent?.postMessage({ type: "miniapp.ready" }, "*");
@@ -69,26 +95,6 @@ function signalMiniAppReady() {
   } catch (e) {}
 }
 DONE.signalMiniAppReady = signalMiniAppReady;
-
-// --------- GLOBAL STATE: WALLET + FARCASTER ----------
-DONE.wallet = {
-  provider: null,
-  address: null,
-  chainId: null,
-  connected: false,
-  source: null, // 'miniapp' | 'browser'
-};
-
-DONE.farcaster = {
-  fid: null,
-  username: null,
-  displayName: null,
-  neynarScore: null,
-  eligible: false,
-  checked: false,
-};
-
-const MIN_NEYNAR_SCORE = 0.35;
 
 // --------- WALLET UTILS ----------
 function shortAddress(addr) {
@@ -105,7 +111,6 @@ function updateWalletUI() {
   const connected = DONE.wallet.connected;
   const addr = DONE.wallet.address;
 
-  // Header button
   if (btn && labelEl) {
     if (!connected) {
       btn.classList.remove("connected", "miniapp-connected");
@@ -122,7 +127,6 @@ function updateWalletUI() {
     }
   }
 
-  // Panel status di halaman airdrop (kalau ada)
   if (addrDisplay) {
     if (connected) {
       addrDisplay.textContent = shortAddress(addr);
@@ -153,9 +157,9 @@ async function connectWallet() {
   const ethereum = window.ethereum;
   if (!ethereum) {
     alert(
-      "Tidak menemukan wallet EVM di browser.\n" +
+      "Tidak menemukan wallet EVM di environment ini.\n" +
         "Di web: install MetaMask / Rabby / Coinbase.\n" +
-        "Di mini app: pastikan membuka dari Farcaster yang support wallet."
+        "Di mini app: pastikan Farcaster/warpcast sudah menyediakan wallet."
     );
     return DONE.wallet;
   }
@@ -192,13 +196,45 @@ function disconnectWallet() {
 }
 
 // --------- FARCASTER + NEYNAR GATING ----------
+let farcasterSessionTried = false;
+
+async function hydrateFarcasterFromSession() {
+  if (farcasterSessionTried) return;
+  farcasterSessionTried = true;
+  try {
+    const resp = await fetch("/api/farcaster/session");
+    if (!resp.ok) return;
+    const data = await resp.json();
+    if (data && data.fid) {
+      DONE.farcaster.fid = data.fid;
+      DONE.farcaster.username = data.username || null;
+      DONE.farcaster.displayName = data.displayName || null;
+      if (typeof data.score === "number") {
+        DONE.farcaster.neynarScore = data.score;
+        DONE.farcaster.eligible = data.score >= MIN_NEYNAR_SCORE;
+        DONE.farcaster.checked = true;
+      }
+    }
+  } catch (e) {
+    console.warn("Gagal mengambil sesi Farcaster dari backend:", e);
+  }
+}
+
 async function ensureFarcasterEligibility() {
   const state = DONE.farcaster;
+
   if (state.checked && state.neynarScore != null) {
     return state.eligible;
   }
 
-  // Tidak pakai SDK, jadi minta FID manual
+  await hydrateFarcasterFromSession();
+
+  if (state.neynarScore != null) {
+    state.eligible = state.neynarScore >= MIN_NEYNAR_SCORE;
+    state.checked = true;
+    return state.eligible;
+  }
+
   if (!state.fid) {
     const input = prompt(
       "Masukkan FID Farcaster kamu untuk verifikasi Neynar (contoh: 12345):"
@@ -249,7 +285,6 @@ DONE.ensureFarcasterEligibility = ensureFarcasterEligibility;
 
 // --------- DOM WIRING ----------
 window.addEventListener("DOMContentLoaded", () => {
-  // Header: tombol connect wallet global
   const btn = document.querySelector("[data-wallet-toggle]");
   if (btn) {
     btn.addEventListener("click", async () => {
@@ -266,7 +301,6 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Tombol "Open DONE Quest Mini App"
   document.querySelectorAll(".js-miniapp-start").forEach((el) => {
     el.addEventListener("click", () => {
       if (DONE.isMiniApp) {
@@ -286,5 +320,8 @@ window.addEventListener("load", () => {
     connectWallet().catch((e) =>
       console.warn("Auto-connect wallet mini app gagal:", e)
     );
+  } else {
+    // di web, coba hydrate sesi Farcaster (kalau user sudah login lewat backend)
+    hydrateFarcasterFromSession();
   }
 });

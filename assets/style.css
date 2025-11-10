@@ -80,19 +80,6 @@ nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
   box-shadow:var(--shadow-soft);
   transform:translateY(-1px);
 }
-
-.pill-wallet{
-  cursor:pointer;
-  border:1px solid rgba(148,163,184,.6);
-  white-space:nowrap;
-}
-.pill-wallet.connected{
-  border-color:rgba(52,211,153,1);
-  color:var(--text);
-}
-.pill-wallet.miniapp-connected{
-  opacity:.95;
-}
 .pill.primary{
   border:none;
   background:conic-gradient(from 200deg,#38bdf8,#6366f1,#38bdf8);
