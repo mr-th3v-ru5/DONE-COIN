@@ -120,6 +120,7 @@ nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
   border-color:rgba(148,163,184,.7);
 }
 .btn.full{width:100%;justify-content:center;}
+.btn-xs{padding:6px 10px;font-size:11px;}
 
 /* Cards / layout helpers */
 
@@ -183,8 +184,32 @@ nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 }
 .hero-copy{font-size:13px;color:var(--muted);max-width:560px}
 .hero-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;margin-bottom:8px}
+
+/* CA + Dexscreener block */
 .hero-meta{font-size:11px;color:var(--muted);margin-top:4px;}
-.hero-meta code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;}
+.hero-meta-flex{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px;
+  margin-top:10px;
+}
+.ca-box{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:#020617;
+  border:1px solid rgba(148,163,184,.55);
+  font-size:11px;
+  color:var(--muted);
+}
+.ca-box code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:11px;
+  color:var(--text);
+}
 
 /* Stats */
 
