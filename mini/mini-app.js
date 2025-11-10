@@ -188,7 +188,9 @@
 
     if (!ethProvider) {
       if (els.walletAddr) els.walletAddr.textContent = "no provider";
-      throw new Error("No ethereum provider (Farcaster wallet / window.ethereum) found");
+      throw new Error(
+        "No ethereum provider (Farcaster wallet / window.ethereum) found"
+      );
     }
 
     const provider = new ethers.providers.Web3Provider(ethProvider);
@@ -254,10 +256,7 @@
     if (!els.claimBtn) return;
 
     const can =
-      state.walletAddress &&
-      state.scoreEligible &&
-      state.questCompleted &&
-      state.fid;
+      state.walletAddress && state.scoreEligible && state.questCompleted && state.fid;
 
     els.claimBtn.disabled = !can;
 
