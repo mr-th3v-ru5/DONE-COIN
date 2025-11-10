@@ -1,4 +1,4 @@
-// app.js – Script untuk versi WEB (index.html, airdrop.html, community.html)
+// assets/app.js – Script untuk versi WEB (index.html, airdrop.html, community.html)
 //
 // TIDAK pakai miniapp-sdk. Mini app cuma di /mini/.
 
