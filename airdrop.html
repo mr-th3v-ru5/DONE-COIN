@@ -3,9 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>DONE Quest – Claim DONE</title>
-  <meta name="description" content="DONE Quest for DONE COIN ($DONE) on Base. Complete Farcaster mission steps, connect Base wallet, and claim DONE from the on-chain airdrop contract." />
-  <link rel="icon" href="https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-0d78-19e399cfb801/public?exp=1762754400&sig=33fae3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf" />
+  <title>DONE Quest – $DONE Base airdrop</title>
+
+  <meta
+    name="description"
+    content="DONE Quest – Farcaster mission & on-chain claim for $DONE on Base."
+  />
+
+  <link
+    rel="icon"
+    href="https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-e3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf"
+  />
+
   <link rel="stylesheet" href="assets/web.css" />
 </head>
 <body>
@@ -13,56 +22,76 @@
     <header class="reveal reveal-visible">
       <div class="brand">
         <div class="logo">
-          <img alt="DONE" src="https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-0d78-19e399cfb801/public?exp=1762754400&sig=33fae3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf" />
+          <img
+            alt="DONE"
+            src="https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-e3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf"
+          />
         </div>
         <div class="b-meta">
           <div class="b-title">DONE COIN • $DONE</div>
           <div class="b-sub">DONE Quest – Farcaster mission & on-chain claim</div>
         </div>
       </div>
+
       <nav>
         <a class="pill" href="index.html">🏠 Overview</a>
+        <a class="pill active" href="airdrop.html">🎯 DONE Quest</a>
         <a class="pill" href="community.html">🌐 Community</a>
-        <a class="pill primary" target="_blank" rel="noopener noreferrer" href="https://base.meme/coin/base:0x3Da0Da9414D02c1E4cc4526a5a24F5eeEbfCEAd4">🧠 Open on Base.meme</a>
+        <a
+          class="pill primary"
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://basememe.com/meme/0x3Da0Da9414D02c1E4cc4526a5a24F5eeEbfCEAd4"
+        >
+          🧠 Open on Base.meme
+        </a>
       </nav>
     </header>
 
     <main>
       <section class="quest reveal reveal-visible">
         <div class="quest-grid">
-          <!-- LEFT: steps -->
+          <!-- LEFT: STEPS -->
           <div>
-            <div class="eyebrow"><span class="badge-dot"></span> DONE QUEST • 1,000 $DONE</div>
-            <p class="text-muted">
+            <div class="eyebrow">
+              <span class="badge-dot"></span> DONE QUEST • 1,000 $DONE
+            </div>
+            <h2 class="hero-title" style="font-size:20px;margin-bottom:6px;">
               Tap each step to open the Farcaster link and complete the action.
+            </h2>
+            <p class="hero-copy" style="margin-bottom:10px;">
               The front-end tracks your progress; the on-chain airdrop contract on Base enforces one claim per wallet.
             </p>
+
             <div class="stepper">
-              <button class="step" data-step="1" data-url="https://farcaster.xyz/dani12po">
+              <button class="step" data-step="1" id="step1">
                 <div class="step-circle">1</div>
                 <div>
                   <div class="step-main">Follow @dani12po</div>
                   <div class="step-sub">On Farcaster.</div>
                 </div>
               </button>
-              <button class="step" data-step="2" data-url="https://farcaster.xyz/dani12po/0x6c0154d8">
+
+              <button class="step" data-step="2" id="step2">
                 <div class="step-circle">2</div>
                 <div>
                   <div class="step-main">Like the quest cast</div>
                   <div class="step-sub">Show you’re actually here.</div>
                 </div>
               </button>
-              <button class="step" data-step="3" data-url="https://farcaster.xyz/dani12po/0x6c0154d8">
+
+              <button class="step" data-step="3" id="step3">
                 <div class="step-circle">3</div>
                 <div>
                   <div class="step-main">Recast</div>
                   <div class="step-sub">Push DONE into more feeds.</div>
                 </div>
               </button>
-              <button class="step" data-step="4" data-url="https://farcaster.xyz/dani12po/0x6c0154d8">
+
+              <button class="step" data-step="4" id="step4">
                 <div class="step-circle">4</div>
                 <div>
-                  <div class="step-main">Quote & tag @dani12po</div>
+                  <div class="step-main">Quote &amp; tag @dani12po</div>
                   <div class="step-sub">Add your own meme or message.</div>
                 </div>
               </button>
@@ -71,65 +100,86 @@
             <div class="progress-bar">
               <div class="progress-fill" id="progressFill"></div>
             </div>
-            <div class="progress-label" id="progressLabel">0 / 4 steps marked as done.</div>
-
-            <!-- hidden checkboxes to keep logic simple -->
-            <div style="display:none">
-              <input type="checkbox" id="q1" />
-              <input type="checkbox" id="q2" />
-              <input type="checkbox" id="q3" />
-              <input type="checkbox" id="q4" />
+            <div class="progress-label" id="progressLabel">
+              0 / 4 steps marked as done.
             </div>
           </div>
 
-          <!-- RIGHT: wallet & claim -->
+          <!-- RIGHT: WALLET / CLAIM -->
           <div class="wallet-col">
             <div class="wallet-title">Connect wallet (Base)</div>
+
             <div class="tabs">
-              <button class="tab active" data-tab="evm">Base (EVM)</button>
+              <button class="tab active" type="button">Base (EVM)</button>
             </div>
 
-            <div id="panel-evm" class="wallet-panel active">
-              <p>Connect MetaMask or WalletConnect on Base to claim DONE on-chain.</p>
-              <button id="btn-evm-connect" class="btn primary full" type="button">🔗 Connect EVM wallet</button>
-              <span id="evm-addr" class="addr" style="display:none;"></span>
-              <div class="hint" id="evm-note">You’ll be prompted to switch/add Base (chain id 8453) if needed.</div>
-            </div>
-         <div class="hint" id="fc-status" style="margin-top:10px;">
-          Untuk claim, kamu perlu akun Farcaster dengan Neynar score ≥ 0.35. Klik tombol verifikasi di bawah.
-       </div>
-      <button id="btn-fc-verify" class="btn full" type="button" style="margin-top:6px;">
-      🔵 Verify Farcaster (Neynar)
-         </button>
+            <p class="text-muted">
+              Connect MetaMask or WalletConnect on Base to claim DONE on-chain.
+            </p>
 
-            <div class="claim-row" style="margin-top:12px;display:flex;flex-direction:column;gap:8px;">
-              <button id="btn-claim" class="btn secondary full" type="button" style="opacity:.55;pointer-events:none;">
+            <button id="connectWalletBtn" class="btn primary" type="button" style="margin-top:6px;">
+              🔗 Connect EVM wallet
+            </button>
+
+            <div id="walletAddress" class="addr" style="display:none;"></div>
+
+            <p class="text-muted" style="margin-top:8px;">
+              You’ll be prompted to switch/add Base (chain id 8453) if needed.
+            </p>
+
+            <p class="text-muted" style="margin-top:8px;">
+              Untuk claim, kamu perlu akun Farcaster dengan Neynar score ≥ 0.35. Klik tombol verifikasi di bawah.
+            </p>
+
+            <button id="verifyFarcasterBtn" class="btn" type="button" style="margin-top:6px;">
+              🔵 Verify Farcaster (Neynar)
+            </button>
+
+            <div id="neynarStatus" class="text-muted" style="margin-top:6px;"></div>
+
+            <div class="claim-row">
+              <button id="claimBtn" class="btn primary" type="button" disabled>
                 🎁 Claim 1,000 DONE
               </button>
-              <button class="btn full js-miniapp-start" type="button">✅ Open DONE Quest Mini App</button>
-            </div>
-            <div class="hint" id="claim-hint">
-              Claim button unlocks after you mark all 4 steps as done and connect a Base wallet.
-              Tokens are sent directly from the DONE Quest airdrop contract on Base.
+
+              <button class="btn js-miniapp-start" type="button">
+                ✅ Open DONE Quest Mini App
+              </button>
             </div>
           </div>
         </div>
       </section>
+
+      <div class="quest-footnote">
+        DONE Quest • On-chain claim on Base. Always DYOR • Not financial advice.
+      </div>
     </main>
   </div>
 
-  <footer class="reveal reveal-visible">
-    <span>DONE Quest • On-chain claim on Base.</span>
-    <span>Always DYOR • Not financial advice.</span>
+  <footer class="footer">
+    <span>DONE COIN ($DONE) • $DONE on Base</span>
+    <span>
+      <a href="community.html">Community hub</a> ·
+      <a href="airdrop.html">DONE Quest</a> ·
+      <a
+        href="https://basememe.com/meme/0x3Da0Da9414D02c1E4cc4526a5a24F5eeEbfCEAd4"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Base.meme listing
+      </a>
+    </span>
   </footer>
 
-   <!-- libs for EVM connect -->
+  <!-- libs for EVM connect (dipakai airdrop.js kamu) -->
   <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js"></script>
   <script src="https://unpkg.com/@walletconnect/web3-provider@1.7.8/dist/umd/index.min.js"></script>
   <script src="https://unpkg.com/web3modal@1.9.12/dist/index.js"></script>
 
-  <!-- JS web di ROOT -->
-  <script src="app.js"></script>
+  <!-- JS web -->
+  <script src="assets/app.js"></script>
+
+  <!-- JS quest kamu (biarkan pakai file yang sama seperti sebelumnya) -->
   <script src="airdrop.js"></script>
 </body>
 </html>
