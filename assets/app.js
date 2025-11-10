@@ -1,20 +1,12 @@
 // app.js – Shared JS untuk versi WEB (index.html, airdrop.html, community.html)
-//
-// - Scroll reveal animasi
-// - Tombol "Open DONE Quest Mini App" di web (forward ke URL mini app di Farcaster)
-//
-// CATATAN PENTING:
-//   Mini App Farcaster PUNYA file sendiri: /mini/index.html + /mini/mini-app.js
-//   Di sini kita TIDAK import miniapp-sdk lagi supaya tidak bikin konflik.
 
 window.DONE = window.DONE || {};
-const DONE = window.DONE;
 
-// URL mini app di Farcaster (ubah kalau ID mini app kamu beda)
-DONE.MINIAPP_URL = "https://farcaster.xyz/miniapps/3YcfUSEaBQQM/done-quest-done";
+// Ganti dengan URL mini app kamu di Farcaster
+window.DONE.MINIAPP_URL = "https://farcaster.xyz/miniapps/3YcfUSEaBQQM/done-quest-done";
 
 (function () {
-  // ---------- SCROLL REVEAL ----------
+  // Scroll reveal sederhana
   function setupScrollReveal() {
     const els = document.querySelectorAll(".reveal");
     if (!("IntersectionObserver" in window) || !els.length) return;
@@ -38,13 +30,14 @@ DONE.MINIAPP_URL = "https://farcaster.xyz/miniapps/3YcfUSEaBQQM/done-quest-done"
     els.forEach((el) => observer.observe(el));
   }
 
-  // ---------- MINI APP BUTTON (WEB) ----------
+  // Button pembuka mini app Farcaster (class: js-miniapp-start)
   function setupMiniAppButtons() {
     const buttons = document.querySelectorAll(".js-miniapp-start");
     if (!buttons.length) return;
+
     buttons.forEach((btn) => {
       btn.addEventListener("click", () => {
-        const url = (window.DONE && DONE.MINIAPP_URL) || null;
+        const url = window.DONE && window.DONE.MINIAPP_URL;
         if (!url) {
           alert("Mini app URL belum dikonfigurasi.");
           return;
