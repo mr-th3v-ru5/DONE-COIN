@@ -1,12 +1,12 @@
-
 // DONE Quest Mini App JS
-// - Auto connect wallet via window.ethereum (Farcaster / Warpcast wallet)
-// - Detect FID from query or backend session
-// - Check Neynar score via backend
-// - Enable claim() on DONE airdrop contract at Base if:
-//     * Neynar score >= 0.35
+// - Auto connect wallet via Farcaster Mini App SDK (sdk.wallet.getEthereumProvider)
+//   atau fallback ke window.ethereum
+// - Pakai sdk.context.user (via window.DONE_MINIAPP_CONTEXT) untuk ambil FID & username
+// - Cek Neynar score via backend (>= 0.35)
+// - Claim DONE airdrop di Base kalau:
 //     * Wallet connected
-//     * User manually confirms quest steps
+//     * Quest steps selesai (user tap semua)
+//     * FID ada & score >= 0.35
 
 (function () {
   const AIRDROP_ADDRESS = "0x1df8DcCAD57939BaB8Ae0f3406Eaa868887E03bb";
@@ -20,7 +20,7 @@
     score: null,
     scoreEligible: false,
     walletAddress: null,
-    provider: null,
+    provider: null, // ethers provider
     signer: null,
     questCompleted: false,
   };
@@ -46,6 +46,7 @@
     });
   });
 
+  // ---------- QUEST ----------
   function setupQuestToggles() {
     const stepEls = document.querySelectorAll(".step");
     if (!stepEls.length) return;
@@ -57,6 +58,7 @@
         updateClaimButton();
       });
     });
+
     updateQuestProgress();
   }
 
@@ -78,6 +80,7 @@
     state.questCompleted = done === total;
   }
 
+  // ---------- HELPERS ----------
   function setClaimStatus(msg) {
     if (els.claimStatus) els.claimStatus.textContent = msg;
   }
@@ -99,8 +102,27 @@
     return Number.isFinite(n) ? n : null;
   }
 
+  // ---------- FARCASTER CONTEXT (SDK) ----------
+  function hydrateFarcasterFromSDKContext() {
+    try {
+      const sdk = window.DONE_MINIAPP_SDK;
+      const ctx =
+        window.DONE_MINIAPP_CONTEXT ||
+        (sdk && sdk.context ? sdk.context : null);
+      if (!ctx || !ctx.user) return;
+
+      const user = ctx.user;
+      state.fid = user.fid;
+      state.username = user.username || null;
+      state.displayName = user.displayName || null;
+    } catch (e) {
+      console.warn("hydrateFarcasterFromSDKContext error:", e);
+    }
+  }
+
+  // ---------- FARCASTER BACKEND / NEYNAR ----------
   async function hydrateFarcasterFromBackend() {
-    // optional: backend endpoint yang return { fid, username, displayName, score? }
+    // Optional: backend endpoint yang return { fid, username, displayName, score? }
     try {
       const resp = await fetch("/api/farcaster/session");
       if (!resp.ok) return;
@@ -108,8 +130,8 @@
       if (!data || !data.fid) return;
 
       state.fid = data.fid;
-      state.username = data.username || null;
-      state.displayName = data.displayName || null;
+      state.username = data.username || state.username;
+      state.displayName = data.displayName || state.displayName;
       if (typeof data.score === "number") {
         state.score = data.score;
         state.scoreEligible = data.score >= MIN_SCORE;
@@ -143,15 +165,33 @@
     }
   }
 
+  // ---------- WALLET (SDK + fallback) ----------
   async function connectWallet() {
     if (state.walletAddress) return;
 
-    if (typeof window.ethereum === "undefined") {
-      if (els.walletAddr) els.walletAddr.textContent = "no ethereum provider";
-      throw new Error("No ethereum provider found (window.ethereum missing)");
+    let ethProvider = null;
+
+    // 1) coba provider dari mini app SDK (wallet Farcaster)
+    try {
+      const sdk = window.DONE_MINIAPP_SDK;
+      if (sdk && sdk.wallet && sdk.wallet.getEthereumProvider) {
+        ethProvider = await sdk.wallet.getEthereumProvider();
+      }
+    } catch (e) {
+      console.warn("sdk.wallet.getEthereumProvider error:", e);
     }
 
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    // 2) fallback ke window.ethereum (kalau akses via browser biasa)
+    if (!ethProvider && typeof window.ethereum !== "undefined") {
+      ethProvider = window.ethereum;
+    }
+
+    if (!ethProvider) {
+      if (els.walletAddr) els.walletAddr.textContent = "no provider";
+      throw new Error("No ethereum provider (Farcaster wallet / window.ethereum) found");
+    }
+
+    const provider = new ethers.providers.Web3Provider(ethProvider);
     const accounts = await provider.send("eth_requestAccounts", []);
     const addr = accounts && accounts[0];
 
@@ -164,6 +204,7 @@
     }
   }
 
+  // ---------- UI UPDATE ----------
   function updateScoreUI() {
     if (els.scoreVal) {
       els.scoreVal.textContent =
@@ -173,7 +214,7 @@
     els.scorePill.classList.remove("ok", "bad");
 
     if (state.score == null) {
-      // tidak tahu
+      // belum tahu
     } else if (state.scoreEligible) {
       els.scorePill.classList.add("ok");
     } else {
@@ -195,7 +236,7 @@
     if (els.fcHint) {
       if (!state.fid) {
         els.fcHint.textContent =
-          "Tidak bisa mendeteksi FID Farcaster dari mini app. Pastikan mini app dikonfigurasi untuk mengirimkan FID di URL atau sesi backend.";
+          "Tidak bisa mendeteksi FID Farcaster dari mini app. Pastikan mini app dikonfigurasi dengan context atau FID di URL.";
       } else if (state.score == null) {
         els.fcHint.textContent =
           "FID terdeteksi. Mengambil Neynar score untuk anti-bot…";
@@ -239,14 +280,18 @@
     }
   }
 
+  // ---------- NETWORK & CLAIM ----------
   async function ensureBaseNetwork(rawProvider) {
     const provider = rawProvider || (state.provider && state.provider.provider);
     if (!provider || !provider.request) return;
+
     const baseChainId = "0x2105";
+
     try {
       const current = await provider.request({ method: "eth_chainId" });
       if (current === baseChainId) return;
     } catch (e) {}
+
     try {
       await provider.request({
         method: "wallet_switchEthereumChain",
@@ -283,6 +328,7 @@
     if (typeof ethers === "undefined") {
       throw new Error("ethers.js belum dimuat");
     }
+
     await ensureBaseNetwork(state.provider.provider);
 
     const contract = new ethers.Contract(
@@ -312,6 +358,7 @@
     }
   }
 
+  // ---------- BOOTSTRAP ----------
   async function bootstrap() {
     if (els.claimBtn) {
       els.claimBtn.addEventListener("click", async () => {
@@ -331,19 +378,30 @@
       });
     }
 
+    // 1) connect wallet (Farcaster)
     try {
       await connectWallet();
     } catch (e) {
       console.warn("connectWallet error:", e);
     }
 
-    state.fid = parseFidFromQuery();
+    // 2) ambil FID dari SDK context dulu
+    hydrateFarcasterFromSDKContext();
+
+    // 3) fallback: query param
+    if (!state.fid) {
+      state.fid = parseFidFromQuery();
+    }
+
+    // 4) fallback lagi: session backend
     if (!state.fid) {
       await hydrateFarcasterFromBackend();
     }
 
+    // 5) ambil Neynar score kalau perlu
     await fetchNeynarScoreIfNeeded();
 
+    // 6) update UI
     if (state.walletAddress && els.walletAddr) {
       els.walletAddr.textContent = shortAddr(state.walletAddress);
     }
