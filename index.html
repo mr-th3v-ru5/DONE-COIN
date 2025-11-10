@@ -1,206 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>DONE COIN ($DONE) – Community-first meme coin on Base</title>
+// assets/app.js – Script untuk versi WEB (index.html, airdrop.html, community.html)
+//
+// TIDAK pakai miniapp-sdk. Mini app cuma di /mini/.
 
-  <meta
-    name="description"
-    content="DONE COIN ($DONE) on Base. Join the DONE Quest, claim the airdrop, and hang out with the Farcaster community."
-  />
+window.DONE = window.DONE || {};
 
-  <link
-    rel="icon"
-    href="https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-e3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf"
-  />
+// Ganti dengan URL mini app Farcaster kamu
+window.DONE.MINIAPP_URL =
+  "https://farcaster.xyz/miniapps/3YcfUSEaBQQM/done-quest-done";
 
-  <!-- PENTING: style.css di ROOT, bukan di /assets -->
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="page">
-    <!-- HEADER -->
-    <header class="reveal">
-      <div class="brand">
-        <div class="logo">
-          <img
-            alt="DONE"
-            src="https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-e3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf"
-          />
-        </div>
-        <div class="b-meta">
-          <div class="b-title">DONE COIN • $DONE</div>
-          <div class="b-sub">Community-first meme coin on Base</div>
-        </div>
-      </div>
+(function () {
+  // ---------- Scroll reveal ----------
+  function setupScrollReveal() {
+    const els = document.querySelectorAll(".reveal");
+    if (!els.length) return;
 
-      <nav>
-        <a class="pill active" href="index.html">🏠 Overview</a>
-        <a class="pill" href="airdrop.html">🎯 DONE Quest</a>
-        <a class="pill" href="community.html">🌐 Community</a>
-        <a
-          class="pill primary"
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://basememe.com/meme/0xDa0Da9414D02c1E4cc4526a5a24F5eeEbfCEAd4"
-        >
-          🧠 Open on Base.meme
-        </a>
-      </nav>
-    </header>
+    if (!("IntersectionObserver" in window)) {
+      // Browser lama: tampilkan saja
+      els.forEach((el) => el.classList.add("reveal-visible"));
+      return;
+    }
 
-    <main>
-      <!-- HERO / INTRO -->
-      <section class="hero-row section-gap">
-        <div class="card reveal">
-          <div class="card-inner">
-            <div class="eyebrow">
-              <span class="badge-dot"></span> TRANSPARENT • COMMUNITY FIRST
-            </div>
-            <h1 class="hero-title">
-              <span>DONE COIN ($DONE)</span> – I’m DONE with rugs
-            </h1>
-            <p class="hero-copy">
-              Meme coin for everyone who’s DONE with rugs, fake promises and trash devs.
-              Community first, hype later – simple, transparent and easy to meme.
-              Not financial advice, always DYOR. 🧠
-            </p>
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("reveal-visible");
+            obs.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
 
-            <div class="hero-actions">
-              <a class="btn primary full" href="airdrop.html">🎯 Start DONE Quest</a>
-              <a
-                class="btn"
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://farcaster.xyz/dani12po"
-              >
-                🔵 @dani12po
-              </a>
-              <a
-                class="btn"
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://x.com/i/communities/1986294951999906065"
-              >
-                𝕏 Community
-              </a>
-            </div>
+    els.forEach((el) => obs.observe(el));
+  }
 
-            <div class="hero-meta hero-meta-flex">
-              <div class="ca-box">
-                CA:
-                <code>0x3Da0Da9414D02c1E4cc4526a5a24F5eeEbfCEAd4</code>
-              </div>
-              <a
-                class="btn"
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://dexscreener.com/base/0x3Da0Da9414D02c1E4cc4526a5a24F5eeEbfCEAd4"
-              >
-                📈 View chart
-              </a>
-              <a
-                class="btn"
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://basescan.org/token/0x3Da0Da9414D02c1E4cc4526a5a24F5eeEbfCEAd4"
-              >
-                🔍 View on Basescan
-              </a>
-            </div>
-          </div>
-        </div>
+  // ---------- Tombol buka mini app ----------
+  function setupMiniAppButtons() {
+    const buttons = document.querySelectorAll(".js-miniapp-start");
+    if (!buttons.length) return;
 
-        <aside class="side-col reveal">
-          <div class="stat-grid">
-            <div class="stat-card">
-              <div class="stat-label">Chain</div>
-              <div class="stat-value">Base</div>
-              <div class="stat-tag">Fast, cheap, and blue.</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-label">Ticker</div>
-              <div class="stat-value">$DONE</div>
-              <div class="stat-tag">Because we’re DONE.</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-label">Quest reward</div>
-              <div class="stat-value">1,000 DONE</div>
-              <div class="stat-tag">Per eligible wallet.</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-label">Anti-bot</div>
-              <div class="stat-value">Neynar ≥ 0.35</div>
-              <div class="stat-tag">Farcaster native filter.</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-label">Vibe</div>
-              <div class="stat-value">DONE COIN</div>
-              <div class="stat-tag">No rugs. No trash devs.</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-label">Use case</div>
-              <div class="stat-value">Quests & memes</div>
-              <div class="stat-tag">Reward real community actions.</div>
-            </div>
-          </div>
-        </aside>
-      </section>
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const url = window.DONE && window.DONE.MINIAPP_URL;
+        if (!url) {
+          alert("Mini app URL belum dikonfigurasi.");
+          return;
+        }
+        window.open(url, "_blank");
+      });
+    });
+  }
 
-      <!-- FEATURES -->
-      <section class="feature-row reveal section-gap">
-        <article class="feature">
-          <h3>Clean &amp; simple</h3>
-          <p>No complex DeFi maze. Easy to understand, easy to meme, easy to verify.</p>
-        </article>
-        <article class="feature">
-          <h3>Community-first</h3>
-          <p>Value flows to the people who actually show up, share, and build.</p>
-        </article>
-        <article class="feature">
-          <h3>Built for quests</h3>
-          <p>DONE Quest routes rewards to real participants, not bots.</p>
-        </article>
-      </section>
-
-      <!-- TOKENOMICS / ECOSYSTEM (boleh kamu isi detail lain nanti) -->
-      <section class="tokenomics section-gap reveal">
-        <div class="token-card">
-          <h2>DONE Quest ecosystem</h2>
-          <p class="hero-copy">
-            DONE Quest is the main way new people earn $DONE. Farcaster actions, on-chain proof,
-            and anti-bot filtering using Neynar score.
-          </p>
-          <ul class="feature-list">
-            <li>🔵 Farcaster account with Neynar score ≥ <strong>0.35</strong></li>
-            <li>🧾 Complete social quests: follow, cast, join, and hold</li>
-            <li>🧱 Claim through the airdrop contract on Base</li>
-            <li>🌐 Community decides future quests and meme collabs</li>
-          </ul>
-          <a class="btn primary" href="airdrop.html">Go to DONE Quest</a>
-        </div>
-      </section>
-    </main>
-  </div>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <span>DONE COIN ($DONE) • $DONE on Base</span>
-    <span>
-      <a href="community.html">Community hub</a> ·
-      <a href="airdrop.html">DONE Quest</a> ·
-      <a
-        href="https://dexscreener.com/base/0x27d9c95186f871fd78d360fd2a69e33101bb193d"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        DEX listing
-      </a>
-    </span>
-  </footer>
-
-  <!-- PENTING: pakai app.js di ROOT, bukan assets/app.js -->
-  <script src="app.js"></script>
-</body>
-</html>
+  document.addEventListener("DOMContentLoaded", () => {
+    setupScrollReveal();
+    setupMiniAppButtons();
+  });
+})();
