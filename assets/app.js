@@ -4,22 +4,24 @@
 // - Global tombol Connect Wallet di header
 // - Helper Farcaster + Neynar score gating (dipakai di airdrop.js)
 
-import { sdk } from "https://esm.sh/@farcaster/miniapp-sdk";
-
+// Global namespace
 window.DONE = window.DONE || {};
 const DONE = window.DONE;
 
-// URL mini app kamu di Farcaster
+// URL mini app kamu di Farcaster (optional, untuk tombol "Open mini app")
 DONE.MINIAPP_URL = "https://farcaster.xyz/miniapps/3YcfUSEaBQQM/done-quest-done";
 
 // --------- DETECT MINI APP ----------
 (function detectMiniApp() {
   let mini = false;
   try {
+    // kalau dibuka dalam iframe native Farcaster
     if (window.parent && window.parent !== window) mini = true;
 
     const ref = document.referrer || "";
-    if (ref.includes("warpcast.com") || ref.includes("farcaster.xyz")) mini = true;
+    if (ref.includes("warpcast.com") || ref.includes("farcaster.xyz")) {
+      mini = true;
+    }
 
     const qs = new URLSearchParams(location.search);
     if (
@@ -30,6 +32,7 @@ DONE.MINIAPP_URL = "https://farcaster.xyz/miniapps/3YcfUSEaBQQM/done-quest-done"
       mini = true;
     }
   } catch (e) {}
+
   if (mini) {
     document.documentElement.classList.add("miniapp");
   }
@@ -53,9 +56,23 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
 });
 
+// --------- MINI APP READY HELPER (opsional) ----------
+function signalMiniAppReady() {
+  try {
+    window.parent?.postMessage({ type: "miniapp.ready" }, "*");
+  } catch (e) {}
+
+  try {
+    window.ReactNativeWebView?.postMessage(
+      JSON.stringify({ type: "miniapp.ready" })
+    );
+  } catch (e) {}
+}
+DONE.signalMiniAppReady = signalMiniAppReady;
+
 // --------- GLOBAL STATE: WALLET + FARCASTER ----------
 DONE.wallet = {
-  provider: null, // EIP-1193 provider (mini app atau browser)
+  provider: null,
   address: null,
   chainId: null,
   connected: false,
@@ -73,25 +90,6 @@ DONE.farcaster = {
 
 const MIN_NEYNAR_SCORE = 0.35;
 
-// --------- MINI APP READY ----------
-function signalMiniAppReady() {
-  try {
-    sdk?.actions?.ready && sdk.actions.ready();
-  } catch (e) {}
-
-  try {
-    window.parent?.postMessage({ type: "miniapp.ready" }, "*");
-  } catch (e) {}
-
-  try {
-    window.ReactNativeWebView?.postMessage(
-      JSON.stringify({ type: "miniapp.ready" })
-    );
-  } catch (e) {}
-}
-
-DONE.signalMiniAppReady = signalMiniAppReady;
-
 // --------- WALLET UTILS ----------
 function shortAddress(addr) {
   if (!addr) return "";
@@ -107,10 +105,10 @@ function updateWalletUI() {
   const connected = DONE.wallet.connected;
   const addr = DONE.wallet.address;
 
+  // Header button
   if (btn && labelEl) {
     if (!connected) {
-      btn.classList.remove("connected");
-      btn.classList.remove("miniapp-connected");
+      btn.classList.remove("connected", "miniapp-connected");
       labelEl.textContent = "Connect wallet";
     } else {
       btn.classList.add("connected");
@@ -124,6 +122,7 @@ function updateWalletUI() {
     }
   }
 
+  // Panel status di halaman airdrop (kalau ada)
   if (addrDisplay) {
     if (connected) {
       addrDisplay.textContent = shortAddress(addr);
@@ -139,7 +138,8 @@ function updateWalletUI() {
       noteDisplay.textContent =
         "Connect wallet lewat tombol di kanan atas untuk bisa klaim airdrop.";
     } else if (DONE.isMiniApp) {
-      noteDisplay.textContent = "Wallet Farcaster kamu sudah terhubung.";
+      noteDisplay.textContent =
+        "Wallet Farcaster (mini app) kamu sudah terhubung.";
     } else {
       noteDisplay.textContent =
         "EVM wallet di browser sudah terhubung. Pastikan jaringan sudah di Base sebelum klaim.";
@@ -150,35 +150,12 @@ function updateWalletUI() {
 async function connectWallet() {
   if (DONE.wallet.connected) return DONE.wallet;
 
-  // MINI APP: pakai wallet embed Farcaster
-  if (DONE.isMiniApp) {
-    const provider = await sdk.wallet.getEthereumProvider();
-
-    const accounts = await provider.request({ method: "eth_requestAccounts" });
-    const address = accounts && accounts[0];
-    const chainId = await provider.request({ method: "eth_chainId" });
-
-    DONE.wallet.provider = provider;
-    DONE.wallet.address = address;
-    DONE.wallet.chainId = chainId;
-    DONE.wallet.connected = true;
-    DONE.wallet.source = "miniapp";
-
-    if (sdk.context?.user) {
-      DONE.farcaster.fid = sdk.context.user.fid;
-      DONE.farcaster.username = sdk.context.user.username || null;
-      DONE.farcaster.displayName = sdk.context.user.displayName || null;
-    }
-
-    updateWalletUI();
-    return DONE.wallet;
-  }
-
-  // WEB: pakai wallet EVM di browser (MetaMask, Rabby, dll)
   const ethereum = window.ethereum;
   if (!ethereum) {
     alert(
-      "Tidak menemukan wallet EVM di browser.\nCoba install MetaMask / Rabby / Coinbase Wallet."
+      "Tidak menemukan wallet EVM di browser.\n" +
+        "Di web: install MetaMask / Rabby / Coinbase.\n" +
+        "Di mini app: pastikan membuka dari Farcaster yang support wallet."
     );
     return DONE.wallet;
   }
@@ -191,7 +168,7 @@ async function connectWallet() {
   DONE.wallet.address = address;
   DONE.wallet.chainId = chainId;
   DONE.wallet.connected = true;
-  DONE.wallet.source = "browser";
+  DONE.wallet.source = DONE.isMiniApp ? "miniapp" : "browser";
 
   updateWalletUI();
   return DONE.wallet;
@@ -217,16 +194,12 @@ function disconnectWallet() {
 // --------- FARCASTER + NEYNAR GATING ----------
 async function ensureFarcasterEligibility() {
   const state = DONE.farcaster;
-  if (state.checked) return state.eligible;
-
-  if (!state.fid && DONE.isMiniApp && sdk.context?.user) {
-    state.fid = sdk.context.user.fid;
-    state.username = sdk.context.user.username || null;
-    state.displayName = sdk.context.user.displayName || null;
+  if (state.checked && state.neynarScore != null) {
+    return state.eligible;
   }
 
+  // Tidak pakai SDK, jadi minta FID manual
   if (!state.fid) {
-    // kalau akses dari web biasa, minta input FID manual
     const input = prompt(
       "Masukkan FID Farcaster kamu untuk verifikasi Neynar (contoh: 12345):"
     );
@@ -269,15 +242,14 @@ async function ensureFarcasterEligibility() {
   }
 }
 
-// expose ke global
+DONE.updateWalletUI = updateWalletUI;
 DONE.connectWallet = connectWallet;
 DONE.disconnectWallet = disconnectWallet;
-DONE.updateWalletUI = updateWalletUI;
 DONE.ensureFarcasterEligibility = ensureFarcasterEligibility;
-DONE.sdk = sdk;
 
 // --------- DOM WIRING ----------
 window.addEventListener("DOMContentLoaded", () => {
+  // Header: tombol connect wallet global
   const btn = document.querySelector("[data-wallet-toggle]");
   if (btn) {
     btn.addEventListener("click", async () => {
@@ -294,11 +266,12 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  document.querySelectorAll(".js-miniapp-start").forEach((btn) => {
-    btn.addEventListener("click", () => {
+  // Tombol "Open DONE Quest Mini App"
+  document.querySelectorAll(".js-miniapp-start").forEach((el) => {
+    el.addEventListener("click", () => {
       if (DONE.isMiniApp) {
         signalMiniAppReady();
-      } else {
+      } else if (DONE.MINIAPP_URL) {
         window.open(DONE.MINIAPP_URL, "_blank");
       }
     });
@@ -307,21 +280,11 @@ window.addEventListener("DOMContentLoaded", () => {
   updateWalletUI();
 });
 
-// Auto signal + auto connect kalau di mini app
+// Auto connect kalau di mini app (pakai window.ethereum)
 window.addEventListener("load", () => {
   if (DONE.isMiniApp) {
-    (async () => {
-      try {
-        await sdk.actions.ready();
-      } catch (e) {
-        console.warn("sdk.actions.ready error:", e);
-      }
-
-      try {
-        await connectWallet();
-      } catch (e) {
-        console.warn("Auto-connect wallet mini app gagal:", e);
-      }
-    })();
+    connectWallet().catch((e) =>
+      console.warn("Auto-connect wallet mini app gagal:", e)
+    );
   }
 });
