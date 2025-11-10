@@ -91,42 +91,51 @@
 
           <!-- RIGHT: wallet & claim -->
           <div class="wallet-col">
-            <div class="wallet-title">Connect wallet (Base)</div>
-            <div class="tabs">
-              <button class="tab active" data-tab="evm">Base (EVM)</button>
-            </div>
+            <div class="wallet-title">Access &amp; claim</div>
 
-            <div id="panel-evm" class="wallet-panel active">
-              <p>
-                Wallet akan dihubungkan lewat tombol
-                <strong>“Connect wallet”</strong> di kanan atas.
-                Pastikan jaringan Base (chain id 8453).
-              </p>
-              <!-- tombol lokal disembunyikan via JS, disimpan untuk fallback -->
-              <button
-                id="btn-evm-connect"
-                class="btn primary full"
-                type="button"
-                style="display:none;"
-              >
-                🔗 Connect EVM wallet
-              </button>
-              <span id="evm-addr" class="addr" style="display:none;"></span>
-              <div class="hint" id="evm-note">
-                Connect wallet dulu lewat tombol kanan atas. Kalau kamu buka dari Farcaster
-                mini app, wallet akan terhubung otomatis.
+            <!-- FARCASTER CONNECT (WEB) -->
+            <div class="wallet-panel active">
+              <div class="claim-row" style="display:flex;align-items:center;gap:8px;">
+                <div class="claim-label">Farcaster account</div>
+                <button
+                  id="btn-connect-farcaster"
+                  class="btn outline"
+                  type="button"
+                >
+                  Connect Farcaster
+                </button>
+              </div>
+              <div class="hint" id="farcaster-note">
+                Dibutuhkan akun Farcaster dengan Neynar score &ge; 0.35
+                untuk mencegah bot. Di mini app, akun Farcaster terhubung
+                otomatis.
               </div>
             </div>
 
-            <div class="claim-row" style="margin-top:12px;display:flex;flex-direction:column;gap:8px;">
-              <button id="btn-claim" class="btn secondary full" type="button" style="opacity:.55;pointer-events:none;">
+            <!-- STATUS WALLET EVM (DARI TOMBOL HEADER) -->
+            <div class="wallet-panel" style="margin-top:12px;">
+              <div class="claim-label">Connected wallet (Base)</div>
+              <span id="evm-addr" class="addr" style="display:none;"></span>
+              <div class="hint" id="evm-note">
+                Wallet akan dihubungkan lewat tombol
+                <strong>“Connect wallet”</strong> di kanan atas (web),
+                atau otomatis jika kamu membuka dari Farcaster Mini App.
+              </div>
+            </div>
+
+            <!-- TOMBOL CLAIM -->
+            <div
+              class="claim-row"
+              style="margin-top:16px;display:flex;align-items:center;gap:8px;"
+            >
+              <button id="btn-claim" class="btn primary full" type="button">
                 🎁 Claim 1,000 DONE
               </button>
-              <button class="btn full js-miniapp-start" type="button">✅ Open DONE Quest Mini App</button>
             </div>
             <div class="hint" id="claim-hint">
-              Claim button unlocks after you mark all 4 steps as done and connect a Base wallet.
-              Tokens are sent directly from the DONE Quest airdrop contract on Base.
+              Claim akan terbuka setelah 4 langkah quest selesai,
+              wallet sudah connect di Base, dan akun Farcaster lolos
+              Neynar score minimal 0.35.
             </div>
           </div>
         </div>

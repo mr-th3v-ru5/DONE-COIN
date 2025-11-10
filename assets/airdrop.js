@@ -10,6 +10,7 @@
   const AIRDROP_ABI = ["function claim() external"];
 
   document.addEventListener("DOMContentLoaded", () => {
+    // QUEST PROGRESS
     const steps = document.querySelectorAll(".step");
     const progressFill = document.getElementById("progressFill");
     const progressLabel = document.getElementById("progressLabel");
@@ -20,13 +21,15 @@
       document.getElementById("q4"),
     ].filter(Boolean);
 
+    // CLAIM & STATUS
     const claimBtn = document.getElementById("btn-claim");
     const claimHint = document.getElementById("claim-hint");
+    const farcasterBtn = document.getElementById("btn-connect-farcaster");
+    const farcasterNote = document.getElementById("farcaster-note");
 
-    const localConnectBtn = document.getElementById("btn-evm-connect");
-    if (localConnectBtn) {
-      localConnectBtn.style.display = "none";
-    }
+    // status wallet dari tombol global (header) / mini app
+    const evmAddrEl = document.getElementById("evm-addr");
+    const evmNoteEl = document.getElementById("evm-note");
 
     function openMissionUrl(url) {
       if (!url) return;
@@ -37,6 +40,7 @@
       }
     }
 
+    // --------- QUEST PROGRESS ----------
     function getCompletedCount() {
       if (hiddenChecks.length === steps.length && steps.length > 0) {
         return hiddenChecks.filter((c) => c.checked).length;
@@ -51,11 +55,19 @@
     function updateProgress() {
       const total = steps.length || 4;
       const done = getCompletedCount();
-
       const pct = Math.min(100, Math.max(0, (done / total) * 100));
+
       if (progressFill) progressFill.style.width = pct + "%";
       if (progressLabel)
         progressLabel.textContent = `${done} / ${total} steps complete`;
+    }
+
+    function isWalletConnected() {
+      return !!(DONE.wallet && DONE.wallet.connected);
+    }
+
+    function isFarcasterEligible() {
+      return !!(DONE.farcaster && DONE.farcaster.eligible);
     }
 
     function updateClaimButtonState() {
@@ -63,8 +75,8 @@
 
       const total = steps.length || 4;
       const done = getCompletedCount();
-      const hasWallet = !!(DONE.wallet && DONE.wallet.connected);
-      const farcasterOk = !!(DONE.farcaster && DONE.farcaster.eligible);
+      const hasWallet = isWalletConnected();
+      const farcasterOk = isFarcasterEligible();
 
       const ready = done === total && hasWallet && farcasterOk;
 
@@ -72,23 +84,23 @@
       claimBtn.style.opacity = ready ? "1" : "0.55";
       claimBtn.style.pointerEvents = ready ? "auto" : "none";
 
-      if (claimHint) {
-        let msg =
-          "Claim unlock kalau 4 step quest selesai, wallet sudah connect, dan akun Farcaster lolos Neynar score ≥ 0.35.";
+      if (!claimHint) return;
 
-        if (!hasWallet) {
-          msg = "Hubungkan EVM wallet lewat tombol di kanan atas dulu.";
-        } else if (done !== total) {
-          msg = `Selesaikan semua step quest dulu (${done}/${total}).`;
-        } else if (!farcasterOk) {
-          msg =
-            "Akun Farcaster kamu belum diverifikasi / belum lolos Neynar score ≥ 0.35.";
-        }
-
-        claimHint.textContent = msg;
+      if (!hasWallet) {
+        claimHint.textContent =
+          "Hubungkan wallet EVM lewat tombol di kanan atas dulu.";
+      } else if (done !== total) {
+        claimHint.textContent = `Selesaikan semua step quest dulu (${done}/${total}).`;
+      } else if (!farcasterOk) {
+        claimHint.textContent =
+          "Akun Farcaster kamu belum diverifikasi / belum lolos Neynar score ≥ 0.35.";
+      } else {
+        claimHint.textContent =
+          "Semua syarat terpenuhi. Klik tombol untuk klaim 1,000 DONE.";
       }
     }
 
+    // Step click handlers
     steps.forEach((step, idx) => {
       const circle = step.querySelector(".step-circle");
 
@@ -129,13 +141,59 @@
 
     updateProgress();
 
+    // --------- FARCASTER CONNECT BUTTON (WEB) ----------
+    if (farcasterBtn) {
+      farcasterBtn.addEventListener("click", async () => {
+        try {
+          if (!DONE.ensureFarcasterEligibility) {
+            alert(
+              "Verifikasi Farcaster belum dikonfigurasi di front-end (DONE.ensureFarcasterEligibility tidak ada)."
+            );
+            return;
+          }
+
+          if (farcasterNote) {
+            farcasterNote.textContent =
+              "Memeriksa Neynar score akun Farcaster kamu…";
+          }
+
+          const ok = await DONE.ensureFarcasterEligibility();
+          DONE.farcaster.eligible = !!ok;
+
+          if (farcasterNote) {
+            if (ok) {
+              const score = DONE.farcaster.neynarScore;
+              farcasterNote.textContent =
+                "Farcaster terverifikasi. Score: " +
+                (score != null ? score.toFixed(2) : "OK") +
+                ". Kamu bisa menyelesaikan quest dan klaim.";
+            } else {
+              farcasterNote.textContent =
+                "Maaf, akun Farcaster kamu belum memenuhi Neynar score ≥ 0.35 atau tidak bisa diverifikasi.";
+            }
+          }
+        } catch (e) {
+          console.error(e);
+          if (farcasterNote) {
+            farcasterNote.textContent =
+              "Gagal memverifikasi akun Farcaster. Coba lagi nanti.";
+          }
+        } finally {
+          updateClaimButtonState();
+        }
+      });
+    }
+
+    // --------- BASE NETWORK HELPER ----------
     async function ensureBaseNetwork(provider) {
-      const baseChainId = "0x2105";
+      const baseChainId = "0x2105"; // 8453
 
       try {
         const current = await provider.request({ method: "eth_chainId" });
         if (current === baseChainId) return;
-      } catch (e) {}
+      } catch (e) {
+        // ignore
+      }
 
       try {
         await provider.request({
@@ -166,6 +224,7 @@
       }
     }
 
+    // --------- CLAIM TX ----------
     async function runClaimTransaction() {
       if (!DONE.wallet || !DONE.wallet.connected || !DONE.wallet.provider) {
         throw new Error("Wallet belum terhubung.");
@@ -214,6 +273,7 @@
       }
     }
 
+    // --------- CLAIM BUTTON HANDLER ----------
     if (claimBtn) {
       claimBtn.addEventListener("click", async () => {
         try {
@@ -228,18 +288,13 @@
             return;
           }
 
-          if (!DONE.wallet || !DONE.wallet.connected) {
-            if (DONE.connectWallet) {
-              await DONE.connectWallet();
+          if (!isWalletConnected()) {
+            if (claimHint) {
+              claimHint.textContent =
+                "Hubungkan wallet EVM lewat tombol di kanan atas dulu.";
             }
-            if (!DONE.wallet || !DONE.wallet.connected) {
-              if (claimHint) {
-                claimHint.textContent =
-                  "Hubungkan wallet EVM dulu lewat tombol di kanan atas.";
-              }
-              updateClaimButtonState();
-              return;
-            }
+            updateClaimButtonState();
+            return;
           }
 
           if (!DONE.ensureFarcasterEligibility) {
@@ -287,6 +342,7 @@
       });
     }
 
+    // Sinkron UI awal (wallet & farcaster)
     if (DONE.updateWalletUI) {
       DONE.updateWalletUI();
     }
