@@ -15,8 +15,8 @@
     href="https://imagedelivery.net/FhZYbuj1i750yqSmEMsC2Q/76367a92-24a2-43fd-e3e4cc7c7b847263faf95e8bff58cb6346ab2ddd2b09cc565475375d1fcf"
   />
 
-  <!-- PENTING: pakai CSS web -->
-  <link rel="stylesheet" href="assets/style.css" />
+  <!-- PENTING: style.css di ROOT, bukan di /assets -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="page">
@@ -51,154 +51,156 @@
     </header>
 
     <main>
-      <!-- HERO SECTION -->
-      <section class="reveal">
-        <div class="hero-row">
-          <div>
+      <!-- HERO / INTRO -->
+      <section class="hero-row section-gap">
+        <div class="card reveal">
+          <div class="card-inner">
             <div class="eyebrow">
-              <span class="badge-dot"></span>
-              Community-first meme coin • Built on Base
+              <span class="badge-dot"></span> TRANSPARENT • COMMUNITY FIRST
             </div>
-
             <h1 class="hero-title">
-              <span>DONE COIN ($DONE)</span> is the quest-driven meme coin for people who actually get things done.
+              <span>DONE COIN ($DONE)</span> – I’m DONE with rugs
             </h1>
-
             <p class="hero-copy">
-              Hold some DONE, join the Farcaster quests, and farm social + on-chain rewards together with the DONE community.
-              No complicated roadmap – just memes, missions, and being early.
+              Meme coin for everyone who’s DONE with rugs, fake promises and trash devs.
+              Community first, hype later – simple, transparent and easy to meme.
+              Not financial advice, always DYOR. 🧠
             </p>
 
             <div class="hero-actions">
-              <a class="btn primary" href="airdrop.html">🎯 Join DONE Quest</a>
-              <button class="btn secondary js-miniapp-start" type="button">
-                🔵 Open DONE Quest Mini App
-              </button>
+              <a class="btn primary full" href="airdrop.html">🎯 Start DONE Quest</a>
               <a
                 class="btn"
                 target="_blank"
                 rel="noopener noreferrer"
-                href="https://dexscreener.com/base/0xDa0Da9414D02c1E4cc4526a5a24F5eeEbfCEAd4"
+                href="https://farcaster.xyz/dani12po"
               >
-                📈 View chart on Dexscreener
+                🔵 @dani12po
+              </a>
+              <a
+                class="btn"
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://x.com/i/communities/1986294951999906065"
+              >
+                𝕏 Community
               </a>
             </div>
 
-            <div class="hero-meta">
-              <div class="hero-meta-flex">
-                <span>Chain: <strong>Base</strong></span>
-                <span>Symbol: <strong>$DONE</strong></span>
-                <span>Supply: <strong>fixed</strong></span>
+            <div class="hero-meta hero-meta-flex">
+              <div class="ca-box">
+                CA:
+                <code>0x3Da0Da9414D02c1E4cc4526a5a24F5eeEbfCEAd4</code>
               </div>
-              <div class="hero-meta-flex">
-                <span>Quest: <strong>1,000 $DONE</strong> claim per eligible wallet</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- RIGHT CARD -->
-          <div>
-            <div class="card">
-              <div class="card-inner">
-                <div class="card-side">
-                  <div class="eyebrow">On-chain</div>
-                  <h2 class="hero-title" style="font-size:18px;margin-bottom:8px;">
-                    DONE Quest airdrop on Base
-                  </h2>
-                  <p class="hero-copy" style="font-size:13px;">
-                    Complete the Farcaster missions, verify your Neynar score, and claim 1,000 $DONE directly to your Base wallet.
-                    Only 1 claim per wallet – enforced by the airdrop contract.
-                  </p>
-                  <div class="hero-actions" style="margin-top:10px;">
-                    <a class="btn primary" href="airdrop.html">🚀 Go to claim page</a>
-                    <a
-                      class="btn"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href="https://basescan.org/address/0x1df8DcCAD57939BaB8Ae0f3406Eaa868887E03bb"
-                    >
-                      🔍 View airdrop contract
-                    </a>
-                  </div>
-                </div>
-
-                <div class="card-side">
-                  <div class="eyebrow">Farcaster</div>
-                  <p class="hero-copy" style="font-size:13px;">
-                    The DONE Quest is built around Farcaster. Accounts with Neynar score ≥ 0.35 can participate to reduce
-                    bots and sybil farming.
-                  </p>
-                  <div class="hero-actions" style="margin-top:10px;">
-                    <button class="btn secondary js-miniapp-start" type="button">
-                      🔵 Launch DONE Quest mini app
-                    </button>
-                    <a
-                      class="btn"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href="https://warpcast.com/~/channel/done"
-                    >
-                      💬 Join the DONE channel
-                    </a>
-                  </div>
-                </div>
-              </div>
+              <a
+                class="btn"
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://dexscreener.com/base/0x3Da0Da9414D02c1E4cc4526a5a24F5eeEbfCEAd4"
+              >
+                📈 View chart
+              </a>
+              <a
+                class="btn"
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://basescan.org/token/0x3Da0Da9414D02c1E4cc4526a5a24F5eeEbfCEAd4"
+              >
+                🔍 View on Basescan
+              </a>
             </div>
           </div>
         </div>
+
+        <aside class="side-col reveal">
+          <div class="stat-grid">
+            <div class="stat-card">
+              <div class="stat-label">Chain</div>
+              <div class="stat-value">Base</div>
+              <div class="stat-tag">Fast, cheap, and blue.</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Ticker</div>
+              <div class="stat-value">$DONE</div>
+              <div class="stat-tag">Because we’re DONE.</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Quest reward</div>
+              <div class="stat-value">1,000 DONE</div>
+              <div class="stat-tag">Per eligible wallet.</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Anti-bot</div>
+              <div class="stat-value">Neynar ≥ 0.35</div>
+              <div class="stat-tag">Farcaster native filter.</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Vibe</div>
+              <div class="stat-value">DONE COIN</div>
+              <div class="stat-tag">No rugs. No trash devs.</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Use case</div>
+              <div class="stat-value">Quests & memes</div>
+              <div class="stat-tag">Reward real community actions.</div>
+            </div>
+          </div>
+        </aside>
       </section>
 
-      <!-- INFO SECTION -->
-      <section class="feature-row reveal">
-        <div class="feature-card">
-          <h2>How the DONE Quest works</h2>
-          <p>
-            DONE Quest is a simple checklist of Farcaster actions – follow, cast, join, and hold. The front-end tracks your
-            steps, the airdrop contract on Base ensures only one claim per wallet.
+      <!-- FEATURES -->
+      <section class="feature-row reveal section-gap">
+        <article class="feature">
+          <h3>Clean &amp; simple</h3>
+          <p>No complex DeFi maze. Easy to understand, easy to meme, easy to verify.</p>
+        </article>
+        <article class="feature">
+          <h3>Community-first</h3>
+          <p>Value flows to the people who actually show up, share, and build.</p>
+        </article>
+        <article class="feature">
+          <h3>Built for quests</h3>
+          <p>DONE Quest routes rewards to real participants, not bots.</p>
+        </article>
+      </section>
+
+      <!-- TOKENOMICS / ECOSYSTEM (boleh kamu isi detail lain nanti) -->
+      <section class="tokenomics section-gap reveal">
+        <div class="token-card">
+          <h2>DONE Quest ecosystem</h2>
+          <p class="hero-copy">
+            DONE Quest is the main way new people earn $DONE. Farcaster actions, on-chain proof,
+            and anti-bot filtering using Neynar score.
           </p>
           <ul class="feature-list">
             <li>🔵 Farcaster account with Neynar score ≥ <strong>0.35</strong></li>
-            <li>🧾 Complete 4 social quests on Farcaster</li>
-            <li>🧱 Connect a Base wallet (same wallet you’ll claim to)</li>
-            <li>🎁 Claim <strong>1,000 $DONE</strong> from the airdrop contract</li>
+            <li>🧾 Complete social quests: follow, cast, join, and hold</li>
+            <li>🧱 Claim through the airdrop contract on Base</li>
+            <li>🌐 Community decides future quests and meme collabs</li>
           </ul>
-          <a class="btn primary" href="airdrop.html">Start the quest</a>
-        </div>
-
-        <div class="feature-card">
-          <h2>Why DONE?</h2>
-          <p>
-            DONE is a meme about actually shipping. Holders are people who like to execute, not just talk.
-            The token is the social layer for that energy on Base.
-          </p>
-          <ul class="feature-list">
-            <li>⚡ Built for Farcaster-native communities</li>
-            <li>🧠 Live and memed on Base.meme</li>
-            <li>🌐 Open community – anyone can spin up quests</li>
-          </ul>
-          <a class="btn" href="community.html">Explore community links</a>
+          <a class="btn primary" href="airdrop.html">Go to DONE Quest</a>
         </div>
       </section>
     </main>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-      <div>DONE COIN • $DONE on Base</div>
-      <div class="footer-links">
-        <a href="community.html">Community hub</a>
-        <a href="airdrop.html">DONE Quest</a>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://basememe.com/meme/0xDa0Da9414D02c1E4cc4526a5a24F5eeEbfCEAd4"
-        >
-          Base.meme listing
-        </a>
-      </div>
-    </footer>
   </div>
 
-  <!-- SCRIPT WEB (bukan mini app) -->
-  <script src="assets/app.js"></script>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span>DONE COIN ($DONE) • $DONE on Base</span>
+    <span>
+      <a href="community.html">Community hub</a> ·
+      <a href="airdrop.html">DONE Quest</a> ·
+      <a
+        href="https://dexscreener.com/base/0x27d9c95186f871fd78d360fd2a69e33101bb193d"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        DEX listing
+      </a>
+    </span>
+  </footer>
+
+  <!-- PENTING: pakai app.js di ROOT, bukan assets/app.js -->
+  <script src="app.js"></script>
 </body>
 </html>
