@@ -24,10 +24,14 @@
         <a class="pill" href="index.html">🏠 Overview</a>
         <a class="pill" href="community.html">🌐 Community</a>
         <a class="pill primary" target="_blank" rel="noopener noreferrer" href="https://base.meme/coin/base:0x3Da0Da9414D02c1E4cc4526a5a24F5eeEbfCEAd4">🧠 Open on Base.meme</a>
-        <button class="pill pill-wallet" type="button" data-wallet-toggle>
+          <button
+          class="pill pill-wallet"
+          type="button"
+          data-wallet-toggle
+        >
           <span data-wallet-label>Connect wallet</span>
         </button>
-      </nav>
+</nav>
     </header>
 
     <main>
@@ -98,7 +102,7 @@
                 <strong>“Connect wallet”</strong> di kanan atas.
                 Pastikan jaringan Base (chain id 8453).
               </p>
-              <!-- tombol ini akan disembunyikan oleh JS, kita tetap biarkan untuk fallback -->
+              <!-- tombol lokal disembunyikan via JS, disimpan untuk fallback -->
               <button
                 id="btn-evm-connect"
                 class="btn primary full"
@@ -112,7 +116,6 @@
                 Connect wallet dulu lewat tombol kanan atas. Kalau kamu buka dari Farcaster
                 mini app, wallet akan terhubung otomatis.
               </div>
-            </div>
             </div>
 
             <div class="claim-row" style="margin-top:12px;display:flex;flex-direction:column;gap:8px;">
