@@ -326,4 +326,137 @@
     try {
       if (els.rewardPreview) {
         els.rewardPreview.textContent =
-          "Perkiraan reward (tanpa mo
+          "Perkiraan reward (tanpa modal): tergantung hasil kontrak DoneBet.";
+      }
+      if (els.payoutPreview) {
+        els.payoutPreview.textContent =
+          "Payout final (modal + reward) dihitung dan dikirim otomatis oleh kontrak DoneBet setelah event selesai.";
+      }
+    } catch (e) {
+      console.warn("updatePayoutPreview error:", e);
+    }
+  }
+
+  async function placeBetFlow() {
+    if (!state.signer || !state.address) {
+      setStatus("Hubungkan wallet dulu.");
+      return;
+    }
+
+    const rawAmount = (els.betAmount && els.betAmount.value) || "";
+    const num = parseFloat(rawAmount);
+    if (!isFinite(num) || num <= 0) {
+      setStatus("Masukkan jumlah $DONE yang valid.");
+      return;
+    }
+
+    try {
+      const amount = ethers.utils.parseUnits(
+        rawAmount,
+        state.doneDecimals || 18
+      );
+
+      // Cek minimal bet
+      if (state.minBetRaw) {
+        const min = ethers.BigNumber.from(state.minBetRaw);
+        if (amount.lt(min)) {
+          const humanMin = ethers.utils.formatUnits(
+            state.minBetRaw,
+            state.doneDecimals || 18
+          );
+          setStatus(`Jumlah bet kurang dari minimal: ${humanMin} DONE`);
+          return;
+        }
+      }
+
+      // Cek saldo
+      if (state.doneBalanceRaw) {
+        const bal = ethers.BigNumber.from(state.doneBalanceRaw);
+        if (bal.lt(amount)) {
+          const humanBal = ethers.utils.formatUnits(
+            state.doneBalanceRaw,
+            state.doneDecimals || 18
+          );
+          setStatus(
+            `Saldo $DONE kamu (${humanBal}) kurang dari jumlah bet yang diminta.`
+          );
+          return;
+        }
+      }
+
+      const erc20 = new ethers.Contract(
+        DONE_TOKEN_ADDRESS,
+        ERC20_ABI,
+        state.signer
+      );
+      const bet = new ethers.Contract(
+        BET_CONTRACT_ADDRESS,
+        BET_ABI,
+        state.signer
+      );
+
+      setStatus("Mengecek allowance $DONE untuk kontrak bet…");
+      let allowance = await erc20.allowance(
+        state.address,
+        BET_CONTRACT_ADDRESS
+      );
+
+      if (allowance.lt(amount)) {
+        setStatus(
+          "Allowance kurang. Mengirim transaksi approve (set allowance tinggi)…"
+        );
+        const txApprove = await erc20.approve(
+          BET_CONTRACT_ADDRESS,
+          ethers.constants.MaxUint256
+        );
+        await txApprove.wait();
+
+        // Baca ulang allowance untuk memastikan
+        allowance = await erc20.allowance(
+          state.address,
+          BET_CONTRACT_ADDRESS
+        );
+
+        if (allowance.lt(amount)) {
+          setStatus(
+            "Allowance masih kurang setelah approve. Cek kembali kontrak/token $DONE di BaseScan."
+          );
+          return;
+        }
+
+        setStatus("Approve selesai. Mengirim transaksi bet…");
+      } else {
+        setStatus("Allowance cukup. Mengirim transaksi bet…");
+      }
+
+      const side = state.selectedSide || 0;
+      const tx = await bet.placeBet(side, amount);
+      setStatus("Tx bet terkirim: " + tx.hash + " (menunggu konfirmasi)…");
+
+      const receipt = await tx.wait();
+      if (receipt.status === 1) {
+        setStatus(
+          "✅ Bet sukses! Kalau kamu menang, payout (modal + reward) sudah otomatis masuk ke wallet ini."
+        );
+        await loadDoneTokenInfo();
+      } else {
+        setStatus("Transaksi bet gagal / reverted.");
+      }
+    } catch (e) {
+      console.error(e);
+      let msg =
+        e?.reason ||
+        (e?.data && e.data.message) ||
+        (e?.error && e.error.message) ||
+        e?.message ||
+        "unknown error";
+
+      if (typeof msg === "string" && msg.includes("insufficient allowance")) {
+        msg =
+          "insufficient allowance — allowance $DONE ke kontrak DoneBet masih kurang. Pastikan transaksi approve berhasil, lalu coba lagi.";
+      }
+
+      setStatus("Bet gagal: " + msg);
+    }
+  }
+})();
