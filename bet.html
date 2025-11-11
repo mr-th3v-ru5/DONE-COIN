@@ -7,7 +7,7 @@
     content="width=device-width, initial-scale=1"
   />
   <title>DONE Bet — Base</title>
-  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./mini/style.css" />
 </head>
 <body>
   <div class="shell">
@@ -61,8 +61,7 @@
           </button>
         </div>
         <div class="hint">
-          Mode hanya contoh UI — parameter asli (chance, reward) diatur di
-          smart contract bet kamu.
+          Mode di atas hanya label UI — payout sebenarnya dihitung langsung oleh smart contract DoneBet.
         </div>
       </div>
 
@@ -87,8 +86,11 @@
           <button class="qa" data-percent="100">MAX</button>
         </div>
         <div class="hint" id="min-bet-hint">
-          Minimal bet akan dibaca dari smart contract (jika fungsi tersedia).
+          Minimal bet dibaca langsung dari smart contract (minBetAmount).
         </div>
+        <div class="hint" id="pool-info"></div>
+        <div class="hint" id="reward-preview"></div>
+        <div class="hint" id="payout-preview"></div>
       </div>
 
       <!-- ACTION SECTION -->
