@@ -12,6 +12,7 @@
 <body>
   <div class="shell">
     <div class="card">
+
       <!-- HEADER -->
       <div class="card-header">
         <div class="brand">
@@ -22,8 +23,13 @@
           </div>
         </div>
 
-        <div class="pill" id="network-pill">
-          Network: <span id="network-name">—</span>
+        <div class="header-right">
+          <div class="pill" id="network-pill">
+            Network: <span id="network-name">—</span>
+          </div>
+          <button class="btn-wallet" id="btn-connect">
+            🔗 Connect Wallet
+          </button>
         </div>
       </div>
 
@@ -38,9 +44,6 @@
           <div class="row-label">$DONE Balance</div>
           <div class="addr" id="done-balance">0.0</div>
         </div>
-        <button class="btn btn-primary" id="btn-connect">
-          🔗 Connect Wallet
-        </button>
         <div class="hint" id="wallet-hint">
           Gunakan wallet yang sama dengan mini app airdrop di jaringan Base.
         </div>
@@ -68,25 +71,26 @@
       <!-- AMOUNT SECTION -->
       <div class="section">
         <div class="section-title">Amount</div>
-        <div class="input-row">
+        <div class="amount-row">
           <input
-            id="bet-amount"
             type="number"
             min="0"
-            step="0.0001"
-            placeholder="0.0"
-            class="input"
+            step="0.01"
+            id="bet-amount"
+            placeholder="Masukkan jumlah DONE"
           />
-          <div class="input-suffix">DONE</div>
+          <span class="amount-unit">DONE</span>
         </div>
-        <div class="quick-amounts">
-          <button class="qa" data-percent="10">10%</button>
-          <button class="qa" data-percent="25">25%</button>
-          <button class="qa" data-percent="50">50%</button>
-          <button class="qa" data-percent="100">MAX</button>
+
+        <div class="qa-row">
+          <button class="qa" data-perc="10">10%</button>
+          <button class="qa" data-perc="25">25%</button>
+          <button class="qa" data-perc="50">50%</button>
+          <button class="qa" data-perc="100">MAX</button>
         </div>
+
         <div class="hint" id="min-bet-hint">
-          Minimal bet dibaca langsung dari smart contract (minBetAmount).
+          Minimal bet dari kontrak: memuat…
         </div>
         <div class="hint" id="pool-info"></div>
         <div class="hint" id="reward-preview"></div>
