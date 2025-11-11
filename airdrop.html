@@ -96,6 +96,12 @@
                 </div>
               </button>
             </div>
+            <!-- Hidden checkboxes for quest state (digunakan oleh airdrop.js) -->
+            <input type="checkbox" id="q1" style="display:none;" />
+            <input type="checkbox" id="q2" style="display:none;" />
+            <input type="checkbox" id="q3" style="display:none;" />
+            <input type="checkbox" id="q4" style="display:none;" />
+
 
             <div class="progress-bar">
               <div class="progress-fill" id="progressFill"></div>
@@ -117,11 +123,13 @@
               Connect MetaMask or WalletConnect on Base to claim DONE on-chain.
             </p>
 
-            <button id="connectWalletBtn" class="btn primary" type="button" style="margin-top:6px;">
+            <button id="btn-evm-connect" class="btn primary" type="button" style="margin-top:6px;">
               🔗 Connect EVM wallet
             </button>
 
-            <div id="walletAddress" class="addr" style="display:none;"></div>
+            <div id="evm-addr" class="addr" style="display:none;"></div>
+
+            <p id="evm-note" class="text-muted" style="margin-top:6px;"></p>
 
             <p class="text-muted" style="margin-top:8px;">
               You’ll be prompted to switch/add Base (chain id 8453) if needed.
@@ -131,14 +139,14 @@
               Untuk claim, kamu perlu akun Farcaster dengan Neynar score ≥ 0.35. Klik tombol verifikasi di bawah.
             </p>
 
-            <button id="verifyFarcasterBtn" class="btn" type="button" style="margin-top:6px;">
+            <button id="btn-fc-verify" class="btn" type="button" style="margin-top:6px;">
               🔵 Verify Farcaster (Neynar)
             </button>
 
-            <div id="neynarStatus" class="text-muted" style="margin-top:6px;"></div>
+            <div id="fc-status" class="text-muted" style="margin-top:6px;"></div>
 
             <div class="claim-row">
-              <button id="claimBtn" class="btn primary" type="button" disabled>
+              <button id="btn-claim" class="btn primary" type="button" disabled>
                 🎁 Claim 1,000 DONE
               </button>
 
@@ -146,6 +154,7 @@
                 ✅ Open DONE Quest Mini App
               </button>
             </div>
+            <p id="claim-hint" class="text-muted" style="margin-top:6px;"></p>
           </div>
         </div>
       </section>
